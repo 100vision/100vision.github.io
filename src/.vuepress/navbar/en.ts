@@ -11,17 +11,35 @@ export const enNavbar = navbar([
         text: "Networking",
         icon: "edit",
         prefix: "networking/",
+        link: "",
         children: [
         ],
       },
       {
-        text: "Windows",
+        text: "DevOps",
         icon: "edit",
-        prefix: "windows/",
+        prefix: "devops/",
+        link: "",
         children: [
         ],
       },
 
+      {
+        text: "编程语言",
+        icon: "edit",
+        prefix: "coding/",
+        link: "",
+        children: [
+        ],
+      },
+      {
+        text: "SysOps",
+        icon: "edit",
+        prefix: "sysops/",
+        link: "",
+        children: [
+        ],
+      },
     ],
 	
 
@@ -33,21 +51,21 @@ export const enNavbar = navbar([
     text: "外语学习",
     icon: "note",
     prefix: "/learning2ndlang/",
-	link: "",
-	children: [
-		{
-			text: "english",
-			icon: "note",
-			link: "",
-			prefix: "english/"
-		},
-		
-		{
-			text: "日本语",
-			icon: "note",
-			link: "",
-			prefix: "japanese/"
-		},
+    link: "",
+    children: [
+      {
+        text: "english",
+        icon: "note",
+        link: "",
+        prefix: "english/"
+      },
+      
+      {
+        text: "日本语",
+        icon: "note",
+        link: "",
+        prefix: "japanese/"
+      },
 	]
   },
   
