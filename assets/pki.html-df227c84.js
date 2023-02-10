@@ -1,1 +1,0 @@
-import{_ as t,V as a,W as s,X as e,Y as c}from"./framework-32f4afb1.js";const o={},n=e("h2",{id:"什么是pki",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#什么是pki","aria-hidden":"true"},"#"),c(" 什么是PKI")],-1),r=e("p",null,"简单地说，PKI公钥体系。",-1),_=[n,r];function i(d,l){return a(),s("div",null,_)}const p=t(o,[["render",i],["__file","pki.html.vue"]]);export{p as default};
