@@ -1,0 +1,1 @@
+import{_ as o,V as c,W as _,X as e,Y as t}from"./framework-32f4afb1.js";const s={},n=e("blockquote",null,[e("p",null,[t("勉強すればするほど　難しくなる感じがします"),e("br"),t(" 　ーー李秀麗という思っております")])],-1),l=[n];function r(a,d){return c(),_("div",null,l)}const f=o(s,[["render",r],["__file","2022021001.html.vue"]]);export{f as default};
