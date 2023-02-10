@@ -1,6 +1,6 @@
 ---
 # This is the title of the article
-title: 日本語勉強の一つ
+title: 常用短语1
 # This is the icon of the page
 icon: page
 # This control sidebar order
@@ -8,13 +8,13 @@ order: 4
 # Set author
 author: tlin82
 # Set writing time
-date: 2020-01-01
+date: 2023-02-10
 # A page can have multiple categories
 category:
-  - Guide
+  - 英语
 # A page can have multiple tags
 tag:
-  - Windows
+  - 英语学习
   - Powershell
 # this page is sticky in article list
 sticky: false
