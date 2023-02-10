@@ -1,1 +1,0 @@
-import{_ as o,V as c,W as s,X as e,Y as t}from"./framework-32f4afb1.js";const _={},a=e("blockquote",null,[e("p",null,[t("勉強すればするほど　難しくなる感じがします"),e("br"),t(" 　ーー李秀麗という思っております")])],-1),n=[a];function l(r,u){return c(),s("div",null,n)}const f=o(_,[["render",l],["__file","vocabu.html.vue"]]);export{f as default};
