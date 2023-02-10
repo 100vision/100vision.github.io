@@ -42,3 +42,6 @@ jobs:
           # This is the branch where the docs are deployed to
           branch: gh-pages
           folder: src/.vuepress/dist
+        env:
+          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
