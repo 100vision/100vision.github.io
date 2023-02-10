@@ -1,1 +1,0 @@
-import{_ as l,V as o,W as s,X as e,Y as t}from"./framework-32f4afb1.js";const _={},n=e("blockquote",null,[e("p",null,[t("勉強すればするほど　難しくなる感じがします"),e("br"),t(" 　ーー李秀麗という思っております")])],-1),c=[n];function r(a,d){return o(),s("div",null,c)}const f=l(_,[["render",r],["__file","entry_level_lesson02.html.vue"]]);export{f as default};
