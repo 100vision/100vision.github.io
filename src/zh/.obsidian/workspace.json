@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "second_lang/jp/entry_lesson_02.md",
+                "file": "it/networking/wireguard.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "second_lang/jp/entry_lesson_02.md",
+                "file": "it/networking/wireguard.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "second_lang/jp/entry_lesson_02.md",
+                "file": "it/networking/wireguard.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "second_lang/jp/entry_lesson_02.md"
+                "file": "it/networking/wireguard.md"
               }
             }
           }
@@ -148,7 +148,7 @@
   },
   "active": "71766472ca228574",
   "lastOpenFiles": [
-    "second_lang/jp/entry_lesson_01.md",
-    "second_lang/jp/entry_lesson_02.md"
+    "second_lang/jp/entry_lesson_02.md",
+    "second_lang/jp/entry_lesson_01.md"
   ]
 }
