@@ -58,4 +58,4 @@ star: true
 :::
 
 
-![figure](../Japanese/これ.png)
+![figure](これ.png)
