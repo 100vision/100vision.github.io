@@ -53,9 +53,9 @@ star: true
 　　- 位置关系和 これ/それ/あれ/どれ一样。
 　　
 　　
-　　::: tip note
+::: tip note
 　　连体不能单独使用
-　　:::
+:::
 
 
-![[これ.png]]
+![figure](../jp/これ.png)
