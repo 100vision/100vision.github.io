@@ -11,12 +11,8 @@
             "id": "71766472ca228574",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "second_lang/jp/entry_lesson_02.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "second_lang/jp/entry_lesson_02.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "second_lang/jp/entry_lesson_02.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "second_lang/jp/entry_lesson_02.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -148,8 +140,8 @@
   },
   "active": "71766472ca228574",
   "lastOpenFiles": [
-    "it/networking/wireguard.md",
     "second_lang/jp/entry_lesson_02.md",
+    "it/networking/wireguard.md",
     "second_lang/jp/entry_lesson_01.md"
   ]
 }
