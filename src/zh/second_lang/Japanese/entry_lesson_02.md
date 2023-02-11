@@ -59,3 +59,4 @@ star: true
 
 
 ![figure](これ.png)
+![Figure 1](../Images/)
