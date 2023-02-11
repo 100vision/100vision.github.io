@@ -55,5 +55,5 @@ star: true
 　　连体不能单独使用
 　　:::
 
-![alt](/home/tlin82/..)
 
+![[これ.png]]
