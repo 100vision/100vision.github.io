@@ -1,6 +1,6 @@
 {
   "commitMessage": "post committed: {{date}}",
-  "autoCommitMessage": "post committed: {{date}}",
+  "autoCommitMessage": "post update committed: {{date}}",
   "commitDateFormat": "YYYY-MM-DD HH:mm:ss",
   "autoSaveInterval": 1,
   "autoPushInterval": 0,
