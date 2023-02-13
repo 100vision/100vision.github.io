@@ -3,11 +3,11 @@ import { enNavbar, zhNavbar } from "./navbar/index.js";
 import { enSidebar, zhSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
-  hostname: "https://notes.solex-inc.com",
+  hostname: "https://blog.solex-inc.com",
 
   author: {
     name: "tlin82",
-    url: "https://notes.solex-inc.com",
+    url: "https://blog.solex-inc.com",
   },
 
   iconAssets: "iconfont",
