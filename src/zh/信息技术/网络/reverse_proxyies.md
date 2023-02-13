@@ -48,7 +48,7 @@ copyright: 无版权
 需要把DNS域名托管在CloudFalre
 :::
 
-## 大致步骤
+**大致步骤**
 
 - 申请免费的CloudFlare账户
 - 内网服务器要安装cloudflared软件
@@ -60,15 +60,17 @@ copyright: 无版权
 
 >frp 是一个开源项目，专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议。可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。
 
-
-
-### Github项目
-https://github.com/fatedier/frp/blob/dev/README_zh.md
-
 ::: tip 前提条件
 需要一台ECS云主机，有公网IP
 :::
 
-### 文档位置
+**Github项目**
+
+https://github.com/fatedier/frp/blob/dev/README_zh.md
+
+
+
+**文档位置**
+
 https://gofrp.org/docs/
 
