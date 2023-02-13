@@ -6,7 +6,7 @@ export default hopeTheme({
   hostname: "https://notes.solex-inc.com",
 
   author: {
-    name: "Tim.L",
+    name: "tlin82",
     url: "https://notes.solex-inc.com",
   },
 
