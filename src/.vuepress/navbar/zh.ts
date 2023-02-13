@@ -14,7 +14,7 @@ export const zhNavbar = navbar([
         text: "网络",
         icon: "edit",
         prefix: "网络/",
-        link: "",
+        link: "/zh/网络/",
         children: [
         ],
       },
