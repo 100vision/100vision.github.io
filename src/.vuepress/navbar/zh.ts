@@ -8,10 +8,9 @@ export const zhNavbar = navbar([
   {
     text: "信息技术",
     icon: "edit",
-    prefix: "/zh/信息技术/",
-    children: [
+    link: "/zh/信息技术/"
 
-    ],
+
   },
 
 ]);
