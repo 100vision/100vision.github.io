@@ -10,22 +10,6 @@ export const zhNavbar = navbar([
     icon: "edit",
     prefix: "/zh/信息技术/",
     children: [
-      {
-        text: "网络",
-        icon: "edit",
-        prefix: "网络/",
-        link: "/zh/网络/",
-        children: [
-        ],
-      },
-      {
-        text: "虚拟化",
-        icon: "edit",
-        prefix: "virtualization/",
-        children: [
-
-        ],
-      },
 
     ],
   },
