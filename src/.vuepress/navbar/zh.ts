@@ -2,18 +2,18 @@ import { navbar } from "vuepress-theme-hope";
 
 export const zhNavbar = navbar([
   "/zh/",
-  { text: "生活随笔", icon: "discover", link: "/zh/thoughts/" },
-  { text: "外语学习", icon: "discover", link: "/zh/second_lang/" },
+  { text: "生活随笔", icon: "discover", link: "/zh/生活随笔/" },
+  { text: "外语学习", icon: "discover", link: "/zh/外语学习/" },
 
   {
     text: "IT",
     icon: "edit",
-    prefix: "/zh/it/",
+    prefix: "/zh/信息技术/",
     children: [
       {
         text: "网络",
         icon: "edit",
-        prefix: "networking/",
+        prefix: "网络/",
         link: "",
         children: [
         ],
