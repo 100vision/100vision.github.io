@@ -65,7 +65,7 @@ export default hopeTheme({
 
       blog: {
         description: "IT从业者/日语学习爱好者",
-        intro: "/zh/intro.html",
+        intro: "",
       },
 
       // page meta
