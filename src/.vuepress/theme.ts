@@ -12,7 +12,7 @@ export default hopeTheme({
 
   iconAssets: "iconfont",
 
-  logo: "/logo.svg",
+  logo: "/avatar.JPG",
 
   repo: "100vision/100vision.github.io",
 
