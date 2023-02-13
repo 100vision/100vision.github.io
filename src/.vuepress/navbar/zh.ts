@@ -6,7 +6,7 @@ export const zhNavbar = navbar([
   { text: "外语学习", icon: "discover", link: "/zh/外语学习/" },
 
   {
-    text: "IT",
+    text: "信息技术",
     icon: "edit",
     prefix: "/zh/信息技术/",
     children: [
