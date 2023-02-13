@@ -16,7 +16,7 @@ export default hopeTheme({
 
   repo: "100vision/100vision.github.io",
 
-  docsDir: "docs",
+  docsDir: "src",
 
   blog: {
     medias: {
