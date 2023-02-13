@@ -3,18 +3,18 @@ import { enNavbar, zhNavbar } from "./navbar/index.js";
 import { enSidebar, zhSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
-  hostname: "https://thoughts.solex-inc.com",
+  hostname: "https://notes.solex-inc.com",
 
   author: {
     name: "Tim.L",
-    url: "https://throughts.solex-inc.com",
+    url: "https://notes.solex-inc.com",
   },
 
   iconAssets: "iconfont",
 
   logo: "/logo.svg",
 
-  repo: "vuepress-theme-hope/vuepress-theme-hope",
+  repo: "100vision/100vision.github.io",
 
   docsDir: "docs",
 
