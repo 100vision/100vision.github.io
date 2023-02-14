@@ -8,6 +8,6 @@ tagline:
 heroFullScreen: false
 projects:
 
-footer: 主题使用vuepress-theme-hope.github.io/
+footer: 
 ---
 
