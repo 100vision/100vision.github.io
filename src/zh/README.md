@@ -10,7 +10,7 @@ tagline: Be the man of my words.
 projects:
 
 
-footer:  主题 epress-theme-hope.github.io/
+footer:  
 ---
 
 
