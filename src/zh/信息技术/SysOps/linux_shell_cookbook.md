@@ -58,3 +58,5 @@ $ !!:s/foo/FOO
 ```
 当你需要上一个命令的一些字符并重新执行
 
+### 原创
+https://plantegg.github.io/2017/01/01/top_linux_commands/
