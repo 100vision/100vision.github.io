@@ -25,7 +25,20 @@ star: true
 
 ---
 
-### 
+### 脚本功能： 列出所有DFS空间下的共享目标文件夹
+
+::: tip 前提条件
+需要安装DFSN模块到Powershell
+:::
+
+### 1、安装DFSN模块
+- Windows 2012 管理可选特色
+- 添加功能
+- 选择RSAT 文件服务工具
+
+### 2、脚本内容
+
+
 ```Powershell
 function Get-DfsnAllFolderTargets ()
 {
