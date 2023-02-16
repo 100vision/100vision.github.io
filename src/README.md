@@ -8,7 +8,6 @@ tagline:
 bgImage: /bg.jpg
 heroFullScreen: false
 projects:
-
 footer: 
 ---
 
