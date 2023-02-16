@@ -59,7 +59,7 @@ export default hopeTheme({
       // sidebar
       sidebar: zhSidebar,
 
-      footer: "主题使用vuepress-theme-hope.github.io",
+      footer: '由 <a href="https://theme-hope.vuejs.press" target="_blank">Theme Hope</a> 驱动',
 
       displayFooter: true,
 
