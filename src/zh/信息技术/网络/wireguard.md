@@ -21,7 +21,8 @@ sticky: false
 star: true
 # 你可以自定义页脚
 footer: 
-# 你可以自定义版权信息
+---
+
 
 
 
@@ -31,8 +32,7 @@ footer:
 
 IPSEC VPN vs WireGuard VPN。
 
-
-## WireGuard的优势
+##WireGuard的优势
 
 更快又不失安全,适合小公司或家庭等廉价实现方案。
 
