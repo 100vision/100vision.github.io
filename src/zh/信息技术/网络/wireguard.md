@@ -38,7 +38,7 @@ IPSEC VPN vs WireGuard VPN。
 
 ## 部署
 
-:::note 前提条件
+:::tip 前提条件
 需要1台云主机(有公网IP地址）作为WireGuard的Hub服务器实现联网
 :::
 
