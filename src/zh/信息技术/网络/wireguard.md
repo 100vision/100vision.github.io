@@ -101,7 +101,7 @@ PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACC
 [Peer]
 PublicKey = <Public-key-Hub-server>
 AllowedIPs = 192.0.2.0/24,10.0.20.6/22,10.188.0.0/24  
-Endpoint = 1.2.3.4:51820            
+Endpoint = 1.2.3.4:51820   # ECS公网IP地址         
 PersistentKeepalive = 10
 ```
 
