@@ -22,8 +22,7 @@ star: true
 # 你可以自定义页脚
 footer: 
 # 你可以自定义版权信息
-copyright: 无版权
----
+
 
 
 
@@ -35,21 +34,22 @@ IPSEC VPN vs WireGuard VPN。
 
 ## WireGuard的优势
 
-更快又不失安全
+更快又不失安全,轻松实现组网
 
 ## 部署
 
 :::note 前提条件
-需要1台云主机或ECS作为WireGuard的Hub服务器实现联网
+需要1台云主机(有公网IP地址）作为WireGuard的Hub服务器实现联网
 :::
 
 ### 拓扑
-home <--> ECS <---> Office
+
+home(eth0,wg0) <--> ECS(eth0,wg0) <---> Office(wg0,eth0)
 
 
 ### 部署注意事项
 
-- 配置文件中的allowed IPs 是指允许路由的目标子网
+- 配置文件中的allowed IPs 是指允许路由的目标子网。添加后自动添加相应路由项的路由表
 
 
 ### 常用命令
