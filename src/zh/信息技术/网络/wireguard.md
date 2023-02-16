@@ -104,3 +104,9 @@ AllowedIPs = 192.0.2.0/24,10.0.20.6/22,10.188.0.0/24
 Endpoint = 1.2.3.4:51820            
 PersistentKeepalive = 10
 ```
+
+
+## 进阶：使用Web GUI管理WireGuard配置
+
+ 使用一些Web工具方便管理WirGuard的配置和公钥，自动生成配置。
+具体参考[配置参考](https://medium.com/swlh/web-uis-for-wireguard-that-make-configuration-easier-e104710fa7bd)
