@@ -21,8 +21,8 @@ export default hopeTheme({
   blog: {
     medias: {
 
-      Email: "https://example.com",
-      Gmail: "https://example.com",
+      Email: "mailto:lin.tixiang@gmail.com",
+      Gmail: "https://www.gmail.com",
 
     },
   },
