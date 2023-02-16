@@ -37,4 +37,27 @@ IPSEC VPN vs WireGuard VPN。
 
 更快又不失安全
 
+## 部署
+
+:::note 前提条件
+需要1台云主机或ECS作为WireGuard的Hub服务器实现联网
+:::
+
+### 拓扑
+home <--> ECS <---> Office
+
+
+### 部署注意事项
+
+- 配置文件中的allowed IPs 是指允许路由的目标子网
+
+
+### 常用命令
+
+- 启动和停止wg tun网卡wg0
+```shell
+wg-quick down wg0
+wg-quick up wg0
+```
+
 
