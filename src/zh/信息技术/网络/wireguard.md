@@ -65,7 +65,7 @@ wg-quick down wg0
 wg-quick up wg0
 ```
 
-## 示例配置
+### 示例配置
 
 - 1、中心WireGuard服务器配置
 
