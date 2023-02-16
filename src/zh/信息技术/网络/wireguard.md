@@ -34,16 +34,19 @@ IPSEC VPN vs WireGuard VPN。
 
 ## WireGuard的优势
 
-更快又不失安全,轻松实现组网
+更快又不失安全,适合小公司或家庭等廉价实现方案。
 
 ## 部署
 
 :::tip 前提条件
-需要1台云主机(有公网IP地址）作为WireGuard的Hub服务器实现联网
+需要至少一个公网IP地址。另外，如果只有一个节点具备公网 IP ，则所有组网流量都需要通过这个公网 IP 的节点进行中转1台云主机(有公网IP地址）作为WireGuard的Hub服务器实现联网
 :::
 
 ### 拓扑
 
+- 拓扑选项1：中心化。
+
+云主机作为WireGuard Gateway，其他站点（子网）都在NAT后面，没有公网IP地址
 home(eth0,wg0) <--> ECS(eth0,wg0) <---> Office(wg0,eth0)
 
 
@@ -60,4 +63,42 @@ wg-quick down wg0
 wg-quick up wg0
 ```
 
+## 示例配置
 
+- 1、中心WireGuard服务器配置
+
+```shell
+cat /etc/wireguard/wg0.conf
+
+[Interface]
+Address = 192.0.2.254/32
+SaveConfig = false
+DNS = 223.5.5.5
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+ListenPort = 51820
+PrivateKey = <private-key-Hub-server>
+
+[Peer]
+PublicKey = <public-key-A>
+AllowedIPs = 192.0.2.1/32,192.168.6.0/24,192.168.0.0/24,192.168.11.0/24
+```
+
+
+- 2. WireGuard客户端配置示例
+
+```shell
+[Interface]
+PrivateKey = <private-key-A>
+Address = 192.0.2.1 #隧道IP地址
+DNS = 192.168.0.24      #dns可以配置为内网dns服务器
+PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+#WireGuard Server/Gateway (tencent ecs with Public IP address)
+[Peer]
+PublicKey = <Public-key-Hub-server>
+AllowedIPs = 192.0.2.0/24,10.0.20.6/22,10.188.0.0/24  
+Endpoint = 1.2.3.4:51820            
+PersistentKeepalive = 10
+```
