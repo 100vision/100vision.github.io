@@ -30,11 +30,11 @@ footer:
 
 ## 什么是WireGuard
 
-IPSEC VPN vs WireGuard VPN。
+是一个易于配置、快速且安全的开源 VPN，它利用了最新的加密技术。
 
-##WireGuard的优势
+## WireGuard的优势
 
-更快又不失安全,适合小公司或家庭等廉价实现方案。
+相比IPSec VPN，WireGuard更快又不失安全,适合小公司或家庭等廉价实现方案。
 
 ## 部署
 
@@ -52,7 +52,9 @@ home(eth0,wg0) <--> ECS(eth0,wg0) <---> Office(wg0,eth0)
 
 ### 部署注意事项
 
-- 配置文件中的allowed IPs 是指允许路由的目标子网。添加后自动添加相应路由项的路由表
+- 配置文件中的allowed IPs 是指允许路由的目标子网。添加后自动添加相应路由项的路由表.
+
+-如果hub服务器是部署在云主机，注意云主机上需要放行WG的默认UDP端口==51820==
 
 
 ### 常用命令
