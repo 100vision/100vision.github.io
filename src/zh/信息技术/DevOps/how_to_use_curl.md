@@ -18,7 +18,7 @@ tag:
   - http基础
   - curl
 # 此页面会在文章列表置顶
-sticky: false
+sticky: curl
 # 此页面会出现在文章收藏中
 star: true
 # 你可以自定义页脚
@@ -33,6 +33,10 @@ copyright: 无版权
 ## curl介绍
 
 curl，一个很强大的http api调试工具，可以在Shell上直接使用。
+
+::: tip 
+作为一个运维，我应该要熟练使用该工具
+:::
 
 
 
