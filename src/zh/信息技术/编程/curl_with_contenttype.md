@@ -58,12 +58,31 @@ curl，一个很好的api调试工具。好几次想在Linxu Shell使用curl调�
 Http GET方法有时也用于提交，也使用到了Parameters参数，也是以键值对形式，但提交的参数是在**http header**里，不是**http body**
 :::
 
-curl提交时可以直接提交本地json文件，也可以在命令行上提交json结构数据。
-例1：命令行提交：
+
+## curl POST数据到api接口
+
+### 1、提交json
+
+::: note 注意
+提交json, 需要在header中显式指定Content-Type为applicaiton/json，因为curl默认是application/x-www-form-urlencoded
+:::
+- 在命令行上提交json结构数据。
+
 ```shell
-curl -H 'content-type: application/json' -X POST -d '{"accountType":"4","channel":"1"}' http://192.168.129.xx/AntiRushServer/api/ActivityAntiRush
+curl -H 'content-type: application/json' -X POST -d '{"accountType":"4","channel":"1"}' http://192.168.129.xx/my-api
+```
+- 直接提交本地json文件
+
+```shell
+curl -X POST -H 'content-type: application/json'  -d @/apps/test.json http://192.168.129.xx/my-api
 ```
 
+### 2. 提交application/x-www-form-urlencoded
+application/x-www-form-urlencoded是默认数据格式，即表单KV
+，例：
+```shell
+curl -d key1=value1&key2=value2 http://example.com
+```
 
-
-
+## 扩展
+![更多Content-Type](https://www.runoob.com/http/http-content-type.html)
