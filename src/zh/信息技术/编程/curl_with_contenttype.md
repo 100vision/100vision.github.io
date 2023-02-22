@@ -47,8 +47,8 @@ curl，一个很好的api调试工具。好几次想在Linxu Shell使用curl调�
 - application/x-www-form-urlencoded
 
 这两个常用来做POST提交。它们的区别是：
-- applicaton/json 提交的是json格式的数据，数据放在**http body***里面。
-- application/x-www-form-urlencoded 提交的是类似key1=val1&key2=val2键值对，数据也是放在**http body**里面
+- applicaton/json 提交的是json格式的数据，数据放在**http body**里面。
+- application/x-www-form-urlencoded 提交的是类似key1=val1&key2=val2键值对，通常是表单。数据也是放在**http body**里面
 
 ::: tip 总结
 它们的区别是提交的数据结构体不同，但都是在http body里面
@@ -85,4 +85,5 @@ curl -d key1=value1&key2=value2 http://example.com
 ```
 
 ## 扩展
-[更多Content-Type](https://www.runoob.com/http/http-content-type.html)
+- [更多Content-Type](https://www.runoob.com/http/http-content-type.html)
+- http body中的数据提交后的后端接收(Springboot使用@requestBody注解接收)
