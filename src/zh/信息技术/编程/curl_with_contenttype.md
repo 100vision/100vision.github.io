@@ -35,12 +35,12 @@ curl，一个很好的api调试工具。好几次想在Linxu Shell使用curl调�
 
 
 
-## 什么是Content Type ##
+## 什么是Content Type 
 
 >一般是指网页中存在的 Content-Type，用于定义网络文件的类型和网页的编码，决定浏览器将以什么形式、什么编码读取这个文件，这就是经常看到一些 PHP 网页点击的结果却是下载一个文件或一张图片的原因。Content-Type 标头告诉客户端实际返回的内容的内容类型。
 
 
-### curl常用的Content Type ###
+## curl常用的Content Type ###
 
 使用curl做api接口测试时，常会用的Content Type:
 - application/json
@@ -85,4 +85,4 @@ curl -d key1=value1&key2=value2 http://example.com
 ```
 
 ## 扩展
-![更多Content-Type](https://www.runoob.com/http/http-content-type.html)
+[更多Content-Type](https://www.runoob.com/http/http-content-type.html)
