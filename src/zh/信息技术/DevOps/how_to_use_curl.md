@@ -89,5 +89,4 @@ curl -A 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:47.0) Gecko/20100101 Firefox/47.
 
 ## 扩展
 
-- 使用POSTMAN可以帮忙生成curl参数
-![postman](../../post_images/postman_with_curl_code_snippet.JPG)
+- 可以使用POSTMAN帮忙生成curl参数，如图：
