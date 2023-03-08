@@ -29,7 +29,7 @@ copyright: 无版权
 
 :::note
 学习和了解一下FaaS
-
+:::
 
 ## FaaS 是什么
 
