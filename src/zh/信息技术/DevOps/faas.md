@@ -28,7 +28,7 @@ copyright: 无版权
 ---
 
 :::note
-学习和了解一下FaaS
+学习和了解一下FaaS. 然后使用CloudFlare Worker部署一个OpenAI ChatGPT TG机器人  https://github.com/TBXark/ChatGPT-Telegram-Workers
 :::
 
 ## FaaS 是什么
@@ -57,3 +57,4 @@ copyright: 无版权
 
 ## 文章来源
 https://blog.csdn.net/alex_yangchuansheng/article/details/121279538 
+https://github.com/TBXark/ChatGPT-Telegram-Workers
