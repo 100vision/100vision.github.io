@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: 工具：rsync注意事项
+title: 工具：rsync注意事项:非ASCII 会报"invalid argument"
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
