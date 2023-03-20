@@ -7,7 +7,7 @@ icon: page
 order: 11
 # 设置作者
 # 设置写作时间
-date: 2023-03-17
+date: 2023-03-20
 # 一个页面可以有多个分类
 category:
   - Linux
@@ -15,6 +15,7 @@ category:
 tag:
   - Linux
   - 工具
+  - 解决问题
 
 
 # 此页面会在文章列表置顶
@@ -27,8 +28,12 @@ star: true
 
 ## Rsync的字符编码问题
 
+适用rsync同步一些中文文件名等非ASCII 会报`invalid argument`
+
+## 解决办法
+
 ```shell
 [root@myserver ~]# rsync -avz --iconv=gbk,utf8 /weaver/ /mnt/lenovo-nas/
 ```
-需要指定字符集`--iconv=gbk,utf8`,否则同步一些中文文件名会报`invalid argument`
+需要指定字符集`--iconv=gbk,utf8`
 
