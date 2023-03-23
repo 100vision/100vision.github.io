@@ -34,12 +34,12 @@ copyright: 无版权
 
 ## 介绍
 
-Nginx功能强大的Web服务器软件和反向代理。它的配置参数很多，手动配置有时不能一一想到。DigitalOcean著名的主机服务商提供了一个可视化生成NGINX配置。（顺便说一下，他们家的很多、很好基础建站教程无论从排版/内容上看都很赞）
+Nginx功能强大的Web服务器软件和反向代理。它的配置参数很多，手动配置有时不能一一想到。DigitalOcean著名的主机服务商提供了一个可视化生成NGINX配置。（顺便说一下，他们家的很多基础建站教程无论从排版/内容的都很赞）
 
 ## 使用方法
 
 - 可以在线使用 https://www.digitalocean.com/community/tools/nginx 
-- 也可以`git clone`下来放到本地. Github https://github.com/digitalocean/nginxconfig.io
+- 也可以`git clone`下来放到本地. Github项目地址 https://github.com/digitalocean/nginxconfig.io
 
 
 ![Nginx 配置生成器](https://imgur.com/a/g6lmM4y)
