@@ -34,9 +34,7 @@ copyright: 无版权
 
 ## 介绍
 
-Nginx功能强大的Web服务器软件和反向代理。它的配置参数很多，手动配置有时不能一一想到。
-
-DigitalOcean, 著名的主机服务商提供了一个可视化生成NGINX配置的工具。
+Nginx功能强大的Web服务器软件和反向代理。它的配置参数很多，手动配置有时不能一一想到。这时，DigitalOcean, 著名的主机服务商提供了一个可视化生成NGINX配置的工具。他们声称：
 
 >The only tool you'll ever need to configure your NGINX server. 
 
@@ -47,6 +45,6 @@ DigitalOcean, 著名的主机服务商提供了一个可视化生成NGINX配置�
 - 可以在线使用 https://www.digitalocean.com/community/tools/nginx 
 - 也可以`git clone`下来放到本地. Github项目地址 https://github.com/digitalocean/nginxconfig.io
 
-### 截图
+## 截图
 https://imgur.com/a/g6lmM4y
-![Nginx 配置生成器](https://imgur.com/a/g6lmM4y)
+![Nginx 配置生成器](https://imgur.com/a/g6lmM4y
