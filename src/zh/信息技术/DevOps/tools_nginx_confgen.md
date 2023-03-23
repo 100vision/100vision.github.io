@@ -41,3 +41,4 @@ Nginx功能强大的Web服务器软件和反向代理。它的配置参数很多
 - 可以在线使用 https://www.digitalocean.com/community/tools/nginx 
 - 也可以`git clone`下来放到本地
 
+![Nginx 配置生成器](https://imgur.com/a/g6lmM4y)
