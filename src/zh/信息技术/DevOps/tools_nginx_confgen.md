@@ -47,4 +47,5 @@ Nginx功能强大的Web服务器软件和反向代理。它的配置参数很多
 
 ## 截图
 https://imgur.com/a/g6lmM4y
-![Nginx 配置生成器](https://imgur.com/a/g6lmM4y
+
+![Nginx 配置生成器](https://imgur.com/a/g6lmM4y)
