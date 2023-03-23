@@ -48,5 +48,5 @@ DigitalOcean, 著名的主机服务商提供了一个可视化生成NGINX配置�
 - 也可以`git clone`下来放到本地. Github项目地址 https://github.com/digitalocean/nginxconfig.io
 
 ### 截图
-
-![Nginx 配置生成器](./images/nginx_config_generator.JPG)
+https://imgur.com/a/g6lmM4y
+![Nginx 配置生成器](https://imgur.com/a/g6lmM4y)
