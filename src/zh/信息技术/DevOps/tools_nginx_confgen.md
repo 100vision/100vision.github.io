@@ -42,7 +42,7 @@ DigitalOcean, 著名的主机服务商提供了一个可视化生成NGINX配置�
 
 （顺便说一下DO，他们家的很多基础建站教程无论从排版/内容的都很赞）
 
-## 使用方法
+## 使用
 
 - 可以在线使用 https://www.digitalocean.com/community/tools/nginx 
 - 也可以`git clone`下来放到本地. Github项目地址 https://github.com/digitalocean/nginxconfig.io
