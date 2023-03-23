@@ -41,5 +41,6 @@ Nginx功能强大的Web服务器软件和反向代理。它的配置参数很多
 - 可以在线使用 https://www.digitalocean.com/community/tools/nginx 
 - 也可以`git clone`下来放到本地. Github项目地址 https://github.com/digitalocean/nginxconfig.io
 
+### 截图
 
-![Nginx 配置生成器](https://imgur.com/a/g6lmM4y)
+![Nginx 配置生成器](./images/nginx_config_generator.JPG)
