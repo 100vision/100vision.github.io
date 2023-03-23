@@ -29,7 +29,7 @@ copyright: 无版权
 ---
 
 :::note
-无意中发现一个Nginx工具，可以可视化生成Nginx配置。
+无意中发现一个Nginx工具，`NGINX CONFIG` 可以可视化生成Nginx配置。
 :::
 
 ## 介绍
@@ -39,6 +39,7 @@ Nginx功能强大的Web服务器软件和反向代理。它的配置参数很多
 ## 使用方法
 
 - 可以在线使用 https://www.digitalocean.com/community/tools/nginx 
-- 也可以`git clone`下来放到本地
+- 也可以`git clone`下来放到本地. Github https://github.com/digitalocean/nginxconfig.io
+
 
 ![Nginx 配置生成器](https://imgur.com/a/g6lmM4y)
