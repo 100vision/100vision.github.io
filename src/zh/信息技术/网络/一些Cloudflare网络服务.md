@@ -10,11 +10,12 @@ order: 14
 date: 2023-04-4
 # 一个页面可以有多个分类
 category:
-  - 随笔
+  - 网络
+  - IT
 # 一个页面可以有多个标签
 tag:
-  - 随笔
-  -Cloudflare
+  - 网络
+  - Cloudflare
 
 # 此页面会在文章列表置顶
 sticky: false
