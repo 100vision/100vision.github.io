@@ -48,9 +48,13 @@ copyright: 无版权
 
 ### Cloudflare Email Routing
 
-邮件别名`hayashidesu@solex-inc.com` 或 `365@solex-inc.com`到我的Gmail个人邮。这样，发送到`hayashidesu@solex-inc.com`的邮件，在Gmail里就能看到。
+>Easily create addresses and route emails for free
+Create custom email addresses for your domain. Add an optional catch-all for any address that has not been configured. Route emails to your preferred inbox. All without ever exposing your primary email address.
 
-防止有些免费网络服务不接受免费邮箱，可以作为替代。
+邮件别名`hayashidesu@solex-inc.com` 或 `365@solex-inc.com`到我的Gmail个人邮。这样，发送到`hayashidesu@solex-inc.com`的邮件，在Gmail里就能看到。好处有：
+
+- 防止暴露主邮箱；
+- 防止有些免费网络服务不接受免费邮箱注册，例如Gmail。
 
 ### Cloudflare Worker
 
