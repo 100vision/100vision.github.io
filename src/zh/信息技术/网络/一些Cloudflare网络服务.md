@@ -39,7 +39,7 @@ copyright: 无版权
 
 ### Domain Naming service
 
-`solex-inc.com` 的DNS解析托管在Cloudflare.com。域名主要主机列表有：
+`solex-inc.com` 的DNS解析托管在 Cloudflare.com。域名主要主机列表有：
 - help.solex-inc.com  Cloudflare Worker 代理主机。代理OpenAI API，这样可以实现直连。
 - cockpit.solex-inc.com CentOS Cockpit Web控制台，j4125小主机docker托管。
 - blog.solex-inc.com 本博客使用的域名，使用Github托管内容.
@@ -48,7 +48,7 @@ copyright: 无版权
 
 ### Cloudflare Email Routing
 
-邮件别名`hayashidesu@solex-inc.com`到我的Gmail个人邮。这样，发送到`hayashidesu@solex-inc.com`的邮件，在Gmail里就能看到。
+邮件别名`hayashidesu@solex-inc.com` 或 `365@solex-inc.com`到我的Gmail个人邮。这样，发送到`hayashidesu@solex-inc.com`的邮件，在Gmail里就能看到。
 
 防止有些免费网络服务不接受免费邮箱，可以作为替代。
 
@@ -68,4 +68,4 @@ copyright: 无版权
 
 ## 感谢
 
-感谢Cloudfare提供的这些免费良心服务。
+感谢Cloudflare提供的这些免费良心服务。
