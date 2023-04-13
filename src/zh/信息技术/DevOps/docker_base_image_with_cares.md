@@ -55,4 +55,10 @@ copyright: 无版权
 
 ### 推荐基础镜像
 
-Debian或Ubuntu
+`Debian或Ubuntu` , 这些镜像也不是很大，才几十MB
+
+## 参考
+
+https://juejin.cn/post/7120557446682116132 
+
+https://cloud.tencent.com/developer/article/2168079
