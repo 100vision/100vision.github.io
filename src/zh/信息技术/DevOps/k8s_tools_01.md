@@ -64,7 +64,7 @@ Rancher Server 可以Docker形式部署在Kubernetes之外，也可以二进制�
 3. 在每个节点上安装好必备软件环境（Docker等）
 ::: warning 关于Docker版本
 所有节点上的Docker版本保持一致。如果是虚拟机，可以克隆成模板使用.
-::: warning
+::: warning 关于Docker版本
 
 4. 在每个节点上配置好防火墙（或是关闭）；
 5. 在Rancher Server上创建集群，生成集群配置。
