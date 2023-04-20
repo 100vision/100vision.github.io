@@ -86,3 +86,21 @@ FORWARD链用于处理网络上**流经本机**的数据包，所以适用于将
 ```bash
 iptables -A FORWARD -j ACCEPT
 ```
+
+## 链表执行顺序
+
+### iptables网关接收过程
+
+1. PREROUTING
+2. <路由选择>，如果时数据包目的地址时本机时，进入INPUT链；如果是他机时，进入FORWARD链；
+- 2.1 INPUT链
+- 2.2 FORWARD链
+
+
+### 发送过程
+
+1. 路由选择。目的地址时本机的，进入OUTPUT链；如果时他机，进入FORWARD链；
+2. 
+- 目的地址时本机的走OUTPUT链；
+- 目的地址非本机的走FORWARD链
+3. POSTROUTING
