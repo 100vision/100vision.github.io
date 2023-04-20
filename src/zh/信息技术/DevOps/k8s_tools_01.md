@@ -62,19 +62,19 @@ Rancher Server 可以Docker形式部署在Kubernetes之外，也可以二进制�
 1. 需要规划好集群。比如选择集群网络插件，集群规模。一般生产环境建议使用3个etcd节点起步（奇数个etcd)。
 2. 在每个节点上安装好操作系统；
 3. 在每个节点上安装好必备软件环境（Docker等）
+4. 在每个节点上配置好防火墙（或是关闭）；
+5. 在Rancher Server上创建集群，生成集群配置。
+6. 在每个节点上执行Rancher Server上生成的配置命令，注册加入,类似：
+```bash
+curl -fL https://my-rancher-server/system-agent-install.sh | sudo  sh -s - --server https://my-rancher-server --label 'cattle.io/os=linux' --token 94dmz8db447rhqx2hm82v96vwl8wvdtvcd77mgb2t9mcmcl2n7mcth --ca-checksum 1aabd46120eb41ab0b20a088ccc7b327c79aaf2cc9ed64c2a9ced335c7ec349a --etcd --controlplane --worker
+```
+
 
 ::: warning 关于Docker版本
 
 所有节点上的Docker版本保持一致。如果是虚拟机，可以克隆成模板使用.
 
 ::: warning 
-
-4. 在每个节点上配置好防火墙（或是关闭）；
-5. 在Rancher Server上创建集群，生成集群配置。
-6. 在每个节点上执行Rancher Server上生成的配置命令，注册加入；类似：
-```bash
-curl -fL https://my-rancher-server/system-agent-install.sh | sudo  sh -s - --server https://my-rancher-server --label 'cattle.io/os=linux' --token 94dmz8db447rhqx2hm82v96vwl8wvdtvcd77mgb2t9mcmcl2n7mcth --ca-checksum 1aabd46120eb41ab0b20a088ccc7b327c79aaf2cc9ed64c2a9ced335c7ec349a --etcd --controlplane --worker
-```
 
 ::: tip
 
