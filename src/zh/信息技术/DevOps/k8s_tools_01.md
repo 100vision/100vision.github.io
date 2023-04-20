@@ -62,9 +62,12 @@ Rancher Server 可以Docker形式部署在Kubernetes之外，也可以二进制�
 1. 需要规划好集群。比如选择集群网络插件，集群规模。一般生产环境建议使用3个etcd节点起步（奇数个etcd)。
 2. 在每个节点上安装好操作系统；
 3. 在每个节点上安装好必备软件环境（Docker等）
+
 ::: warning 关于Docker版本
+
 所有节点上的Docker版本保持一致。如果是虚拟机，可以克隆成模板使用.
-::: warning 关于Docker版本
+
+::: warning 
 
 4. 在每个节点上配置好防火墙（或是关闭）；
 5. 在Rancher Server上创建集群，生成集群配置。
@@ -74,7 +77,9 @@ curl -fL https://my-rancher-server/system-agent-install.sh | sudo  sh -s - --ser
 ```
 
 ::: tip
+
 Rancher Server除了支持裸金属服务器和vSphere虚拟环境上部署，也支持 AWS/Azure/Google云主机节点上创建集群；
+
 :::
 
 ## 其他
