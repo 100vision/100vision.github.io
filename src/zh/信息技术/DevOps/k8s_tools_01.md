@@ -95,3 +95,8 @@ Rancher Server除了支持裸金属服务器和vSphere虚拟环境上部署，�
 - 建议 ETCD 节点使用 SSD 硬盘。ETCD 对写入延迟非常敏感。因此，尽可能地使用 SSD 磁盘。
 - 扩容ETCD增加节点前，确保ETCD集群状态是健康的。否则可能导致ETCD集群各节点间数据不一致。
 :::
+
+
+##参考
+
+https://ranchermanager.docs.rancher.com/zh/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/node-requirements-for-rancher-managed-clusters
