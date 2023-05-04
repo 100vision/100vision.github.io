@@ -103,8 +103,11 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 ### 3.3 部署到Citrix
 
-未做（还有环境测试）
+未做（没有环境测试）
 
+### 其他：FSLogix配置磁盘文件的压缩
+
+因为VMDK文件使用的是厚置备清零，一旦文件增长了会出于高水位不会Shrink（缩减）和自动回收空间，为解决改问题，可以使用这个脚本 [invoke-FSlShrinkDisk](https://github.com/FSLogix/Invoke-FslShrinkDisk) 
 
 # 二、应用交付解决方案 Horizon App Volumes
 
@@ -166,7 +169,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 5. 安装过程全部完成后，点击【OK】完成捕捉；
 6. 回到App Volumes Manager查看AppStack包是否存在，包最终状态是`Enabled`；
 7. AppStack包准备完毕。就可以分配给其他agent和用户计算机了。
-8. 把Packaing VM的快照回滚到之前未安装任何应用之前；！！！重要
+8. 把Packaing VM的快照回滚到之前未安装任何应用之前。这是为了下一个应用捕捉准备一个干净环境，！！！重要
 9. 重复以上步骤，可创建另一个应用程序包；
 
 
@@ -180,9 +183,23 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 **【指派应用程序包】**
 
 1. 登录App Volumes Manager，在包详细信息里，可以把包指派给：
-- AD用户或组
-- AD的OU单元（虚拟桌面或RDSH所在的OU单元）；
+- AD用户
+- AD组
+- AD的OU单元（虚拟桌面或RDSH所在的OU单元）； --- 推荐
 
 2. 验证。方法：
 - 管理员查看App Volumes Manager中的Assignments标签页列表；
 - 用户登录查看应用是否挂载。方法：可以查看安装目录或桌面；
+
+**【AppStack/Package发布为Pubished App】**
+
+适用场景：需要把AppStack应用包作为Published App发布给用户。这种情况下，AppStack是分配到了Horizon View RDS Farm场里的RDSH服务器，然后在把AppStack发布给用户；
+
+1. 按照以上把AppStack/Package指派给RDSH服务器所在的OU；
+2. 创建RDSH Farm场；
+3. 发布Published Apps。选择“已安装程序列表”选择要发布的AppStack，如果没有找到（一般找不到，因为应用是用户登录时才挂载），就选择“手动选择”，并手动指定应用主程序文件位置；
+
+
+# 三、 FSLogix和App Volumes一起使用
+
+实验证明，可以一起使用；
