@@ -109,6 +109,11 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 因为VHDX虚拟磁盘文件使用的是厚置备清零，一旦文件增长了会在高水位不会Shrink（缩减）和自动回收空间，为解决该问题，可以试试使用这个脚本 [invoke-FSlShrinkDisk](https://github.com/FSLogix/Invoke-FslShrinkDisk) 
 
+### 1.5 诊断和FSLogix Agent Logging
+
+日志文件位置 Open the latest log file from `C:\ProgramData\FSLogix\Logs\Profile\Profile_%date%.log`. 更多官方：
+[这里](https://learn.microsoft.com/en-us/fslogix/troubleshooting-events-logs-diagnostics)
+
 # 二、应用交付解决方案 Horizon App Volumes
 
 ## 2.1 什么是App Volumes
@@ -208,7 +213,10 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 (待补充)
 
+## 2.3 诊断和日志
 
+ 查看App Volumes Agent日志，位置 `C:\Program Files (x86)\CloudVolumes\Agent\Logs`
+ 
 # 三、 FSLogix和App Volumes一起使用
 
 实验证明，可以一起使用；
