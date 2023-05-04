@@ -247,6 +247,15 @@ FSLogix默认对所有登录用户生效。一般需要把管理员或是本地�
 
 ## 参考资料
 
+### FSLogix
+
+[Integrating FSLogix Profile Containers with VMware Horizon](https://techzone.vmware.com/resource/integrating-fslogix-profile-containers-vmware-horizon)
+
+### App Volumes
 [Provisioning an App Volumes AppStack on a RDSH or Citrix XenApp server (2105428)](https://kb.vmware.com/s/article/2105428)
 
+### Master/Golden RDSH Image Provision
+
 [Carl Stalhood:VMware Horizon 7.13.3 – Master RDS Host](https://www.carlstalhood.com/vmware-horizon-7-master-rds-host/)
+
+
