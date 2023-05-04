@@ -30,11 +30,10 @@ star: true
 
 ---
 
+
 # 一、配置管理解决方案 Microsoft FSLogix 
 
-::: tip 前提条件
-待添加
-:::
+
 
 ## 1、什么是FSLogix
 
@@ -119,6 +118,21 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 - 因为解耦了应用和系统，提高了部署灵活性。安装一次，然后可以部署到多个服务器；
 - 可以动态按需部署到不同目标用户和组（AD组）；
 
+**支持应用场景**
+
+- Horizon VDI虚拟桌面环境；
+- Citrix VDI 虚拟桌面环境；
+
+**App Volumes组件**
+
+组件有：
+- App Volumes Manager;
+- App Volumes Agent;
+
+**原理**
+
+- 通过App Volumes Agent录制应用程序安装过程，生成一个应用程序包并把应用程序封装成一个VMDK文件；
+- 通过App Volumes Agent挂载（附加）VMDK到虚拟桌面本地；
 
 ## 部署
 
@@ -126,9 +140,15 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 1、需要AD域环境。2、VMware vSphere；3. 存储要求: 如果使用的是网络存储，最好是有10GB网络和较快（有闪存）的存储，否则应用挂载慢等。
 :::
 
-### 支持应用场景
 
-- Horizon VDI虚拟桌面环境；
-- Citrix VDI 虚拟桌面环境；
 
-### 如何部署Horizon VDI虚拟桌面环境
+
+### 如何部署到Horizon VDI虚拟桌面环境
+
+1. 准备一台服务器并安装App Volumes Manager服务器。本例中使用的是App Volumes 2.18。
+2. 配置App Volumes Manager。登录控制台，指定应用程序包VMDK存储位置Datastore和vSphere管理员密码；
+3. 准备1台VMware虚拟机作为应用程序封装的模板计算机(`Packaging VM`)。操作系统和环境配置最好和后面应用要挂载到的模板虚拟桌面一致。
+4. 在以上Packaging VM上安装App Volumes Agent，安装过程中指定App Volumes Manager服务器地址完成注册；
+5. 立刻给Packaging VM创建一个快照；
+6. 登录App Volumes Manager创建一个AppStack（应用包），并启动【置备provision】来录制应用安装；
+7. 在Packaging VM上应当可以看到一个录制消息框。按照消息框的提示：开始安装应用程序，安装完毕后，才可以点击【OK】完成录制；
