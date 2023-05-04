@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: VMware Horizon：FSLogix和App Volumes
+title: VMware Horizon：FSLogix配置管理和App Volumes应用交付
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -194,7 +194,11 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 **【额外：AppStack/Package发布为Pubished App】**
 
-适用场景：需要把AppStack应用包作为Published App发布给用户。这种情况下，AppStack是分配到了Horizon View RDS Farm场里的RDSH服务器，然后在把AppStack发布给用户；
+::: tip 使用场景
+想要把AppStack应用包作为Published App发布给用户。这种情况下，AppStack是分配到了Horizon View RDS Farm场里的RDSH服务器，然后在把AppStack发布给用户；
+:::
+
+
 
 1. 按照以上把AppStack/Package指派给RDSH服务器所在的OU；
 2. 创建RDSH Farm场；
