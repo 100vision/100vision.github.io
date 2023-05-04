@@ -141,21 +141,25 @@ FSLogix默认对所有登录用户生效。一般需要把管理员或是本地�
 - 得益于解耦，软件发布和维护也很方便。应用安装或升级一次，然后可以部署到多个服务器，不需要在每台服务器上安装；相比镜像更新软件，也更便利轻量；
 - 可以动态按需部署到不同目标用户和组（AD组）；
 
-**支持应用场景**
+**支持的部署场景**
 
 - Horizon VDI虚拟桌面环境；
 - Citrix VDI 虚拟桌面环境；
 
-**App Volumes组件**
 
-组件有：
-- App Volumes Manager;
-- App Volumes Agent;
 
 **原理**
 
-- 通过App Volumes Agent捕捉(Capture)应用程序安装过程，生成一个应用程序包并把应用程序封装成一个VMDK文件；
-- 通过App Volumes Agent挂载（附加）VMDK到虚拟桌面本地；
+- 通过App Volumes Manager发起一个App Volumes Capture请求，然后捕捉Packaging VM上的应用程序安装过程。
+- 然后把捕捉的、生成一个应用程序包并把应用程序封装成一个VMDK文件；
+- 通过App Volumes Manager发布一个应用分配，让App Volumes Agent挂载（附加）应用VMDK到虚拟桌面本地；
+
+**App Volumes角色和组件**
+
+角色有：
+- App Volumes Manager （管理控制台，发动应用捕捉和分配应用）
+- App Volumes Agent （代理。挂载应用）
+- Packaging VM (模板虚拟机，用来捕获应用程序安装)
 
 ## 2.2 部署App Volumes
 
@@ -170,13 +174,17 @@ FSLogix默认对所有登录用户生效。一般需要把管理员或是本地�
 
 **【准备环境】**
 
-1. 准备一台服务器并安装App Volumes Manager服务器。本例中使用的是App Volumes 2.18。
-2. 配置App Volumes Manager。登录控制台，指定应用程序包VMDK存储位置Datastore和vSphere管理员密码；
+1. 准备一台服务器并安装App Volumes Manager服务器。本例中使用的是Horizon 7.13.2 ，App Volumes 2.18。
+2. 配置App Volumes Manager。登录控制台，需要：
+
+- 1个vSphere管理员密码；
+- 1个AD域服务账户（只读权限即可）
+- 指定应用程序包VMDK存储位置Datastore
 
 **【准备Packaging VM】**
 
 
-1. 需要准备1台VMware虚拟机作为应用程序封装的模板计算机(aks. `Packaging VM`)。操作系统和环境配置最好和后面应用要挂载到的模板虚拟桌面一致。
+1. 需要准备1台VMware虚拟机作为应用程序封装的模板计算机(aka. `Packaging VM`)。操作系统和环境配置最好和后面应用要挂载到的模板虚拟桌面一致。
 2. 在以上Packaging VM上安装App Volumes Agent，安装过程中指定App Volumes Manager服务器地址完成注册；
 3. 立刻给Packaging VM创建一个快照；
 
