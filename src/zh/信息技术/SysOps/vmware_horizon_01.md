@@ -62,7 +62,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 ## 1.3 部署FSLogix
 
-::: warning 环境要求
+::: warning 前提要求
 1、需要AD域环境。2、Horizon vSphere/view；3. 存储要求: 如果用户较多,要做好存储容量规划，以及使用的是网络存储，最好是有10GB网络和较快的存储，否则用户登录会很慢，因为通过网络挂载VHDX大文件等。
 :::
 
@@ -235,3 +235,10 @@ FSLogix默认对所有登录用户生效。一般需要把管理员或是本地�
 # 三、 FSLogix和App Volumes一起使用
 
 实验证明，可以一起使用；
+
+
+## 参考资料
+
+[Provisioning an App Volumes AppStack on a RDSH or Citrix XenApp server (2105428)](https://kb.vmware.com/s/article/2105428)
+
+[Carl Stalhood:VMware Horizon 7.13.3 – Master RDS Host](https://www.carlstalhood.com/vmware-horizon-7-master-rds-host/)
