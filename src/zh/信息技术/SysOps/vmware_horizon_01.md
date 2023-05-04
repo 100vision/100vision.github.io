@@ -105,9 +105,9 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 (待补充)
 
-### 其他：FSLogix配置磁盘文件的压缩
+### 1.4 FSLogix配置磁盘文件的压缩
 
-因为VMDK文件使用的是厚置备清零，一旦文件增长了会出于高水位不会Shrink（缩减）和自动回收空间，为解决改问题，可以使用这个脚本 [invoke-FSlShrinkDisk](https://github.com/FSLogix/Invoke-FslShrinkDisk) 
+因为VMDK文件使用的是厚置备清零，一旦文件增长了会在高水位不会Shrink（缩减）和自动回收空间，为解决该问题，可以试试使用这个脚本 [invoke-FSlShrinkDisk](https://github.com/FSLogix/Invoke-FslShrinkDisk) 
 
 # 二、应用交付解决方案 Horizon App Volumes
 
