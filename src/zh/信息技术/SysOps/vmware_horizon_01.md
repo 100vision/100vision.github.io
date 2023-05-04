@@ -34,7 +34,6 @@ star: true
 # 一、配置管理解决方案 Microsoft FSLogix 
 
 
-
 ## 1、什么是FSLogix
 
 FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户配置从系统里抽象剥离出来，然后使用vhd或vhdx虚拟磁盘文件进行封装，放到一个网络位置，例如SMB共享。用户登录时，系统（具体时FSLogix Agent)会去挂载用户的vhd/vhdx磁盘文件到本地。这样实现了：
@@ -61,7 +60,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 - Citrix桌面交付；
 
 
-## 3. 如何部署
+## 3. 部署FSLogix
 
 ::: warning 环境要求
 1、需要AD域环境。2、Horizon vSphere/view；3. 存储要求: 如果用户较多,要做好存储容量规划，以及使用的是网络存储，最好是有10GB网络和较快的存储，否则用户登录会很慢，因为通过网络挂载VHDX大文件等。
@@ -131,10 +130,10 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 **原理**
 
-- 通过App Volumes Agent录制应用程序安装过程，生成一个应用程序包并把应用程序封装成一个VMDK文件；
+- 通过App Volumes Agent捕捉(Capture)应用程序安装过程，生成一个应用程序包并把应用程序封装成一个VMDK文件；
 - 通过App Volumes Agent挂载（附加）VMDK到虚拟桌面本地；
 
-## 部署
+## 部署App Volumes
 
 ::: warning 前提要求
 1、需要AD域环境。2、VMware vSphere；3. 存储要求: 如果使用的是网络存储，最好是有10GB网络和较快（有闪存）的存储，否则应用挂载慢等。
@@ -145,10 +144,45 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 ### 如何部署到Horizon VDI虚拟桌面环境
 
+**【准备环境】**
+
 1. 准备一台服务器并安装App Volumes Manager服务器。本例中使用的是App Volumes 2.18。
 2. 配置App Volumes Manager。登录控制台，指定应用程序包VMDK存储位置Datastore和vSphere管理员密码；
-3. 准备1台VMware虚拟机作为应用程序封装的模板计算机(`Packaging VM`)。操作系统和环境配置最好和后面应用要挂载到的模板虚拟桌面一致。
-4. 在以上Packaging VM上安装App Volumes Agent，安装过程中指定App Volumes Manager服务器地址完成注册；
-5. 立刻给Packaging VM创建一个快照；
-6. 登录App Volumes Manager创建一个AppStack（应用包），并启动【置备provision】来录制应用安装；
-7. 在Packaging VM上应当可以看到一个录制消息框。按照消息框的提示：开始安装应用程序，安装完毕后，才可以点击【OK】完成录制；
+
+**【准备Packaging VM】**
+
+
+1. 准备1台VMware虚拟机作为应用程序封装的模板计算机(`Packaging VM`)。操作系统和环境配置最好和后面应用要挂载到的模板虚拟桌面一致。
+2. 在以上Packaging VM上安装App Volumes Agent，安装过程中指定App Volumes Manager服务器地址完成注册；
+3. 立刻给Packaging VM创建一个快照；
+
+**【创建应用包AppStack/Package】**
+
+1. 登录App Volumes Manager创建一个AppStack（应用包），并指定Packaging VM这个Agent，远程发送【置备provision】来捕捉应用安装；此时包初始状态是`Unprovisioned`。
+2. 在Packaging VM上应当可以看到一个录制消息框。按照消息框的提示：开始安装应用程序，安装完毕后，才可以点击【OK】完成捕捉；
+3. （可选）如果将来应用需要部署到RDSH服务器，则在Packaging VM上，开始之前需要进入**Install**模式。命令行下
+`change user /install`，应用安装完后，进入执行模式，需要 `change user /execute`
+4. 安装过程如果要求重启系统，重启系统；然后再进入桌面；
+5. 安装过程全部完成后，点击【OK】完成捕捉；
+6. 回到App Volumes Manager查看AppStack包是否存在，包最终状态是`Enabled`；
+7. AppStack包准备完毕。就可以分配给其他agent和用户计算机了。
+8. 把Packaing VM的快照回滚到之前未安装任何应用之前；！！！重要
+9. 重复以上步骤，可创建另一个应用程序包；
+
+
+**【准备Horizon虚拟桌面自动场】**
+
+1. 准备虚拟桌面Golden镜像。操作系统与Packaing VM一致（主要是安装`App Volumes Agent` 和Horizon Agent;
+2. 创建一个快照作为Instant Cloned场基础快照使用;
+3. 创建一个自动场；
+
+
+**【指派应用程序包】**
+
+1. 登录App Volumes Manager，在包详细信息里，可以把包指派给：
+- AD用户或组
+- AD的OU单元（虚拟桌面或RDSH所在的OU单元）；
+
+2. 验证。方法：
+- 管理员查看App Volumes Manager中的Assignments标签页列表；
+- 用户登录查看应用是否挂载。方法：可以查看安装目录或桌面；
