@@ -21,6 +21,7 @@ tag:
   - 用户配置管理
   - Profile Container
   - VMware
+  - App Volumes
 
 # 此页面会在文章列表置顶
 sticky: false
@@ -29,7 +30,7 @@ star: true
 
 ---
 
-# Microsoft FSLogix 
+# 一、配置管理解决方案 Microsoft FSLogix 
 
 ::: tip 前提条件
 待添加
@@ -87,7 +88,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
   - 指定配置文件大小的上限，默认是30GB；
 7. 创建Horizon Instant Cloned自动场；
 8. 验证。如果用户能够顺利登录，并观察到网络共享中创建一个VHDX磁盘文件；如下图：
-![FSLogix Profile Disk](./images/fslogix_profile_vhdx.JPG)
+![FSLogix Profile Disk](https://imgur.com/a/ftV6fmp)
 
 
 
@@ -107,4 +108,14 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 未做（还有环境测试）
 
 
-# 应用交付 Horizon App Volumes
+# 二、应用交付解决方案 Horizon App Volumes
+
+## 什么是App Volumes
+
+> App Volumes是VMware的应用交付解决方案。把应用程序抽象出来封装成为一个VMware Disk(*.VMDK)文件**按需**挂载到用户的虚拟桌面，可以大大降低应用程序部署时间。
+
+好处有：
+
+- 因为解耦了应用和系统，提高了部署灵活性。安装一次，然后可以部署到多个服务器；
+- 可以动态按需部署到不同目标用户和组（AD组）；
+- 
