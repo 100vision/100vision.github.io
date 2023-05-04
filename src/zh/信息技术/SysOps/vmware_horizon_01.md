@@ -84,6 +84,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
   - 配置VHD文件夹位置：指定步骤1准备好的网络共享；
   - 启用【删除本地配置文件如果成功】；
   - 指定配置文件大小的上限，默认是30GB；
+  
 7. 创建Horizon Instant Cloned自动场；
 8. 验证。如果用户能够顺利登录，并观察到网络共享中创建一个VHDX磁盘文件；如下图：
 ![FSLogix Profile Disk](https://imgur.com/a/ftV6fmp)
@@ -105,13 +106,27 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 (待补充)
 
-### 1.4 额外：FSLogix配置磁盘压缩
+## 1.4 额外
+
+### 1.4.1：FSLogix配置磁盘压缩
 
 因为VHDX虚拟磁盘文件使用的是厚置备清零，一旦文件增长了会在高水位不会Shrink（缩减）和自动回收空间，为解决该问题，可以试试使用这个脚本 [invoke-FSlShrinkDisk](https://github.com/FSLogix/Invoke-FslShrinkDisk) 
 
-### 1.5 诊断和FSLogix Agent Logging
+### 1.4.2 FSLogix用户排除
 
-日志文件位置 Open the latest log file from `C:\ProgramData\FSLogix\Logs\Profile\Profile_%date%.log`. 更多官方：
+FSLogix默认对所有登录用户生效。一般需要把管理员或是本地用户排除，不接受FSLogix管理。这样好处是，当FSLogix出现问题时，且组策略启动了“阻止使用临时配置登录”等策略项，会造成任何用户无法登录，也没法使用本地配置登录。设置排除用户，可以手动通过把需要排除的用户加入到一个 `FSLogix Profile Exclude List`本地组来实现，有可以使用组策略的受限制组实现。组策略实现步骤：
+
+- 编辑之前创建、已有的FSLogix组策略，定位到`计算机配置/Windows配置/安全设置/受限制的组`;
+- 添加一个组`FSLogix Profile Exclude List`,添加本地管理员或是其他域用户；
+- 刷新所有FSLogix Agent机器的组策略；
+
+这样，被排除的用户将继续是继续使用本地配置，不会使用FSLogix配置；
+
+
+
+## 1.5 诊断和日志
+
+主要是查看代理日志，文件位置 Open the latest log file from `C:\ProgramData\FSLogix\Logs\Profile\Profile_%date%.log`. 更多官方：
 [这里](https://learn.microsoft.com/en-us/fslogix/troubleshooting-events-logs-diagnostics)
 
 # 二、应用交付解决方案 Horizon App Volumes
