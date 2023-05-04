@@ -34,7 +34,7 @@ star: true
 # 一、配置管理解决方案 Microsoft FSLogix 
 
 
-## 1、什么是FSLogix
+## 1.1 什么是FSLogix
 
 FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户配置从系统里抽象剥离出来，然后使用vhd或vhdx虚拟磁盘文件进行封装，放到一个网络位置，例如SMB共享。用户登录时，系统（具体时FSLogix Agent)会去挂载用户的vhd/vhdx磁盘文件到本地。这样实现了：
 
@@ -52,7 +52,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 :::
 
 
-## 2. FSLogix应用范围
+## 1.2 FSLogix应用范围
 
 可以应用到：
 - Horizon View 虚拟桌面交付VDA的Instant Cloned自动场部署中;
@@ -60,7 +60,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 - Citrix桌面交付；
 
 
-## 3. 部署FSLogix
+## 1.3 部署FSLogix
 
 ::: warning 环境要求
 1、需要AD域环境。2、Horizon vSphere/view；3. 存储要求: 如果用户较多,要做好存储容量规划，以及使用的是网络存储，最好是有10GB网络和较快的存储，否则用户登录会很慢，因为通过网络挂载VHDX大文件等。
@@ -69,7 +69,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 
 
-### 3.1 部署到Horizon View自动场:虚拟桌面或RDSH服务器
+### 1.3.1 部署到Horizon View自动场:虚拟桌面或RDSH服务器
 
 1. 准备一个网络共享。并设置FSLogix Container的共享和权限。用来放置用户配置VHD/VHDX；权限设置参考：[Configure Windows ACL](https://learn.microsoft.com/en-us/fslogix/how-to-configure-storage-permissions#configure-windows-acls)
 
@@ -90,7 +90,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 
 
-### 3.2 部署到Horizon View的手动场：RDSH服务器
+### 1.3.2 部署到Horizon View的手动场：RDSH服务器
 
 步骤大致同上。不同的、需要注意的是准备RDSH主机模板:
 - 准备RDSH主机模板时，安装FSLogix Agent；
@@ -101,9 +101,9 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 - 创建Horizon手动场并添加所有RDSH主机；
 
 
-### 3.3 部署到Citrix
+### 1.3.3 部署到Citrix
 
-未做（没有环境测试）
+(待补充)
 
 ### 其他：FSLogix配置磁盘文件的压缩
 
@@ -111,7 +111,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 # 二、应用交付解决方案 Horizon App Volumes
 
-## 什么是App Volumes
+## 2.1 什么是App Volumes
 
 > App Volumes是VMware的应用交付商业解决方案。把应用程序抽象出来封装成为一个VMware Disk(*.VMDK)文件**按需**挂载到用户的虚拟桌面，可以大大降低应用程序部署时间。
 
@@ -136,7 +136,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 - 通过App Volumes Agent捕捉(Capture)应用程序安装过程，生成一个应用程序包并把应用程序封装成一个VMDK文件；
 - 通过App Volumes Agent挂载（附加）VMDK到虚拟桌面本地；
 
-## 部署App Volumes
+## 2.2 部署App Volumes
 
 ::: warning 前提要求
 1、需要AD域环境。2、VMware vSphere；3. 存储要求: 如果使用的是网络存储，最好是有10GB网络和较快（有闪存）的存储，否则应用挂载慢等。
@@ -145,7 +145,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 
 
-### 如何部署到Horizon VDI虚拟桌面环境
+### 2.2.1 如何部署到Horizon VDI虚拟桌面环境
 
 **【准备环境】**
 
@@ -198,6 +198,10 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 1. 按照以上把AppStack/Package指派给RDSH服务器所在的OU；
 2. 创建RDSH Farm场；
 3. 发布Published Apps。选择“已安装程序列表”选择要发布的AppStack，如果没有找到（一般找不到，因为应用是用户登录时才挂载），就选择“手动选择”，并手动指定应用主程序文件位置；
+
+### 2.2.2 如何部署到Citrix虚拟桌面环境
+
+(待补充)
 
 
 # 三、 FSLogix和App Volumes一起使用
