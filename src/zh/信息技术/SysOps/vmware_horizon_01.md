@@ -122,9 +122,22 @@ FSLogix默认对所有登录用户生效。一般需要把管理员或是本地�
 
 这样，被排除的用户将继续是继续使用本地配置，不会使用FSLogix配置；
 
+## 1.5 FSLogix的进阶使用
+
+### 1.5.1 什么是FSLogix App Masking
+
+>一言蔽之，Application Masking 可以用来隐藏应用。解决一些问题和需求：
+- 对某些用户隐藏应用；
+- 解决应用之间的冲突/兼容问题；
 
 
-## 1.5 诊断和日志
+### 1.5.2 使用FSLogix App Masking
+
+>FSLogix Application Masking uses rules that are defined in the FSLogix Application Masking Rules Editor。
+详细请参考[这里](https://learn.microsoft.com/en-us/fslogix/tutorial-application-rule-sets)
+
+
+## 1.6 诊断和日志
 
 主要是查看代理日志，文件位置 Open the latest log file from `C:\ProgramData\FSLogix\Logs\Profile\Profile_%date%.log`. 更多官方：
 [这里](https://learn.microsoft.com/en-us/fslogix/troubleshooting-events-logs-diagnostics)
