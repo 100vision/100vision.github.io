@@ -31,7 +31,11 @@ star: true
 
 ## 需求和背景
 
-有时需要推送一些Google Chrome必备的浏览器扩展（插件）。扩展可以是Google官方Web商店的，也可以是本地内部商店(自开发的)
+解决一些需求：
+
+- 用户计算机没法访问Google官方商店，使用本地自建商店解决；
+- 推送自开发的扩展（需要本地自建商店）；
+- 管理员推送必安装的扩展（可以官方，也可以本地自建商店；
 
 :::tip 推送工具
 如果有AD域环境，一般使用组策略推送下去。策略模板可以在Google有企业版Chrome Enterprise Bundle找到。模板文件上传到域控的PolicyDefinitions。
@@ -94,7 +98,6 @@ http://example.com:8080/mystore/obpdhkhgjdcobgnomfhokfnlaofbcpcg.crx
 - 编写扩展安装的manifest XML文件,取名update.xml。样本如下：
 
 ```plain
-Example XML manifest file:
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
   <app appid='obpdhkhgjdcobgnomfhokfnlaofbcpcg
@@ -117,4 +120,15 @@ Example XML manifest file:
 **开始**
 
 - 新建一条组策略；编辑策略找到`Computer Configuration/Administrative Templates/Google/Extensions/Configure the list of force-installed apps and extensions`
-- 填入上面记下的**Extension Id**。
+
+- 填入上面记下的**Extension Id** 和manifest XML的url,它们之间使用英文分号分开，例如：
+```plain
+obpdhkhgjdcobgnomfhokfnlaofbcpcg;http://example.com/mystore/update.xml
+```
+- 测试。链接策略到一个测试计算机对象OU。
+
+
+
+## 参考
+
+[Google Enterprise: Hosting your extension](https://docs.google.com/document/d/1pT0ZSbGdrbGvuCsVD2jjxrw-GVz-80rMS2dgkkquhTY/edit#)
