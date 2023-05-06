@@ -130,7 +130,8 @@ http://example.com:8080/mystore/obpdhkhgjdcobgnomfhokfnlaofbcpcg.crx
 ```plain
 obpdhkhgjdcobgnomfhokfnlaofbcpcg;http://example.com/mystore/update.xml
 ```
-- 测试。链接策略到一个测试计算机对象OU。
+- 测试策略。链接策略到一个测试计算机对象OU。
+- 验证结果。如果扩展推送成功，用户Chrome应该可以看到扩展，且不可以删除。
 
 
 
