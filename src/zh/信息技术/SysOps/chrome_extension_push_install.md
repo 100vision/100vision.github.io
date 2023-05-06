@@ -83,10 +83,10 @@ star: true
 - 点击【打包扩展程序】，指向源码文件夹，输出打包好的扩展, 默认是`<源码文件夹名>.crx`；
 
 :::warn 注意
-如果手上已经有了封装好的离线crx文件（从谷歌商店下载的），可以跳过以上打包过程。
+如果手上已经有了封装好的离线crx文件（例如从crxextractor.com下载的），可以跳过以上打包过程。
 :::
 
-- 临时安装扩展。把打包好的crx文件，直接拖入到扩展程序窗口安装。安装好的扩展默认是禁用的，不可以使用，可以不理会。记下它的ID，32位，例如obpdhkhgjdcobgnomfhokfnlaofbcpcg。然后移除这个禁用的扩展，不需要了。
+- 临时安装扩展获取扩展ID。把打包好的crx文件，直接拖入到扩展程序窗口安装。安装好的扩展默认是禁用的，不可以使用，可以不理会。记下它的ID，32位，例如obpdhkhgjdcobgnomfhokfnlaofbcpcg。然后移除这个禁用的扩展，不需要了。
 - 使用以上ID重命名crx文件，例如obpdhkhgjdcobgnomfhokfnlaofbcpcg.crx
 
 
