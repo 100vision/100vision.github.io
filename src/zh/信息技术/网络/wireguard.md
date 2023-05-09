@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: WireGuard组网
+title: 组网：WireGuard
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
