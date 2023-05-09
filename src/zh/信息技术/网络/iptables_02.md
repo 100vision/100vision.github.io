@@ -4,7 +4,7 @@ title: iptables表和链的浅显理解
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
-order: 21
+order: 23
 # 设置作者
 # 设置写作时间
 date: 2023-05-09
@@ -83,4 +83,20 @@ iptables -D POSTROUTING 1
 ```
 
 
-### 未完待续
+### 4. 保存规则
+
+默认iptables规则保存在内存里，系统重启后消失。所以要记得保存到文件。
+
+- 如果使用了iptables.service来管理，CentOS下执行`/sbin/iptables-save`来保存到`/etc/sysconfig/iptables`，系统重启后会从该文件加载规则配置。
+```shell
+iptables-save 
+```
+
+- 如果没有使用iptable.service来管理规则配置(使用命令/sbin/iptables等)，管理员需要手动调用`/sbin/iptables-save`保存到文件，然后再使用` /sbin/iptables-restore`手动加载。
+
+``` shell
+/sbin/iptables-save > /etc/sysconfig/iptables
+/sbin/iptables-restore  < /etc/sysconfig/iptables
+```
+
+## （未完待续）
