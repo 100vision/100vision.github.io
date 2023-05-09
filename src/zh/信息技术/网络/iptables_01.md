@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: iptables学习: (一) ：表和链
+title: iptables学习(一) ：表和链
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
