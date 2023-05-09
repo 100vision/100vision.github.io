@@ -30,7 +30,7 @@ copyright: 无版权
 
 ## iptables的常用命令
 
-### 1. 查看当前规则。
+### 查看规则。
 
 ```shell
 iptables -L -t <表名> -v --line-numbers
@@ -54,7 +54,7 @@ num   pkts bytes target     prot opt in     out     source               destina
 5        4   240 MASQUERADE  all  --  any    eth0    192.0.2.0/24         anywhere
 ```
 
-### 2. 添加iptables规则
+### 添加规则
 
 
 2.1 指定链和表添加规则
@@ -67,7 +67,7 @@ iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -i eth0 -j MASQUERADE
 ```
 
 
-### 3. 删除iptables规则
+### 删除规则
 
 :::tip 定位规则编号
 iptables -L --line-nubmers
@@ -78,7 +78,7 @@ iptables -L --line-nubmers
 iptables -D <链名> <n>
 ```
 **举例：删除POSTROUTING链的1号规则**：
-```
+```shell
 iptables -D POSTROUTING 1
 ```
 - 3.2 清空和删除所有规则
@@ -88,7 +88,7 @@ iptables -F
 iptables-save
 ```
 
-### 4. 保存规则
+### 保存规则
 
 默认iptables规则保存在内存里，系统重启后消失。所以要记得保存到文件。
 
