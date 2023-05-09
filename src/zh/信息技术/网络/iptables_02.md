@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: iptables浅显理解 (二) ：常用命令
+title: iptables学习 (二) ：常用命令
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -73,7 +73,7 @@ iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -i eth0 -j MASQUERADE
 iptables -L --line-nubmers
 :::
 
-3.1 指定链，规则号删除
+- 3.1 指定链，规则号删除
 ``` shell
 iptables -D <链名> <n>
 ```
@@ -81,7 +81,12 @@ iptables -D <链名> <n>
 ```
 iptables -D POSTROUTING 1
 ```
+- 3.2 清空和删除所有规则
 
+```shell
+iptables -F
+iptables-save
+```
 
 ### 4. 保存规则
 
