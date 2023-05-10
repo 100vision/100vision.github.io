@@ -42,7 +42,7 @@ SCCM  offers a bunch of very useful log files on CCM client side for admin to tr
 
 ### Policy ID
 
-Before we start following through a deployment process ,first thing to find out the policy ID which is the very important piece of info we needed to start the troubleshooting journey.
+Before we start following through a deployment process ,first thing is to find out the policy ID which is the very important piece of info we needed to start the troubleshooting journey.
 
 Generally, the policy is refered as deployment so policyId is the deploymenId, they are the one and same . Follow the steps below to find out the policy ID:
 
@@ -54,9 +54,11 @@ Generally, the policy is refered as deployment so policyId is the deploymenId, t
 in this case, `{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}`
 
 
-, let's start with `policyAgent.log` where is first stop that our policy shoud come in.
+
 
 ### PolicyAgent.log
+
+> Once we have the policyID, let's start with `policyAgent.log` becasue it is first stop that our policy shoud come in. 
 
 - in this case,  the policy `{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}` is being downloaded by DTS (DataTransferService) and assined to DTS download job id `{B45955B6-1902-4FCA-93BD-921DB7B317DC}`
 
@@ -80,7 +82,9 @@ instance of CCM_PolicyAgent_PolicyDownloadSucceeded
 
 ### DataTransferService.log 
 
-let's go check the download details,our job id was {B45955B6-1902-4FCA-93BD-921DB7B317DC} which is completed with no error.
+> here to check how the download goes
+
+our job id was {B45955B6-1902-4FCA-93BD-921DB7B317DC} which is completed with no error.
 
 ```
 <![LOG[DTSJob {B45955B6-1902-4FCA-93BD-921DB7B317DC} created to download from 'http://XMPRITSCCM01.example-server.com:80/SMS_MP' to 'C:\Windows\CCM\Temp'.]LOG]!><time="15:30:09.905-480" date="05-09-2023" component="DataTransferService" context="" type="1" thread="4352" file="datatransferservice.cpp:330">
@@ -100,7 +104,7 @@ let's go check the download details,our job id was {B45955B6-1902-4FCA-93BD-921D
 
 ### policyEvaluator.log
 
-here, the policy is being evaulated and complied and applied.
+> here to check how the policy is being evaulated and complied and applied.
 
 ```
 ]LOG]!><time="15:30:15.885-480" date="05-09-2023" component="PolicyAgent_PolicyEvaluator" context="" type="1" thread="4088" file="Event.cpp:840">
