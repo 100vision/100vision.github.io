@@ -48,7 +48,10 @@ Before we start following through a deployment process ,first thing is to find o
 
 Generally, a deployment from SCCM server is treated by CCM client as a policy so policyId is the deploymenId, they are the one and same . Follow the steps below to find out the policy ID:
 
-- Open up SCCM admin console
+- Open up SCCM admin console in `debugView' mode. Otherwise, PolicyID wouldn't be shown up.
+```cmd
+"C:\Program Files (x86)\Microsoft Configuration Manager\AdminConsole\bin\Microsoft.ConfigurationManagement.exe" sms:debugview
+```
 - Go to `Monitoring`
 - Locate the deployment task you want to track down;
 - Right click the deployment and click `show object details`
