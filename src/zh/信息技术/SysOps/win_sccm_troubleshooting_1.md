@@ -28,17 +28,19 @@ star: true
 ---
 
 
-## Get Started
+## Issues
 
 See SCCM deployment task is not completed and worked as unexpected. As a result, app/package/compliance baseline was not executed and installed. need to find out 
 
 - why my deployment went wrong.
 - in what phrase the deployment get stuck
 
+so in this post, I wanted to demonstrate myself how to track down a deployment process and what to look into when starting a troubelshooting.
+
 ### SCCM Logging
 
 SCCM  offers a bunch of very useful log files on CCM client side for admin to track how the policy is executed. Locate these log files on client side 
-`c:\windows\ccm\logs`
+`c:\windows\ccm\logs`. 
 
 ### Policy ID
 
@@ -48,10 +50,10 @@ Generally, the policy is refered as deployment so policyId is the deploymenId, t
 
 - Open up SCCM admin console
 - Go to `Monitoring`
-- Locate the deployment task you have trouble with;
+- Locate the deployment task you want to track down;
 - Right click the deployment and click `show object details`
 - DeploymentID could be seen in a list of `Properties` fileds.
-in this case, `{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}`
+in this demo, the deploymentID/PolicyID is `{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}`
 
 
 
@@ -60,7 +62,7 @@ in this case, `{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}`
 
 > Once we have the policyID, let's start with `policyAgent.log` becasue it is first stop that our policy shoud come in. 
 
-- in this case,  the policy `{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}` is being downloaded by DTS (DataTransferService) and assined to DTS download job id `{B45955B6-1902-4FCA-93BD-921DB7B317DC}`
+- in this demo,  the policy `{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}` is being downloaded by DTS (DataTransferService) and assined to DTS download job id `{B45955B6-1902-4FCA-93BD-921DB7B317DC}`
 
 ```
 [Download of policy CCM_Policy_Policy5.PolicyID="{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}",PolicySource="SMS:002",PolicyVersion="1.00" completed (DTS Job ID: {B45955B6-1902-4FCA-93BD-921DB7B317DC})]LOG]!><time="15:30:15.759-480" date="05-09-2023" component="PolicyAgent_PolicyDownload" context="" type="1" thread="4088" file="policydownloadendpoint.cpp:608">
