@@ -28,7 +28,7 @@ star: true
 ---
 
 
-## Issues
+## Purpose
 
 See SCCM deployment task is not completed and worked as unexpected. As a result, app/package/compliance baseline was not executed and installed. need to find out 
 
@@ -133,7 +133,7 @@ instance of CCM_PolicyAgent_PolicyRuleApplied
 - Final #Destination 2: AppEnforce.log (Application Deployment)
 - Final #Destination 3: DCMAgent.log /CIAgent.log  (Compliance Baseline Deployment)
 
-**Final stop to check for admin vary depending on the deployment types listed above.**  in this case, it is `Compliance Baseline Deployment`
+**Final stop to check for admin vary depending on the deployment types listed above.**  in this demo, it is `Compliance Baseline Deployment`
 
 ### DCMAgent.log
 
