@@ -69,7 +69,7 @@ instance of CCM_PolicyAgent_PolicyDownloadSucceeded
 	ClientID = "GUID:9EC29837-CBA8-48B7-AFC1-78BBD2F456DE";
 	DateTime = "20230509073015.769000+000";
 	DownloadMethod = "BITS";
-	DownloadSource = "http://XMPRITSCCM01.solex-server.com/SMS_MP/.sms_pol?{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}.SHA256:1D9B44CB35C72CBE30FD27A2CF753814E418BB217120E60E841904430090DF97";
+	DownloadSource = "http://XMPRITSCCM01.example-server.com/SMS_MP/.sms_pol?{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}.SHA256:1D9B44CB35C72CBE30FD27A2CF753814E418BB217120E60E841904430090DF97";
 	PolicyNamespace = "\\\\.\\ROOT\\CCM\\Policy\\Machine\\RequestedConfig";
 	PolicyPath = "CCM_Policy_Policy5.PolicyID=\"{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}\",PolicySource=\"SMS:002\",PolicyVersion=\"1.00\"";
 	ProcessID = 5436;
@@ -83,7 +83,7 @@ instance of CCM_PolicyAgent_PolicyDownloadSucceeded
 let's go check the download details,our job id was {B45955B6-1902-4FCA-93BD-921DB7B317DC} which is completed with no error.
 
 ```
-<![LOG[DTSJob {B45955B6-1902-4FCA-93BD-921DB7B317DC} created to download from 'http://XMPRITSCCM01.solex-server.com:80/SMS_MP' to 'C:\Windows\CCM\Temp'.]LOG]!><time="15:30:09.905-480" date="05-09-2023" component="DataTransferService" context="" type="1" thread="4352" file="datatransferservice.cpp:330">
+<![LOG[DTSJob {B45955B6-1902-4FCA-93BD-921DB7B317DC} created to download from 'http://XMPRITSCCM01.example-server.com:80/SMS_MP' to 'C:\Windows\CCM\Temp'.]LOG]!><time="15:30:09.905-480" date="05-09-2023" component="DataTransferService" context="" type="1" thread="4352" file="datatransferservice.cpp:330">
 （略）
 <![LOG[DTSJob {71EF16C0-CF7B-4209-AAC7-266900265D9D} successfully completed download.]LOG]!><time="15:30:11.295-480" date="05-09-2023" component="DataTransferService" context="" type="1" thread="3608" file="dtsjob.cpp:4010">
 <![LOG[DTSJob {71EF16C0-CF7B-4209-AAC7-266900265D9D} in state 'NotifiedComplete'.]LOG]!><time="15:30:11.311-480" date="05-09-2023" component="DataTransferService" context="" type="1" thread="7840" file="DTSJob.h:180">
@@ -107,8 +107,7 @@ here, the policy is being evaulated and complied and applied.
 <![LOG[Applied policy CCM_Policy_Policy5.PolicyID="{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}",PolicySource="SMS:002",PolicyVersion="1.00"]LOG]!><time="15:30:15.890-480" date="05-09-2023" component="PolicyAgent_PolicyEvaluator" context="" type="1" thread="4088" file="policyutil.cpp:9196">
 
 ```
-
-### policyEvaluator.log, Policy is being applied     
+if sucessful, the policy is being appled.
 
 ```
 <![LOG[Applying policy {5E7EC5C2-DE88-46BE-89CB-0341B7932B78}]LOG]!><time="15:30:15.845-480" date="05-09-2023" component="PolicyAgent_PolicyEvaluator" context="" type="1" thread="4088" file="policyutil.cpp:6357">
@@ -121,15 +120,14 @@ instance of CCM_PolicyAgent_PolicyRuleApplied
 	DateTime = "20230509073015.884000+000";
 	PolicyID = "{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}";
 ```
-## Final Stop
+
+### Final Stop
 
 - Final #Destination 1: Execmgr.log (Package Deployment)
 - Final #Destination 2: AppEnforce.log (Application Deployment)
 - Final #Destination 3: DCMAgent.log /CIAgent.log  (Compliance Baseline Deployment)
 
-Final stop to check for admin vary depending on the deployment types listed above.
-
-in this case, my deployment status to check is `Compliance Baseline Deployment`
+**Final stop to check for admin vary depending on the deployment types listed above.**  in this case, it is `Compliance Baseline Deployment`
 
 ### DCMAgent.log
 
@@ -138,22 +136,24 @@ For compliance evaluation policy,
 
 
 ```
-<![LOG[DCMAgentJob({4A02F07C-F786-4EDD-9674-CA4B6893FD16}): CDCMAgentJob::SetupJob - Add assignment _Solex_DingTalk_Removal_SCCM Client Present({5E7EC5C2-DE88-46BE-89CB-0341B7932B78})]LOG]!><time="08:22:49.152-480" date="05-10-2023" component="DCMAgent" context="" type="1" thread="8676" file="dcmagentjob.cpp:3251">
+<![LOG[DCMAgentJob({4A02F07C-F786-4EDD-9674-CA4B6893FD16}): CDCMAgentJob::SetupJob - Add assignment _example_DingTalk_Removal_SCCM Client Present({5E7EC5C2-DE88-46BE-89CB-0341B7932B78})]LOG]!><time="08:22:49.152-480" date="05-10-2023" component="DCMAgent" context="" type="1" thread="8676" file="dcmagentjob.cpp:3251">
 
 <![LOG[DCMAgentJob({4A02F07C-F786-4EDD-9674-CA4B6893FD16}): CDCMAgentJob::PopulateCIsFromAssignment - [SCAN] CI policy Id :ScopeId_46E06C1F-1234-4969-A016-8C1CFC11DAB5/Baseline_e8da6249-e3ae-4f6e-a154-0aa1c96931c2 version:1 - Assignment:{5E7EC5C2-DE88-46BE-89CB-0341B7932B78} is not mandatory.]LOG]!><time="08:22:49.177-480" date="05-10-2023" component="DCMAgent" context="" type="1" thread="8676" file="dcmagentjob.cpp:3251">
 <![LOG[CDCMAgentJobMgr::StartJob - Starting DCM Agent job {4A02F07C-F786-4EDD-9674-CA4B6893FD16}]LOG]!><time="08:22:49.180-480" date="05-10-2023" component="DCMAgent" context="" type="1" thread="8676" file="dcmagentjobmgr.cpp:444">
 ```
-### DCMAgent started a CI job CI Agent Job {F2C3175D-A639-4993-83E3-70E9F07C18D7}
+- DCMAgent started a CI job CI Agent Job `{F2C3175D-A639-4993-83E3-70E9F07C18D7}`
 
 ```
 <![LOG[DCMAgentJob({4A02F07C-F786-4EDD-9674-CA4B6893FD16}): CDCMAgent::InitiateCIAgentJob - Starting CI Agent Job {F2C3175D-A639-4993-83E3-70E9F07C18D7} for target: machine. Refer to this CI agent job ID in ciagent.log for more details]LOG]!><time="08:22:49.210-480" date="05-10-2023" component="DCMAgent" context="" type="1" thread="8068" file="dcmagentjob.cpp:3251">
 ```
 
 
-### CCM Client: CIAgent.log to check CI job details. Our Compliance Evaluatiion is being evaluated on client
+###  CIAgent.log
+
+here to  check CI job details. Our Compliance Evaluatiion is being evaluated on client
 
 ```
-<![LOG[CIAgentJob({F2C3175D-A639-4993-83E3-70E9F07C18D7}):  CI ScopeId_46E06C1F-1234-4969-A016-8C1CFC11DAB5/Baseline_e8da6249-e3ae-4f6e-a154-0aa1c96931c2:1 (_Solex_DingTalk_Removal) targeted to  (Dependant of policy CI ScopeId_46E06C1F-1234-4969-A016-8C1CFC11DAB5/Baseline_e8da6249-e3ae-4f6e-a154-0aa1c96931c2:1) is in scope for evaluation.]LOG]!><time="08:22:52.435-480" date="05-10-2023" component="CIAgent" context="" type="1" thread="8676" file="agentjob.cpp:3284">
+<![LOG[CIAgentJob({F2C3175D-A639-4993-83E3-70E9F07C18D7}):  CI ScopeId_46E06C1F-1234-4969-A016-8C1CFC11DAB5/Baseline_e8da6249-e3ae-4f6e-a154-0aa1c96931c2:1 (_example_DingTalk_Removal) targeted to  (Dependant of policy CI ScopeId_46E06C1F-1234-4969-A016-8C1CFC11DAB5/Baseline_e8da6249-e3ae-4f6e-a154-0aa1c96931c2:1) is in scope for evaluation.]LOG]!><time="08:22:52.435-480" date="05-10-2023" component="CIAgent" context="" type="1" thread="8676" file="agentjob.cpp:3284">
 ```
 
 ### that's it. Journey is over.
