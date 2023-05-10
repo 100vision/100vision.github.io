@@ -35,9 +35,14 @@ See SCCM deployment task is not completed and worked as unexpected. As a result,
 - why my deployment went wrong.
 - in what phrase the deployment get stuck
 
+### SCCM Logging
+
+SCCM  offers a bunch of very useful log files on CCM client side for admin to track how the policy is executed. Locate these log files on client side 
+`c:\windows\ccm\logs`
+
 ### Policy ID
 
-Find out the policy ID that is the very important piece of info we needed to start the troubleshooting journey.
+Before we start following through a deployment process ,first thing to find out the policy ID which is the very important piece of info we needed to start the troubleshooting journey.
 
 Generally, the policy is refered as deployment so policyId is the deploymenId, they are the one and same . Follow the steps below to find out the policy ID:
 
@@ -49,8 +54,7 @@ Generally, the policy is refered as deployment so policyId is the deploymenId, t
 in this case, `{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}`
 
 
-SCCM client offers a bunch of very useful log files for admin to track how the policy is executed. these log files can be found on client side 
-`c:\windows\ccm\logs`, let's start with `policyAgent.log` where is first stop that our policy shoud come in.
+, let's start with `policyAgent.log` where is first stop that our policy shoud come in.
 
 ### PolicyAgent.log
 
