@@ -46,7 +46,7 @@ SCCM  offers a bunch of very useful log files on CCM client side for admin to tr
 
 Before we start following through a deployment process ,first thing is to find out the policy ID which is the very important piece of info we needed to start the troubleshooting journey.
 
-Generally, the policy is refered as deployment so policyId is the deploymenId, they are the one and same . Follow the steps below to find out the policy ID:
+Generally, a deployment from SCCM server is treated by CCM client as a policy so policyId is the deploymenId, they are the one and same . Follow the steps below to find out the policy ID:
 
 - Open up SCCM admin console
 - Go to `Monitoring`
