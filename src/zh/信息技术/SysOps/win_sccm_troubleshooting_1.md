@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: SCCM：问题排查1：跟踪基线评估策略的执行过程
+title: SCCM：问题排查1：跟踪部署策略的执行过程
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -28,7 +28,7 @@ star: true
 ---
 
 
-## Issues
+## Purpose
 
 See SCCM deployment task is not completed and worked as unexpected. As a result, app/package/compliance baseline was not executed and installed. need to find out 
 
@@ -58,7 +58,7 @@ Generally, a deployment from SCCM server is treated by CCM client as a policy so
 - DeploymentID could be seen in a list of `Properties` fileds.
 in this demo, the deploymentID/PolicyID is `{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}`
 
-
+![policy_id](https://imgur.com/a/LTfBv4E)
 
 
 ### PolicyAgent.log
@@ -136,7 +136,7 @@ instance of CCM_PolicyAgent_PolicyRuleApplied
 - Final #Destination 2: AppEnforce.log (Application Deployment)
 - Final #Destination 3: DCMAgent.log /CIAgent.log  (Compliance Baseline Deployment)
 
-**Final stop to check for admin vary depending on the deployment types listed above.**  in this case, it is `Compliance Baseline Deployment`
+**Final stop to check for admin vary depending on the deployment types listed above.**  in this demo, it is `Compliance Baseline Deployment`
 
 ### DCMAgent.log
 
