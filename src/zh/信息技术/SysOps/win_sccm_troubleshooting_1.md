@@ -58,7 +58,7 @@ Generally, a deployment from SCCM server is treated by CCM client as a policy so
 - DeploymentID could be seen in a list of `Properties` fileds.
 in this demo, the deploymentID/PolicyID is `{5E7EC5C2-DE88-46BE-89CB-0341B7932B78}`
 
-![policy_id](https://imgur.com/a/LTfBv4E)
+![policy_id](./images/post18_locate_policy_id.JPG)
 
 
 ### PolicyAgent.log
