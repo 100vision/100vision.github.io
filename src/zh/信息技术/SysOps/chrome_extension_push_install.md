@@ -69,9 +69,13 @@ star: true
 
 以IIS为例，步骤：
 
-- 新建一个目录，例如MyStore。设置目录ACL,添加`IIS_USR`，可读可执行；
+- 新建一个目录，例如MyStore。设置目录ACL,添加`IIS_USR`本地账户，可读可执行；如下图：
+
+![IIS Folder Permission](../../PostImages\post20_iis_foder_perm_required.jpg)
 - 新建一个IIS站点，指定一个未使用的端口；主目录指向新建的目录 MyStore;
-- 添加一个MIME类型。文件扩展名输入`.crx` , MIME类型填入 `application/x-chrome-extension`
+- 添加一个MIME类型。文件扩展名输入`.crx` , MIME类型填入 `application/x-chrome-extension`,如下图：
+
+![add new MIME Type](../../PostImages/post20_iis_create_new_content_type.jpg)
 - 完成；
 
 
