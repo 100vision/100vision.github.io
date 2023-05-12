@@ -73,6 +73,14 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 1. 准备一个网络共享。并设置FSLogix Container的共享和权限。用来放置用户配置VHD/VHDX；权限设置参考：[Configure Windows ACL](https://learn.microsoft.com/en-us/fslogix/how-to-configure-storage-permissions#configure-windows-acls)
 
+图：文件夹NTFS ACL
+
+![FSLogix Profile Disk](../../PostImages/post19_horizon_fslogix_share_acls.jpg)
+
+图：文件夹Share Permission
+
+![FSLogix Profile Disk](../../PostImages/post19_horizon_fslogix_share_perm.jpg)
+
 1. 准备自动场的模板虚拟机（安装系统，安装VMWare Tools, 配置DHCP等）
 2. 在虚拟桌面模板中安装Horizon Agent (安装组件需要选择"Horizon Instant Clone")，这时不需要注册到Horizon连接服务器；
 3. 在虚拟桌面模板镜像中(Horizon Agent) 安装FSLogix Agent代理（目前是v2.9） 
@@ -84,10 +92,14 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
   - 配置VHD文件夹位置：指定步骤1准备好的网络共享；
   - 启用【删除本地配置文件如果成功】；
   - 指定配置文件大小的上限，默认是30GB；
-  
+
+ 图：GPO
+
+ ![FSLogix Profile Disk](../../PostImages/post19_horizon_fslogix_gpo.jpg)
+
 7. 创建Horizon Instant Cloned自动场；
 8. 验证。如果用户能够顺利登录，并观察到网络共享中创建一个VHDX磁盘文件；如下图：
-![FSLogix Profile Disk](https://imgur.com/a/ftV6fmp)
+![FSLogix Profile Disk](../../PostImages/post19_horizon_profile_disks.jpg)
 
 
 
