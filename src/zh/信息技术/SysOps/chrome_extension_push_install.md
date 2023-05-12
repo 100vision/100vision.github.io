@@ -69,15 +69,20 @@ star: true
 
 以IIS为例，步骤：
 
-- 新建一个目录，例如MyStore。设置目录ACL,添加`IIS_USR`本地账户，可读可执行；如下图：
+- 新建一个文件夹目录，例如MyStore。设置目录ACL,添加`IIS_USR`本地账户，可读可执行；如下图：
 
 ![IIS Folder Permission](../../PostImages\post20_iis_foder_perm_required.jpg)
-- 新建一个IIS站点，指定一个未使用的端口；主目录指向新建的目录 MyStore;
+- 新建一个IIS站点，指定一个未使用的端口；网站主目录指向新建的目录 MyStore;
 - 添加一个MIME类型。文件扩展名输入`.crx` , MIME类型填入 `application/x-chrome-extension`,如下图：
 
 ![add new MIME Type](../../PostImages/post20_iis_create_new_content_type.jpg)
-- 完成；
+- 测试商店是否工作正常。主要是验证文件是否可以下载。
+  -  在网站目录下放一个测试文件；
+  - 使用浏览器下载一个测试文件url，我的例子就是：
 
+```plain
+http://example.com:8080/mystore/test.text
+```
 
 ### 准备扩展程序(Extension)
 
