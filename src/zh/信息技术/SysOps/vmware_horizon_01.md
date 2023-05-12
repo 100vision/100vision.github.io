@@ -226,6 +226,14 @@ FSLogix默认对所有登录用户生效。一般需要把管理员或是本地�
 8. 把Packaing VM的快照回滚到之前未安装任何应用之前。这是为了下一个应用捕捉准备一个干净环境，！！！重要
 9. 重复以上步骤，可创建另一个应用程序包；
 
+图1：创建好的应用包
+
+![Package ready to assign](../../PostImages/post19_horizon_avm_package.jpg)
+
+图2：App Volumens代理列表
+
+
+![App Volume代理](../../PostImages/post19_horizon_avm_agents.jpg)
 
 **【准备Horizon虚拟桌面自动场】**
 
