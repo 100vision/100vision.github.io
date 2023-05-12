@@ -245,13 +245,13 @@ FSLogix默认对所有登录用户生效。一般需要把管理员或是本地�
 - 管理员查看App Volumes Manager中的Assignments标签页列表；
 - 用户登录查看应用是否挂载。方法：可以查看安装目录或桌面；
 
-**【额外：AppStack/Package发布为Pubished App】**
+**【额外：发布AppStack/Package到Horizon】**
 
 ::: tip 使用场景
-想要把AppStack应用包作为Published App发布给用户。这种情况下，AppStack是分配到了Horizon View RDS Farm场里的RDSH服务器，然后在把AppStack发布给用户；
+可以把AppStack/Package发布到Horizon作为Published Application。Horizon 8以上支持直接把App Volumes Manager注册到Horizon控制台里，然后直接发布。但我使用的Horizon 7好像不行；
 :::
 
-
+Horizon 7需要这样：
 
 1. 按照以上把AppStack/Package指派给RDSH服务器所在的OU；
 2. 创建RDSH Farm场；
