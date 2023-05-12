@@ -44,12 +44,13 @@ star: true
 
 ## 如果通过官方商店的推送扩展
 
-比较简单。但前提是，用户电脑可以科学上网。
+比较简单，但前提用户电脑可以科学上网。
 
 - 在Chrome Web商店里，找到要推送的扩展，并记下它的`Extension Id`。等下会用到；
 - 新建一条组策略；编辑策略找到`Computer Configuration/Administrative Templates/Google/Extensions/Configure the list of force-installed apps and extensions`
 - 填入上面记下的**Extension Id**。
-- 完。下次用户的Chrome就会自动安装该扩展；
+- 链接策略到计算机OU或用户OU；
+- 如果策略推送成功，用户的Chrome就会自动安装该扩展；
 
 ## 如果通过本地自建商店推送扩展
 
@@ -61,10 +62,10 @@ star: true
 
 ### 搭建本地商店
 
-搭建本地商店就是需要一个简单的Web服务器。IIS/Apache等都可以。
+搭建本地商店就是需要一个简单的Web服务器。IIS/Apache等都可以，但不管哪个，都要注意以下：
 
 :::note 注意
-1. 要允许匿名访问，不做认证；2. 需要设置和添加一个文件扩展名.crx的 `application/x-chrome-extension` （Chrome据此判断crx文件是否可以可以安装）
+1. Web服务器要允许匿名访问，不做认证；2. 需要设置和添加一个文件扩展名.crx的 `application/x-chrome-extension` （Chrome据此判断crx文件是否可以可以安装）
 :::
 
 以IIS为例，步骤：
@@ -78,22 +79,22 @@ star: true
 ![add new MIME Type](../../PostImages/post20_iis_create_new_content_type.jpg)
 - 测试商店是否工作正常。主要是验证文件是否可以下载。
   -  在网站目录下放一个测试文件；
-  - 使用浏览器下载一个测试文件url，我的例子就是：
+  - 使用浏览器可以成下载一个测试文件，我的例子就是：
 
 ```plain
 http://example.com:8080/mystore/test.txt
 ```
 
+
 ### 准备扩展程序(Extension)
 
-- 准备好扩展的源码；
-- 打开Chrome，打开【扩展】，右上角，选中【开发者模式】；
-- 点击【加载已解压的扩展程序】载入；根据需求配置扩展选项，验证扩展工作正常；
-- 点击【打包扩展程序】，指向源码文件夹，输出打包好的扩展, 默认是`<源码文件夹名>.crx`；
+- **如果是没有打包好的扩展**，即扩展源码，参考以下步骤先打包：
+  - 准备好扩展的源码；
+  - 打开Chrome，打开【扩展】，右上角，选中【开发者模式】；
+  - 点击【加载已解压的扩展程序】载入；根据需求配置扩展选项，验证扩展工作正常；
+  - 点击【打包扩展程序】，指向源码文件夹，输出打包好的扩展, 默认是`<源码文件夹名>.crx`；
 
-:::tip
-如果手上已经有了封装好的离线crx文件（例如从crxextractor.com下载的），可以跳过以上打包过程。
-:::
+- **如果是打包好的扩展**，即crx文件, 跳过以上步骤，执行以下步骤。
 
 - 临时安装扩展获取扩展ID。把打包好的crx文件，直接拖入到扩展程序窗口安装。安装好的扩展默认是禁用的，不可以使用，可以不理会。记下它的ID，32位，例如obpdhkhgjdcobgnomfhokfnlaofbcpcg。然后移除这个禁用的扩展，不需要了。
 - 使用以上ID重命名crx文件，例如obpdhkhgjdcobgnomfhokfnlaofbcpcg.crx
