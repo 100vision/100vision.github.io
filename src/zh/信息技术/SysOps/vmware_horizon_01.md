@@ -75,11 +75,11 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
 图：文件夹NTFS ACL
 
-![FSLogix Profile Disk](../../PostImages/post19_horizon_fslogix_share_acls.jpg)
+![文件夹ACL List](../../PostImages/post19_horizon_fslogix_share_acls.jpg)
 
 图：文件夹Share Permission
 
-![FSLogix Profile Disk](../../PostImages/post19_horizon_fslogix_share_perm.jpg)
+![文件夹共享权限](../../PostImages/post19_horizon_fslogix_share_perm.jpg)
 
 1. 准备自动场的模板虚拟机（安装系统，安装VMWare Tools, 配置DHCP等）
 2. 在虚拟桌面模板中安装Horizon Agent (安装组件需要选择"Horizon Instant Clone")，这时不需要注册到Horizon连接服务器；
@@ -95,7 +95,7 @@ FSLogix是微软免费的Windows用户配置管理解决方案。把用户账户
 
  图：GPO
 
- ![FSLogix Profile Disk](../../PostImages/post19_horizon_fslogix_gpo.jpg)
+ ![FSLogix相关策略项](../../PostImages/post19_horizon_fslogix_gpo.jpg)
 
 7. 创建Horizon Instant Cloned自动场；
 8. 验证。如果用户能够顺利登录，并观察到网络共享中创建一个VHDX磁盘文件；如下图：
