@@ -12,10 +12,11 @@ date: 2023-05-12
 category:
   - Windows
   - SCCM
+  - 效率工具
 # 一个页面可以有多个标签
 tag:
   - SCCM
-  - Tools
+  - 效率工具
 
 
 
@@ -32,7 +33,7 @@ star: true
 
 >a most powerful ConfigMgr plugin. 一个SCCM管理插件。
 
-![Recast](../../PostImages/post27_logo.jpg "RECAST SOFTWARE") 
+![Recast](../../PostImages/post27_company_icon.png "RECAST SOFTWARE") 
 
 官网：https://www.recastsoftware.com/right-click-tools
 
@@ -60,7 +61,7 @@ star: true
 
 - Client Actions:
 
-![Bulk Importing](../../PostImages/post27_sccm_tool_righ_click_tools.jpg)
+![Bulk Importing](../../PostImages/post_27_sccm_tool_rc_client_actions.jpg)
 
 
 
