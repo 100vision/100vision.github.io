@@ -81,7 +81,7 @@ star: true
   - 使用浏览器下载一个测试文件url，我的例子就是：
 
 ```plain
-http://example.com:8080/mystore/test.text
+http://example.com:8080/mystore/test.txt
 ```
 
 ### 准备扩展程序(Extension)
