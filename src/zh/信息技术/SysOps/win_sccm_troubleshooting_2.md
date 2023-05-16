@@ -66,6 +66,23 @@ PS C:\Users\tixiang_lin> Invoke-WmiMethod -ComputerName <remote_computer> -Names
 WMIC /namespace:\\root\ccm path sms_client CALL TriggerSchedule "{00000000-0000-0000-0000-000000000002}" /NOINTERACTIVE 
 ```
 
+### 快速启动客户端基线评估
+
+```powershell
+
+ $Baselines = Get-WmiObject -ComputerName $ComputerName -Namespace root\ccm\dcm -Class SMS_DesiredConfiguration
+}
+ Else
+{
+ $Baselines = Get-WmiObject -ComputerName $ComputerName -Namespace root\ccm\dcm -Class SMS_DesiredConfiguration | Where-Object {$_.DisplayName -like $BLName}
+}
+ 
+$Baselines | % {
+ 
+ ([wmiclass]"\\$ComputerName\root\ccm\dcm:SMS_DesiredConfiguration").TriggerEvaluation($_.Name, $_.Version) 
+
+```
+
 ## 参考
 
 https://www.manishbangia.com/initiate-sccm-client-actions-cmd-line/
