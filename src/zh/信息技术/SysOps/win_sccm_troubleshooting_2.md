@@ -66,7 +66,7 @@ Invoke-WmiMethod -ComputerName <remote_computer> -Namespace root\ccm -Class sms_
 WMIC /namespace:\\root\ccm path sms_client CALL TriggerSchedule "{00000000-0000-0000-0000-000000000002}" /NOINTERACTIVE 
 ```
 
-### 快速启动客户端基线评估
+## 3. 快速启动客户端基线评估
 
 ```powershell
 
