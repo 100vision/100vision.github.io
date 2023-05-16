@@ -35,7 +35,12 @@ star: true
 ```powershell
 Invoke-WmiMethod -ComputerName <remote_computer> -Namespace root\ccm -Class sms_client -Name ResetPolicy -ArgumentList @(1)
 ```
-然后检查`policyAgent.log`日志
+然后检查`policyAgent.log`日志。并查看计算机策略是已被清除：
+```
+Get-WmiObject -Namespace root\ccm\dcm -Class SMS_DesiredConfiguration
+```
+如果已清除，以上结果是空的。
+
 
 
 ## 2、远程触发客户端动作
