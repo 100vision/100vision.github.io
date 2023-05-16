@@ -33,7 +33,7 @@ star: true
 >清理客户端策略，让策略重新下载。
 
 ```powershell
-PS C:\Users\tixiang_lin> Invoke-WmiMethod -ComputerName <remote_computer> -Namespace root\ccm -Class sms_client -Name ResetPolicy -ArgumentList @(1)
+Invoke-WmiMethod -ComputerName <remote_computer> -Namespace root\ccm -Class sms_client -Name ResetPolicy -ArgumentList @(1)
 ```
 然后检查`policyAgent.log`日志
 
