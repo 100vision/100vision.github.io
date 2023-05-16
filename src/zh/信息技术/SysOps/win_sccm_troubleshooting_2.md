@@ -46,7 +46,7 @@ Invoke-WmiMethod -ComputerName <remote_computer> -Namespace root\ccm -Class sms_
 ### 命令行
 | Client Agent Trigger Schedule ID | Client Action Name                           |
 | ------------------------------- | -------------------------------------------- |
-| {00000000-0000-0000-0000-000000000021} | Machine policy retrieval & Evaluation Cycle |
+| "{00000000-0000-0000-0000-000000000021}" | Machine policy retrieval & Evaluation Cycle |
 | {00000000-0000-0000-0000-000000000022} | Machine policy evaluation cycle              |
 | {00000000-0000-0000-0000-000000000003} | Discovery Data Collection Cycle              |
 | {00000000-0000-0000-0000-000000000002} | Software inventory cycle                     |
