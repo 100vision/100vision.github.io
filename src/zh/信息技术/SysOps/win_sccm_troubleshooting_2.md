@@ -35,7 +35,7 @@ star: true
 ```powershell
 Invoke-WmiMethod -ComputerName <remote_computer> -Namespace root\ccm -Class sms_client -Name ResetPolicy -ArgumentList @(1)
 ```
-然后检查`policyAgent.log`日志。并查看计算机策略是已被清除：
+然后检查`policyAgent.log`日志。例如：可以查看计算机基线Baseline策略是已被清除：
 ```
 Get-WmiObject -Namespace root\ccm\dcm -Class SMS_DesiredConfiguration
 ```
@@ -75,6 +75,7 @@ WMIC /namespace:\\root\ccm path sms_client CALL TriggerSchedule "{00000000-0000-
 
 ```powershell
 
+##获取客户端的基线策略
  $Baselines = Get-WmiObject -ComputerName $ComputerName -Namespace root\ccm\dcm -Class SMS_DesiredConfiguration
 }
  Else
