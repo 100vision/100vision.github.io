@@ -26,70 +26,74 @@ star: true
 
 
 
-## 共同
-
-`「より」`、`「以上に」`、`「一方」`都有比较和对比的意思
+`「より」`、`「以上に」`、`「一方」`都有比较和对比的意思。
 
 
-### 「より」的构成方法与接续方法
+## 「より」
+
+### 构成方法与接续方法
 
 
-- 名词 + 「より」，比较的对象放在前面，
+- **名词 + 「より」**
 
-例如 `私は昨日よりも今日の方が元気です.`　
+例句： `私は昨日よりも今日の方が元気です.`　
 
 译文：我今天比昨天更有活力。
 
-- 动词原型 + 「より」
+- **动词原型 + 「より」**
 
-**例句**：
-
-`この映画は思ったよりも面白かった`
+例句：`この映画は思ったよりも面白かった`
 
 译文：这部电影比我想的还要更有趣。
 
 
-### 「以上に」的构成方法与接续方法
+## 「以上に」
 
->比「より」更加正式，两者可以互换使用。
+### 构成方法与接续方法
 
-- 名词 + 「以上に」，比较的对象放在前面，
+:::tip
+比「より」更加正式，两者几乎可以互换使用。
+:::
 
-例如 `私は昨日よりも今日の方が元気です`.　
+- **名词 + 「以上に」**
+
+例句： `私は昨日よりも今日の方が元気です`.　
 
 译文：我今天比昨天更有活力。
 
-- 动词原型 + 「以上に」
+- **动词原型 + 「以上に」**
 
-**例句**：
 
-1. `彼女の料理は私の想像以上に美味しかった。`
-(Her cooking was better than I had imagined.)
+例句1. `彼女の料理は私の想像以上に美味しかった。`
+译文：(Her cooking was better than I had imagined.)
 
-2. `この問題は私たちの予想以上に複雑だった。`
-(This problem was more complicated than we had expected.)
+例句2. `この問題は私たちの予想以上に複雑だった。`
+译文 (This problem was more complicated than we had expected.)
 
-3. `彼は私以上に彼女のことを知っている。`
-(He knows more about her than I do.)
+例句3. `彼は私以上に彼女のことを知っている。`
+译文：(He knows more about her than I do.)
 
-4. `この映画は私の期待以上に面白かった。`
-(This movie was more interesting than I had expected.)
+例句4. `この映画は私の期待以上に面白かった。`
+译文：(This movie was more interesting than I had expected.)
 　　
 
-### 「一方」、「一方で」的构成方法与接续方法
+## 「一方」、「一方で」
 
+### 构成方法与接续方法
+
+:::tip
 用在小句后面，表示后句和前句对比。
+:::
 
-**例句**：
 
-1. `彼はチョコレートが好きです。一方で、私はあまり好きではありません`
+例句1. `彼はチョコレートが好きです。一方で、私はあまり好きではありません`
 (He likes chocolate. On the other hand, I don't really like it.)
 
-2. `彼女はとても美人です。一方で、とても気が強いです。`
+例句2. `彼女はとても美人です。一方で、とても気が強いです。`
 (She is very beautiful. However, she is also very strong-willed.)
 
-3. `私は早寝早起きが好きです。一方で、夜更かしもたまにします。`
+例句3. `私は早寝早起きが好きです。一方で、夜更かしもたまにします。`
 (I like going to bed early and waking up early. On the other hand, I sometimes stay up late.)
 
-4. `彼は社交的な人です。一方で、私はあまり社交的ではありません。`
+例句4. `彼は社交的な人です。一方で、私はあまり社交的ではありません。`
 (He is a sociable person. However, I am not very sociable.)
