@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: Powershell：基础: 自定义对象1：使用PSCustomObject
+title: Powershell：基础:自定义对象1：使用PSCustomObject
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
