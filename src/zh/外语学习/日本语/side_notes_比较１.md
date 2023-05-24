@@ -65,15 +65,19 @@ star: true
 
 
 例句1. `彼女の料理は私の想像以上に美味しかった。`
+
 译文：(Her cooking was better than I had imagined.)
 
 例句2. `この問題は私たちの予想以上に複雑だった。`
+
 译文 (This problem was more complicated than we had expected.)
 
 例句3. `彼は私以上に彼女のことを知っている。`
+
 译文：(He knows more about her than I do.)
 
 例句4. `この映画は私の期待以上に面白かった。`
+
 译文：(This movie was more interesting than I had expected.)
 　　
 
@@ -82,18 +86,22 @@ star: true
 ### 构成方法与接续方法
 
 :::tip
-用在小句后面，表示后句和前句对比。
+用在小句后面，表示后句和前句对比。等同于英语中的"On the other hand"、中文 “另一方面” 一个意思。
 :::
 
 
 例句1. `彼はチョコレートが好きです。一方で、私はあまり好きではありません`
+
 (He likes chocolate. On the other hand, I don't really like it.)
 
 例句2. `彼女はとても美人です。一方で、とても気が強いです。`
+
 (She is very beautiful. However, she is also very strong-willed.)
 
 例句3. `私は早寝早起きが好きです。一方で、夜更かしもたまにします。`
+
 (I like going to bed early and waking up early. On the other hand, I sometimes stay up late.)
 
 例句4. `彼は社交的な人です。一方で、私はあまり社交的ではありません。`
+
 (He is a sociable person. However, I am not very sociable.)
