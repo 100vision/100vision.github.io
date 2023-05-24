@@ -49,7 +49,6 @@ foreach ($p in $processes) {
         Name    = $p.Name
         CPU     = [float] $p.CPU     
         Memory  = [int] $p.MemorySize
-        Is64Bit = [bool] ($p.Name -match "64")
     }
 }
 
@@ -59,7 +58,10 @@ $result[0].GetType().Name     # PSCustomObject
 $result[0].Name.GetType().Name # String
 $result[0].CPU.GetType().Name  # Double 
 $result[0].Memory.GetType().Name # Int32 
-$result[0].Is64Bit.GetType().Name # Boolean
+
+
+# 使用筛选
+$results | ?{$_.Memory -gt 4000}
 ```
 
 
