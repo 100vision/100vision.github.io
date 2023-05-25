@@ -63,4 +63,25 @@ Administrators | where Name !contains 'Administrator' and Name !contains 'Domain
 ![SCCM CMPivot](../../PostImages/Post32_SCCM_CMPivot_Query_Examples.jpg)
 
 
+## 题外
 
+很多时候企业不希望普通用户拥有本地管理员权限。既然刷出了本地管理员报告，随便说怎么处理移除本地管理员，以遵循安全策略和最佳实践。
+
+### 使用SCCM基线基准
+
+- 在SCCM CMPivot刷出计算机列表后，立马根据报告创建一个计算机集合。
+- 在SCCM `符合性设置`里创建一个基线项目；
+
+**发现脚本（符合条件）**
+
+```powershell
+if (Get-LocalGroupMember -Group "Administrators" -Member "My-Domain-Name\Domain Users" -ErrorAction SilentlyContinue) {   return $false }else {   return $true}
+```
+
+**修正脚本**
+
+```
+Remove-LocalGroupMember -Group "Administrators" -Member "My-Domain-Name\Domain Users"
+```
+
+- 部署基线到集合
