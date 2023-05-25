@@ -70,19 +70,26 @@ Administrators | where Name !contains 'Administrator' and Name !contains 'Domain
 
 ### 使用SCCM基线基准
 
-- 在SCCM CMPivot刷出计算机列表后，立马根据报告创建一个计算机集合。
+- 在SCCM CMPivot刷出计算机列表后，立马根据报告结果创建一个新的计算机集合。
 - 在SCCM `符合性设置`里创建一个基线项目；
 
 **发现脚本（符合条件）**
 
-```powershell
-if (Get-LocalGroupMember -Group "Administrators" -Member "My-Domain-Name\Domain Users" -ErrorAction SilentlyContinue) {   return $false }else {   return $true}
+```Powershell
+if (Get-LocalGroupMember -Group "Administrators" -Member "My-Domain-Name\Domain Users" -ErrorAction SilentlyContinue) 
+  {   
+          return $false 
+  }
+
+  else {   
+          return $true
+  }
 ```
 
 **修正脚本**
 
-```
+```Powershell
 Remove-LocalGroupMember -Group "Administrators" -Member "My-Domain-Name\Domain Users"
 ```
 
-- 部署基线到集合
+- 最后，部署基线到新集合。
