@@ -52,7 +52,8 @@ SCCM 1802以上版本
 
 - 选择一个计算机集合 （Windows 10)
 - 右键集合名称，点击`启动CMPivot`
-- 新建一个查询，例如
+- 新建一个查询；
+- （可选）根据查询结果，创建一个新集合；
 
 ```sql
 Administrators | where Name !contains 'Administrator' and Name !contains 'Domain Admins' and Name !contains 'Helpdesk Admins' 
