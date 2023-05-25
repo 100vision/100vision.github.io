@@ -58,7 +58,7 @@ SCCM 1802以上版本
 Administrators | where Name !contains 'Administrator' and Name !contains 'Domain Admins' and Name !contains 'Helpdesk Admins' 
 ```
 
-**图：范例
+**图：范例**
 
 ![SCCM CMPivot](../../PostImages/Post32_SCCM_CMPivot_Query_Examples.jpg)
 
