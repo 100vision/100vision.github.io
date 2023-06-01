@@ -33,22 +33,39 @@ star: true
 
 ## 症状
 
-- sysvol共享文件夹在每个域控制器都不同步，复制失败；
-- `repladmin /replsummary` 看不到任何错误；
-- `dcdiag`也没有报任何错误；看起来正常；
-- DFS管理查看没有看到Domain SysVol Volumes复制组；
-- DFS日志没有看到event id `2012`（DFS数据库脏关闭的信息）；
-- 使用WMIC查看数据库健康，输出`没有可用实例`
-- 其他复制正常
+- 最初是发现组策略不同步到所有域控。进而发现sysvol文件夹在域控之间不同步。
+- 又在域控的DFS管理中发现DFSR SysVol (Domain Sysvol Volumes）复制组消失！
+
 
 ## 背景
 
-- DC域控都是从Windows Server 2008升级到Windows Server 2016
-- Sysvol复制协议从FRS升级到了DFSr
+- DC域控都是从Windows Server 2008升级到Windows Server 2016.
+- 2个站点多域控制器；
+- Sysvol复制协议几个月前从FRS升级到了DFSr
 
 ## 问题影响
 
 - 主要是影响组策略无法下发因为sysvol文件不同步；
+
+## 排错步骤
+
+
+- 在所有域控上，使用`dcdiag /test:sysvolcheck /e` 检查SysVol也没有报任何错误；看起来正常；
+
+- 在所有域控上，使用`repadmin /syncall /AedP`立刻同步一次，没有变化; `repladmin /replsummary` 也没看到任何错误；
+
+- 考虑到SysVol是使用DFS协议同步，检查事件查看器里的DFS日志，没有发现类似event id `2212`（指示DFS数据库脏关闭的信息）；
+:::tip
+DFS数据库不正常关闭可能导致DFS停止复制。一般事件日志可以看懂2212或2213等event ID。
+:::
+
+- 使用WMIC检查数据库健康，输出`没有可用实例` 或 `no available instance(s).`
+:::tip
+可以使用 `Wmic /namespace:\\root\microsoftdfs path dfsrreplicatedfolderinfo get replicationgroupname,replicatedfoldername,state` 检查数据库状态。如果看到数据库状态异常，DFS停止复制，可以使用 `wmic /namespace:\\root\microsoftdfs path dfsrVolumeConfig where volumeGuid=<GUID> call ResumeReplication` 恢复复制。
+:::
+
+- 问题好像比较严重，感觉有点无助。
+
 
 ## 解决办法：
 
