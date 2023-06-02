@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: SCCM：问题排查2：CCM 客户端安装错误：Setup with Failed to download files through BITS. Error 0x80080005
+title: SCCM：问题排查2：CCM 客户端安装错误："Setup with Failed through BITS. Error 0x80080005"
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -17,7 +17,7 @@ tag:
   - SCCM
   - 疑难排查
   - Troubeshooting
-  - 0x80080005
+  - '0x80080005'
 
 
 
