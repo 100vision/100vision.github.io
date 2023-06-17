@@ -199,8 +199,11 @@ release channel ch01;
 }
 
 ```
-# after finishting this step. Try to open it:
+Once this step. Try to open it:
+
+```
 recover database open resetlogs
+```
 
  if you're lucky enough you should be able to open the database. if you failed . don't panic you're not alone .Acutally in many cases, the recovery at this point complaints file inconsistency. the error looks similar to this :
 # 
@@ -255,13 +258,13 @@ catalog archivelog '/u01/oradata/fast_recovery_area/ORCL/archivelog/2023_06_17/o
  when archive los get ready . re-try the recover operation by executing the recover. if the inconsistency persists, repeat the restore of archvie log until it succeeds
 
 
-**Finally**, Database 
+**Finally**, 
 ```
 SQL> recover database open resetlogs
 
 database is altered
 ```
-
+Congratulations!
 
 
 
