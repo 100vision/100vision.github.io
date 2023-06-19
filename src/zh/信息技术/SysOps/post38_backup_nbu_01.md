@@ -104,7 +104,7 @@ star: true
 ![添加目标域的Storage Server](../../PostImages/post38_nbu_air_cofigure_storage_server_repl_conf_step2.jpg)
 
 :::tip 可能异常
-在添加目标storage server可能会出现证书不信任异常，例如hand shaking，可以参照文章 ["Netbackup: 如何解决Netbackup CA证书异常问题"](http://www.163.com)，然后再继续。
+在添加目标storage server可能会出现证书不信任异常，例如hand shaking，可以参照文章 ["Netbackup: 如何解决Netbackup CA证书异常问题"](https://blog.solex-inc.com/zh/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/SysOps/post38_backup_nbu_02.html)，然后再继续。
 :::
 
 - 在源域上创建SLP策略。
