@@ -25,10 +25,10 @@ star: true
 
 
 :::warning Caveat 
- Notes to myself only . Use this instrucution at your own risk in production.
+Notes to myself only . Use this instrucution at your own risk in production.
 :::warning
 
-## Sincerio
+## Scenario
 
 - Oracle Single instance (Source) to Single instance(target)
 - Netbackup Data Backup Environment
