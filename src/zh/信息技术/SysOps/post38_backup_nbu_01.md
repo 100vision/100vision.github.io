@@ -164,44 +164,49 @@ star: true
 
 ## 二、 手动复制
 
+### 手动复制的使用场景
+
 手动复制可以实现：
 
-- 手动触发AIR复制，更快进行复制。前提需要已有SLP备份数据。
-- 使用场景，在备份域之间手动复制SLP备份数据。
+- 管理员手动发起复制，在备份域之间手动复制SLP备份数据。
 
-例如有2个备份域，
+例如，某公司有这样一个备份环境：
 
-- 一个是生产环境备份master用来存放备份主副本, 一个是DR Netbackup用来存放备份第二个副本。
-- 生产备份服务器备份副本保留1周，源程DR站点的Netbackup保留备份1个月。
-- 生产备份副本定期使用`AIR`复制一份到DR；这样2个站点都有备份副本；
-- 如果哪天生产副本过期不可用了，DR副本还在保留期，这时就可以使用`bpreplicate`从DR复制回来到生产域来恢复。
+- 备份策略：为保证备份可用性，规定备份需要有多个副本；
+- 备份架构是：一个是生产环境备份master用来存放备份主副本, 一个是DR Netbackup用来存放备份第二个副本。
+- 保留策略：生产备份服务器备份副本保留1周，源程DR站点的Netbackup保留备份1个月。
+- 备份计划：生产备份副本定期使用SLP和`AIR`复制一份到DR；这样2个站点都有备份副本；
 
-
-
-### 手动复制通过SLP备份的数据到远程域
-
-使用`nbreplicate`可以手动复制SLP备份过的数据到远程域。使用场景有：
-- 当目标域之前从源域复制过来的备份副本没有了，需要再从源域拿一份过来；
-- 当需要比计划实际更早进行复制；
+这样， 一般情况下没有使用手动复制，但如果哪天生产副本过期不可用了，DR副本还在保留期，这时就可以使用`bpreplicate`从DR复制回来到生产域来恢复。
 
 
-### 手动复制未通过SLP备份的数据到远程域
+### 如何使用nbreplicate手动复制
 
-:::tip
-个人测试不行。有错误 Replication failed for backup id XXXX.cn_1687146752: NB image database contains no image fragments for requested backup id/copy number (165)
-:::
-
-- 配置AIR
-- 在目标域上创建SLP import
-- 然后在源域master上执行以下：
-
+- 在目标域创建SLP并由import策略动作；
+- 源域Master上执行
 ```
-nbreplicate -backupid XXX_155500 -cn 2 
+nbreplicate -backupid XXX_235729 -slp_name <slp_name>
 ```
 
-- 检查目标域的catalog和import job队列
 
-**参考**
+
+
+## 三、关于复制未通过SLP备份的数据到远程域
+
+### 可选方法1
+
+
+- 在源域，通过admin console把备份副本duplicate到一个可移动磁盘或介质；
+- 把介质拿到或传输到远程站点；
+- 把介质挂载到远程站点的媒体服务器media server上；
+- 在远程域里的catalog中导入(import)这些备份副本，通过`initiate import`；
+详细步骤参考：[How to import NetBackup backup images via the NetBackup Administration Console GUI](https://www.veritas.com/support/en_US/article.100017201)
+
+
+
+
+## 参考
+
 https://annurkarthik.wordpress.com/2016/03/09/command-to-start-manual-replication-of-images-to-remote-netbackup-domain/
 
 https://vox.veritas.com/t5/NetBackup/how-to-replicate-backup-image-from-one-NBU-domain-to-the-other/td-p/894871
