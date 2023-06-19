@@ -34,21 +34,47 @@ star: true
 
 ## Netbackup复制 (Replication)介绍
 
-用于实现不同备份域之间备份数据复制；如果是相同备份域，要使用Duplicate
+- 用于实现不同备份域之间备份数据复制，实现多站点多个备份副本，保证备份高可用性；
+- 备份副本可以在本地恢复，也可以在远程域恢复。
+
+:::tip
+如果是相同备份域，要使用Duplicate功能
+:::
+
+
 
 ### Automatic Image Replication (AIR) 自动复制
 
-》AIR功能（Automatic Image Replicate）用于实现不同备份域之间的备份数据自动复制。接合SLP (Storage Lifecycle Policy) 实现备份镜像（备份片）自动复制。
+> AIR功能（Automatic Image Replicate）用于实现不同备份域之间的备份数据自动复制。接合SLP (Storage Lifecycle Policy) 实现备份镜像（备份片）自动复制。
+
 
 ### 手动复制
-有自动复制，也就有手动复制。手动复制是使用`bpreplicate`命令来实现跨域手动复制已有的备份片。具体使用举例见文尾。
+有自动复制，也就有手动复制。手动复制是使用`bpreplicate`命令来手动发起实现跨域手动复制备份片。
 
 
 ### AIR VS 手动复制
 
-- AIR是自动复制，作为SLP的动作一部分，可以计划安排，好像不能复制已有备份镜像image;
+- AIR是自动复制，，可以和备份策略一起计划安排;
 
-- 手动复制。可以复制已有备份image。
+- 手动复制。可以复制已有备份image，管理员可以手动发起。
+
+**相同**
+
+个人理解，
+
+- AIR就是使用`bpreplicate`相同的API来复制，作为SLP的动作一部分，可以和备份策略一起计划调度。
+- 它们都/只可以复制经过SLP备份的数据。非SLP备份的数据不能复制到其他域。
+
+**不同**
+
+主要是使用场景不同：
+- AIR不会复制已经复制的备份数据手动复制，需要和备份策略调度使用；
+- `bpreplicate`不需要调度，可以在源域和目标域来回复制，任意时间复制。
+
+
+
+
+
 
 ## 一. AIR复制
 
@@ -140,8 +166,16 @@ star: true
 
 手动复制可以实现：
 
-- 手动触发AIR复制，更快进行复制。前提需要已有SLP。
-- 手动复制好像可以复制未经SLP备份的的数据，但没有测试。
+- 手动触发AIR复制，更快进行复制。前提需要已有SLP备份数据。
+- 使用场景，在备份域之间手动复制SLP备份数据。
+
+例如有2个备份域，
+
+- 一个是生产环境备份master用来存放备份主副本, 一个是DR Netbackup用来存放备份第二个副本。
+- 生产备份服务器备份副本保留1周，源程DR站点的Netbackup保留备份1个月。
+- 生产备份副本定期使用`AIR`复制一份到DR；这样2个站点都有备份副本；
+- 如果哪天生产副本过期不可用了，DR副本还在保留期，这时就可以使用`bpreplicate`从DR复制回来到生产域来恢复。
+
 
 
 ### 手动复制通过SLP备份的数据到远程域
@@ -154,7 +188,7 @@ star: true
 ### 手动复制未通过SLP备份的数据到远程域
 
 :::tip
-能否实现未测试
+个人测试不行。有错误 Replication failed for backup id XXXX.cn_1687146752: NB image database contains no image fragments for requested backup id/copy number (165)
 :::
 
 - 配置AIR
