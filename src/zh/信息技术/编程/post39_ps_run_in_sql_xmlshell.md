@@ -41,43 +41,27 @@ EXEC sp_configure 'xp_cmdshell', 1;
 RECONFIGURE;
 ```
 
-2. Create a table to store the PowerShell script:
+
+2. Execute the PowerShell script block using the `xp_cmdshell` stored procedure:
 ```sql
-CREATE TABLE dbo.PowerShellScripts (ScriptID INT IDENTITY(1,1) PRIMARY KEY, Script NVARCHAR(MAX));
+DECLARE @ps_script NVARCHAR(MAX);
+
+SET @ps_script = '&{$items = get-childitem c:\;$items | ForEach-Object { write-output $_.fullname}}';
+
+DECLARE @cmd NVARCHAR(4000);
+
+SET @cmd = N'powershell.exe -c "' + @ps_script + N'"';
+
+DECLARE @output TABLE (output NVARCHAR(MAX));
+
+INSERT INTO @output
+EXEC xp_cmdshell @cmd;
+
+SELECT output FROM @output;
 ```
 
-3. Insert the PowerShell script into the table:
-```sql
-INSERT INTO dbo.PowerShellScripts (Script)
-VALUES (N'
-# PowerShell script code goes here
-$variable = "Hello, PowerShell!"
-Write-Output $variable
-');
-```
-Replace the script content in the `VALUES` clause with your actual PowerShell script.
+:::tip Important Notes
+- Enclose the script block in  the & symbol to indicate that it's a command to be executed.
 
-4. Execute the PowerShell script block using the `xmlcmdshell` stored procedure:
-```sql
-DECLARE @cmd NVARCHAR(MAX);
-SET @cmd = N'
-<root>
-    <command>
-        <script>
-            <![CDATA[' +
-            (SELECT Script FROM dbo.PowerShellScripts WHERE ScriptID = 1) +
-            N']]>
-        </script>
-    </command>
-</root>
-';
-
-EXEC sp_xml_preparedocument @idoc OUTPUT, @cmd;
-
-EXEC xmlcmdshell 'powershell.exe', @cmd;
-
-EXEC sp_xml_removedocument @idoc;
-```
-In the above example, the script with `ScriptID = 1` is retrieved from the table `PowerShellScripts` and executed using the `xmlcmdshell` stored procedure. Adjust the `ScriptID` parameter as needed.
-
-Note: Executing PowerShell scripts from SQL Server can pose security risks if not handled carefully. Make sure to validate and sanitize any input to prevent potential SQL injection or script execution vulnerabilities.
+- the comand string for the stored procedure `xp_cmdshell` has to be either  varchar(8000) or nvarchar(4000)
+:::
