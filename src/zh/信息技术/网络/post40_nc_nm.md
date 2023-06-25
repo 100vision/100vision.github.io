@@ -43,11 +43,11 @@ star: true
 - 使用
 
 1. 启动管理员命令行,启动：
-```
+```cmd
 C:> netsh trace start persistent=yes capture=yes tracefile=c:\temp\nettrace-boot.etl
 ```
 2. 停止则执行：
-```
+```cmd
 C:\>netsh trace stop
 ```
 
@@ -62,11 +62,11 @@ C:\>netsh trace stop
 (无)
 ### 使用Tcpdump
 
->来源：[米开朗基杨 Tcpdump 示例教程](https://icloudnative.io/posts/tcpdump-examples/)
 
-**基础使用常用参数**
 
-```
+**1. 基础使用常用参数**
+
+```shell
 $ tcpdump -i eth0 -nn -s0 -v port 80 -w output.pcag -A 
 ```
 - -i : 选择要捕获的接口，通常是以太网卡或无线网卡，也可以是 vlan 或其他特殊接口。如果该系统上只有一个网络接口，则无需指定。
@@ -85,29 +85,31 @@ $ tcpdump -i eth0 -nn -s0 -v port 80 -w output.pcag -A
 
 - -w 写入输出到文件
 
-- -l 行缓冲模式。把实时输出通过管道给前天工具，例如grep
+- -l 行缓冲模式。把实时输出通过管道给其他工具，例如grep
 
-**高级使用举例**
+**2. 高级使用举例**
 
 - 提取HTTP用户代理
 
-```
+```shell
 $ tcpdump -nn -A -s1500 -l | grep "User-Agent:"
 ```
 - 提取 HTTP POST 请求中的密码
 
-```
+```shell
 $ tcpdump -s 0 -A -n -l | egrep -i "POST /|pwd=|passwd=|password=|Host:"
 ```
 
 - 提取Cookies
-```
+```shell
 $ tcpdump -nn -A -s0 -l | egrep -i 'Set-Cookie|Host:|Cookie:'
 ```
 
 
 - 抓取 SMTP/POP3 协议的邮件
 
-```
+```shell
 $ tcpdump -nn -l port 25 | grep -i 'MAIL FROM\|RCPT TO'
 ```
+- 更多使用参考：
+>来源：[米开朗基杨 Tcpdump 示例教程](https://icloudnative.io/posts/tcpdump-examples/)
