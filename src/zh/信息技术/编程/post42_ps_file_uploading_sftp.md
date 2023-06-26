@@ -75,6 +75,9 @@ star: true
 
 ### 脚本
 
+
+[完整脚本](https://github.com/100vision/Powershellgallery/blob/master/%E7%BD%91%E7%BB%9C%E7%B1%BB/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/Upload-FileBySFTP.ps1)
+
 ``` Powershell
 
 <#
