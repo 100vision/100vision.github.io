@@ -57,6 +57,7 @@ star: true
 
 
 - 新建一个作业步骤。并指定作业类型为`Powershell`.
+
 ![指定作业类型](../../PostImages/post41_ps_sql_agent_new_job_type.jpg)
 
 - 点击【打开】定位到写好的Powershell脚本文件然后加载。
@@ -65,14 +66,15 @@ star: true
 ![指定脚本输出](../../PostImages/post41_ps_sql_agent_new_job_output.jpg)
 
 - 设置作业执行计划。
+
 ![设置调度计划](../../PostImages/post41_ps_sql_agent_new_job_schedule.jpg)
 
 - 设置作业执行结果通知。支持邮件等通知，步骤略。
 
 :::tip 关于SQL Agent作业运行身份
-默认SQL Agent服务是使用一个叫`SQL Server 代理服务账户`，这是一个`虚拟服务账户`(Virtual Account) ,点击[这里了解什么是虚拟账户](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/configure-windows-service-accounts-and-permissions?redirectedfrom=MSDN&view=sql-server-ver16#VA_Desc) 应该是权限比较低的账户，不能执行一些权限要求高的任务。如果需要执行，需要在服务管理把服务账户换成高权限账户。
+默认SQL Agent服务是使用一个叫`SQL Server 代理服务账户`，即`NT Service\SQLSERVERAGENT`，这是一个`虚拟服务账户`(Virtual Account) ，在本地计算机管理看不到的，点击[这里了解什么是虚拟账户](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/configure-windows-service-accounts-and-permissions?redirectedfrom=MSDN&view=sql-server-ver16#VA_Desc) 应该是权限比较低的账户，不能执行一些权限要求高的任务。如果需要执行，需要在服务管理把服务账户换成高权限账户。
 :::
 
-## Side Notes 1: 关于文件上传脚本
+## Side Notes : 关于文件上传脚本
 
 实现原理是通过WinSCP的运行库实现的，通过sftp协议上传文件到远程sftp服务器。脚本将在下一个文章介绍。
