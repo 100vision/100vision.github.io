@@ -30,6 +30,9 @@ star: true
 
 ---
 
+:::tip 适用场景
+个人感觉适合在SQLServer里执行一些简单的Powershell任务。如果脚本含有一些特殊字符，执行容易出错。不如使用SQL Server Agent功能强大，可以执行更多脚本任务。
+:::
 
 To execute a PowerShell script block using SQL Server's `xmlcmdshell` stored procedure, you can follow these steps:
 
