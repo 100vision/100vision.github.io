@@ -181,19 +181,30 @@ else {
 
 1. **关于WinSCP Assembly文件准备细节**
 
-为了脚本可以调用，需要准备Assebly文件，可以在WinSCP安装目录下找到。并在脚本中指定然后加载。需要的文件有：
-- WinSCP.exe
-- WinSCPNet.dll
+- WinSCP Assembly文件至关重要，需要在要上传的主机上准备好，这样上传脚本才能工作。
+- 这些Assembly文件是： `WinSCP.exe` 和 `WinSCPNet.dll`,均可以在WinSCP安装目录中找到。如果上传主机没有安装WinSCP,可以通过其他方法准备一份，放到一个指定目录下。
+- 最后在脚本中使用`Add-Type`指令指定并加载。
 
-2. **如果WinSCP没有安装**
+:::note
+`WinSCP.exe` 和 `WinSCPNet.dll` 必须在同一目录下。
+:::
 
-可以搭建一个简单的HTTP服务器，并使用脚本的`webclient`对象实现下载一个副本
+2. **如果上传主机上没有安装WinSCP Assembly文件**
+
+可以搭建一个简单的HTTP服务器，并使用脚本的`webclient`对象实现下载一个副本。本例中，是使用`Node.js` 的express部署一个http。
 
 3. **关于免密登录sftp服务器的实现细节**
 
-免密登录是因为使用了SSH密钥，密钥对通过WinSCP/putty工具生成。一般是把公钥上传到sftp用户主目录下。本例中使用的sftp服务器是sftpGo，是把公钥文本拷贝到用户配置里保存（通过sftpGO Web admin portal)
+免密登录是因为使用了SSH密钥对.
 
-4. **关于脚本中sftp会话选项参数***
+- 密钥对通过WinSCP/putty工具生成。
+- 然后提前把公钥通过WinSCP下的putty上传到sftp用户主目录下。本例中使用的sftp服务器是sftpGo，是把公钥文本拷贝粘贴到用户profile里保存（通过sftpGO Web admin portal)。
+
+:::tip 
+可以先通过WinSCP工具测试是否可以免密登录。
+:::
+
+4. **关于脚本中sftp会话选项参数**
 
 WinSCP的会话参数是通过WinSCP会话工具代码模板生成器生成的，比较方便。使用方法是：
 
@@ -206,4 +217,4 @@ WinSCP的会话参数是通过WinSCP会话工具代码模板生成器生成的�
 ![1](../../PostImages/post42_ps_sftp_generate_code_template_step1.jpg)
 ![1](../../PostImages/post42_ps_sftp_generate_code_template_step2.jpg)
 
-- 复制代码
+- 复制代码模板到Powershell ISE或其他IDE。
