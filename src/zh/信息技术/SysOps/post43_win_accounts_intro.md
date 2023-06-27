@@ -107,9 +107,9 @@ star: true
 - 不能用于多台计算机。否则服务启动失败。
 - 已经被接下来的gMSA取代。
 
-### 使用MSA
+### 开始使用MSA
 
-MSA被gMSA取代，使用方法大致可参照以下gMSA，不展开写。具体参考：
+MSA被gMSA取代，使用方法大致可参照以下gMSA，不是本文重点，不展开写。具体参考：
 
 [Managed Service Accounts: Understanding, Implementing, Best Practices, and Troubleshooting](https://techcommunity.microsoft.com/t5/ask-the-directory-services-team/managed-service-accounts-understanding-implementing-best/ba-p/397009)
 
@@ -136,9 +136,9 @@ gMSA不支持用于Windows集群服务，但支持应用到集群之上的服务
 - 64位系统；
 
 
-### 使用gMSA
+### 开始使用gMSA
 
-> 开始之前要先创建一个Kds Root Key,详见 [Get Started with Group-Managed Server Account](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj128431(v=ws.11)?redirectedfrom=MSDN)
+> 首次使用要先完成一个**一次性**工作。即创建一个Kds Root Key,详见 [Get Started with Group-Managed Server Account](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj128431(v=ws.11)?redirectedfrom=MSDN)
 
 - 创建Kds Root Key。在Windows Server 2012或更高的域控制器上执行:
 ```powershell
@@ -191,7 +191,7 @@ Install-ADServiceAccount -Identity svc_SQLserver
 
 ## 三、虚拟账户 Virtual Account
 
-> 虚拟服务账户，又称Local Managed Account，这里仅作了解。
+> 虚拟服务账户，又称Local Managed Account，不是本文重点，这里仅作了解。
 
 ### 了解虚拟账户特点
 
