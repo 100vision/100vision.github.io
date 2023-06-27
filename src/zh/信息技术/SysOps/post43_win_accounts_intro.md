@@ -90,7 +90,6 @@ star: true
 
 ## 托管Windows服务账户类型
 
-**有3种**
 
 - 普通可管理服务账户(Standalone Managed Service Account, MSA)
 - 组可管理服务账户（ Group-Managed Service Account, gMSA)
@@ -137,7 +136,7 @@ gMSA不支持用于Windows集群服务，但支持应用到集群之上的服务
 - 64位系统；
 
 
-### 使用
+### 使用gMSA
 
 > 开始之前要先创建一个Kds Root Key,详见 [Get Started with Group-Managed Server Account](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj128431(v=ws.11)?redirectedfrom=MSDN)
 
@@ -145,70 +144,75 @@ gMSA不支持用于Windows集群服务，但支持应用到集群之上的服务
 ```powershell
 Add-KdsRootKey –EffectiveImmediately
 ```
-并等待10个小时的AD复制。
-> 可使用 `Test-KdsRootKey -KeyId (Get-KdsRootKey).KeyId`查看创建结果。
+并等待10个小时的AD复制。另外可使用 `Test-KdsRootKey -KeyId (Get-KdsRootKey).KeyId`查看创建结果。
 
-- 10小时后，创建一个AD安全组。这个安全组成员将包含所有将要使用这个gMSA的计算机。
+- 10小时后，创建一个AD安全组，例如Svc_Account_Computers。这个安全组成员将包含所有将要使用这个gMSA的计算机。
 
-- 创建gMSA账户并绑定给安全组。
+- 创建gMSA账户,例如svc_SQLserver并绑定给安全组Svc_Account_Computers。
 ```powershell
-New-ADServiceAccount -name <gMSA_Name>  -PrincipalsAllowedToRetrieveManagedPassword <ad_group_name> 
+New-ADServiceAccount -name svc_SQLserver  -PrincipalsAllowedToRetrieveManagedPassword Svc_Account_Computers 
 ```
-> 创建MSA需要Domain Admin成员。另外默认情况下，MSA账户创建在CN=Managed Service Accounts，可以在`AD计算机和账户`下的 `Managed Service Account` 中查看到。
+
+> 创建gMSA需要Domain Admin成员。另外默认情况下，gMSA账户创建在CN=Managed Service Accounts，可以在`AD计算机和账户`下的 `Managed Service Account` 中查看到。
 
 
 - 部署安装MSA账户到目标主机。使用域管理员身份账户登录到所有需要使用gMSA主机(是那个安全组成员)，然后执行：
 
 
 ``` Powershell
-Install-ADServiceAccount -Identity <the new gMSA you created> 
+Install-ADServiceAccount -Identity svc_SQLserver
 ```
-> 主机需要安装和加载Active Directory Module for Powershell。并可以使用`Test-ADServiceAcount -id <gMSA_Name>`来查看部署是否成功。
+
+> 主机需要安装和加载Active Directory Module for Powershell。并可以使用`Test-ADServiceAcount -id svc_SQLserver`来查看部署是否成功。
+
 :::tip 安装异常
 安装时可能会有异常。提示类似权限不足的错误信息，可以尝试把主机重新启动一下后再尝试。
 :::
 
-- 最后，把gMSA账户给目标服务
+- 最后，把gMSA账户指定给目标服务
 
 在服务属性里，输入gMSA账户名，账户名格式 `<domainName>\<服务账户名>$ `,例如
 `mydomain\myMSA$`，密码一定留空。
+
 
 > 另外，也可以把MSA账户用到Windows计划任务。
 
 - 重启服务。如果无问题，服务正常启动。
 
 
-### 关于gMSA服务账户的权限
+### 关于gMSA服务账户的授权
 
 默认gMSA都是`Domain Computers`安全组成员，权限都不高。如果需要增加权限，可以直接把gMSA账户加入到指定的域安全组或本地安全组即可。如下图，添加到目标主机的本地管理员组：
 
 ![Add permissions for gMSA](../../PostImages/post43_win_serviceAccount_add_perm_for_a_gMSA.jpg)
 
 
-另外，前面提到gMSA服务账户已可以使用到Windows计划任务中，这时也要给gMSA授权，授予`Log on as a batch job` 允许批处理权限，具体方法是在本地组策略用户权限指派中完成。当然，也可以简单点，直接把gMSA添加到Local Administrators组中。
+> 另外，前面提到gMSA服务账户已可以使用到Windows计划任务中，这时也要给gMSA授权，授予`Log on as a batch job` 允许批处理权限，具体方法是在本地组策略用户权限指派中完成。当然，也可以简单点，直接把gMSA添加到Local Administrators组中。
 
 ## 三、虚拟账户 Virtual Account
 
-> 虚拟服务账户，又称Local Managed Account，是Windows Server 2008 R2和Windows 7引入，特点有：
+> 虚拟服务账户，又称Local Managed Account，这里仅作了解。
+
+### 了解虚拟账户特点
 
 - 它们是本地系统账户，不是域账户。账户名格式 NT SERVICE\<SERVICENAME>.
 - 它们可以访问域环境资源，是通过域计算机账户身份访问网络资源的, 例如MyDomain\mycomputer$
 - 不需要管理密码；
 
 
+### 虚拟账户的创建
 
-> 虚拟账户的创建。
-
-一般都是由Windows应用程序安装时创建生成的。例如SQL Server下有：
+一般都是由Windows应用程序安装时创建生成的，不需要管理员创建。例如安装SQL Server后，服务器上有：
 
 - NT SERVICE\MSSQLSERVER  （数据库引擎服务使用）
 - NT Service\SQLSERVERAGENT （SQL Agent服务使用）
 
-> 虚拟服务账户的权限分配。
+### 虚拟服务账户的权限分配
 
-一般情况下，服务默认使用虚拟服务账户凭据运行，本着最小权限运行服务的最佳实践。但有时需要访问一些本地特殊系统资源，则可以额外授权。或是改用其他服务账户类型，即以下的MSA或gMSA。
+一般情况下，服务默认使用虚拟服务账户凭据运行，本着最小权限运行服务的最佳实践。但有时需要访问一些本地特殊系统资源，则可以额外授权。或是改用其他服务账户类型，即以上的MSA或gMSA。
 
-> 虚拟服务账户的授权方法。
+
+### 虚拟服务账户的授权
 
 本地资源授权时，授权目标是虚拟服务账户名，网络资源授权时，授权目标是虚拟账户所在的计算机账户，例如MyDomain\mySQLServerHost$
 
@@ -216,7 +220,7 @@ Install-ADServiceAccount -Identity <the new gMSA you created>
 虚拟账户在本地计算机账户管理中看不到的，在授权时可以直接输入账户名。
 :::
 
-## 参考
+## 参考文章
 
 [Using Managed Service Accounts (MSA and gMSA) in Active Directory
 ](https://woshub.com/group-managed-service-accounts-in-windows-server-2012/)
