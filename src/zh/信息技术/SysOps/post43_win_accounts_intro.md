@@ -175,9 +175,11 @@ Install-ADServiceAccount -Identity svc_SQLserver
 `mydomain\myMSA$`，密码一定留空。
 
 
-> 另外，也可以把MSA账户用到Windows计划任务。
-
 - 重启服务。如果无问题，服务正常启动。
+
+> 另外，也可以把MSA账户用到Windows计划任务。如下图：
+
+![Configure a gMSA in Task Scheduler](../../PostImages/post43_win_serviceAccount_configure_a_gMSA_in_task_scheduler.jpg)
 
 
 ### 关于gMSA服务账户的授权
