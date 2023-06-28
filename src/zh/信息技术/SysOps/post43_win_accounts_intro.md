@@ -150,13 +150,13 @@ Add-KdsRootKey –EffectiveImmediately
 
 - 创建gMSA账户,例如svc_SQLserver并绑定给安全组Svc_Account_Computers。
 ```powershell
-New-ADServiceAccount -name svc_SQLserver  -PrincipalsAllowedToRetrieveManagedPassword Svc_Account_Computers 
+New-ADServiceAccount -name svc_SQLserver  -PrincipalsAllowedToRetrieveManagedPassword Svc_Account_Computers  --DNSHostName svcSQLServer
 ```
 
 > 创建gMSA需要Domain Admin成员。另外默认情况下，gMSA账户创建在CN=Managed Service Accounts，可以在`AD计算机和账户`下的 `Managed Service Account` 中查看到。
 
 
-- 部署安装MSA账户到目标主机。使用域管理员身份账户登录到所有需要使用gMSA主机(是那个安全组成员)，然后执行：
+- 部署安装gMSA账户到目标主机。使用域管理员身份账户登录到所有需要使用gMSA主机(是那个安全组成员)，然后执行：
 
 
 ``` Powershell
