@@ -183,11 +183,11 @@ else {
 1. **关于WinSCP Assembly文件准备细节**
 
 - WinSCP Assembly文件至关重要，需要在要上传的主机（在本例，是在一台远程SQL Server) 上准备好，这样上传脚本才能工作。
-- 这些Assembly文件是： `WinSCP.exe` 和 `WinSCPNet.dll`,均可以在WinSCP安装目录中找到。如果上传主机没有安装WinSCP,可以通过其他方法准备一份(例如通过http)，放到一个上传主机的某个指定目录下。在例子，我指定了`C:\ssh`。
+- 这些Assembly文件是： `WinSCP.exe` 和 `WinSCPNet.dll`,均可以在WinSCP安装目录中找到。如果上传主机没有安装WinSCP,可以通过其他方法准备一份(例如通过http)，放到一个上传主机的某个指定目录下。
 - 最后在脚本中使用`Add-Type`指令指定并加载。
 
 :::note
-`WinSCP.exe` 和 `WinSCPNet.dll` 必须在同一目录下。
+`WinSCP.exe` 和 `WinSCPNet.dll` 必须在同一目录下,在例子，我指定了`C:\ssh`。。
 :::
 
 2. **如果上传主机上没有安装WinSCP Assembly文件**
