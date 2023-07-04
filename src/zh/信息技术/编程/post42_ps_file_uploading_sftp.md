@@ -35,7 +35,7 @@ star: true
 ---
 
 :::tip 背景
-前篇文章 [在SQL Agent里运行Powershell实现文件上传](https://blog.solex-inc.com/zh/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/%E7%BC%96%E7%A8%8B/post41_ps_run_in_sql_with_sql_agent.html)介绍了一个文件上传需求，具体实现是通过Powershell调用WinSCP的Assembly实现的，本篇详细介绍。
+前篇文章 [在SQL Agent里运行Powershell实现文件上传](https://blog.solex-inc.com/zh/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/%E7%BC%96%E7%A8%8B/post41_ps_run_in_sql_with_sql_agent.html)介绍了一个文件上传需求，把远程SQLServer上的一个文件上传到sftp服务器。具体实现是通过Powershell调用WinSCP的Assembly实现的，本篇详细介绍。
 :::
 
 
@@ -45,7 +45,7 @@ star: true
 >WinSCP是Windows下一个很常用、很受欢迎的开源FTP/SFTP客户端，版本更新的很快。
 
 官方主页 https://winscp.net/eng/download.php
-
+sha'g
  WinSCP supports five transfer protocols:
 
     SFTP (SSH File Transfer Protocol);
@@ -128,7 +128,8 @@ param (
     {
         # Connection
         $session.Open($sessionOptions)
-        # Upload the file to the FTP server
+
+      # Upload the file to the FTP server
         $session.PutFiles($LocalFilePath, $RemoteFilePath, $False, $transferOptions).Check()
 
     }
@@ -181,8 +182,8 @@ else {
 
 1. **关于WinSCP Assembly文件准备细节**
 
-- WinSCP Assembly文件至关重要，需要在要上传的主机上准备好，这样上传脚本才能工作。
-- 这些Assembly文件是： `WinSCP.exe` 和 `WinSCPNet.dll`,均可以在WinSCP安装目录中找到。如果上传主机没有安装WinSCP,可以通过其他方法准备一份，放到一个指定目录下。
+- WinSCP Assembly文件至关重要，需要在要上传的主机（在本例，是在一台远程SQL Server) 上准备好，这样上传脚本才能工作。
+- 这些Assembly文件是： `WinSCP.exe` 和 `WinSCPNet.dll`,均可以在WinSCP安装目录中找到。如果上传主机没有安装WinSCP,可以通过其他方法准备一份(例如通过http)，放到一个上传主机的某个指定目录下。在例子，我指定了`C:\ssh`。
 - 最后在脚本中使用`Add-Type`指令指定并加载。
 
 :::note
@@ -191,7 +192,7 @@ else {
 
 2. **如果上传主机上没有安装WinSCP Assembly文件**
 
-可以搭建一个简单的HTTP服务器，并使用脚本的`webclient`对象实现下载一个副本。本例中，是使用`Node.js` 的express部署一个http。
+可以搭建一个简单的HTTP服务器，并使用脚本的`webclient`对象实现下载一个副本。本例中，是使用`Node.js` 的express部署一个http，提供下载WinSCP.exe和WinSCPNet.dll，以及sftp ssh私钥key。
 
 3. **关于免密登录sftp服务器的实现细节**
 
@@ -201,10 +202,10 @@ else {
 - 然后提前把公钥通过WinSCP下的putty上传到sftp用户主目录下。本例中使用的sftp服务器是sftpGo，是把公钥文本拷贝粘贴到用户profile里保存（通过sftpGO Web admin portal)。
 
 :::tip 
-可以先通过WinSCP工具测试是否可以免密登录。
+可以先通过WinSCP工具测试是否可以免密登录sftp服务器。
 :::
 
-4. **关于脚本中sftp会话选项参数**
+4. **关于脚本中sftp SessionOption对象会话选项参数**
 
 WinSCP的会话参数是通过WinSCP会话工具代码模板生成器生成的，比较方便。使用方法是：
 
@@ -217,4 +218,4 @@ WinSCP的会话参数是通过WinSCP会话工具代码模板生成器生成的�
 ![1](../../PostImages/post42_ps_sftp_generate_code_template_step1.jpg)
 ![1](../../PostImages/post42_ps_sftp_generate_code_template_step2.jpg)
 
-- 复制代码模板到Powershell ISE或其他IDE。
+- 复制代码模板到Powershell ISE或其他IDE，最后再写文件上传代码
