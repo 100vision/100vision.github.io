@@ -112,7 +112,8 @@ DBCC 执行完毕。如果 DBCC 输出了错误信息，请与系统管理员联
 
 ## 方法三：使用DACPAC 或 BACPAC
 
-> 一种新方法。初衷是迁移本地数据库到Azure。
+
+> 一种新方法，即 Data-Tier Application Package。初衷是迁移本地数据库到Azure。
 
 > 使用`dacpac`可以提取架构和数据库对象到一个应用包文件,然后把该应用包文件导入到目标数据库中。在SSMS中，对应的操作是`提取数据层应用程序...`，是本文介绍的操作。导出的文件形式是`.dapac`，在目标数据库对应的操作是`部署数据层应用程序...`
 
@@ -159,5 +160,9 @@ DBCC 执行完毕。如果 DBCC 输出了错误信息，请与系统管理员联
 C:\Program Files\Microsoft SQL Server\160\DAC\bin>SqlPackage.exe /action:Extract /TargetFile:"c:\mydb.dacpac" /SourceConnectionString:"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=ecology;Data Source=mydb.example.com;TrustServerCertificate=true"
 ```
 :::tip 
-可以添加`/p:VerifyExtraction=false`关闭架构验证
+该方法对数据库要求较高，稍有不对，要么在源库导出时出问题，要么在目标库导入时出问题，需要使用，很多时候和数据库架构验证有关，可以添加`/p:VerifyExtraction=false`关闭架构验证
 :::
+
+
+
+> 
