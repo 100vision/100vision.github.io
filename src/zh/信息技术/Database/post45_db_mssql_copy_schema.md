@@ -136,23 +136,24 @@ DBCC 执行完毕。如果 DBCC 输出了错误信息，请与系统管理员联
 具体使用，参考 [An introduction to Data-Tier applications in SQL Server](https://www.sqlshack.com/an-introduction-to-data-tier-applications-in-sql-server/)
 
 
-### 关于异常和其他工具
+### 一些常见问题
 
-在SSMS生成DAC包过程中，有很大可能生成不成功。碰到以下类似错误（图）：
+**问题1：在SSMS生成DAC包过程中，碰到以下类似架构验证错误（图）**
 
 ![DAC Package creation failed](../../PostImages/post45_db_mssql_copy_schema_dacpac_exception.jpg)
 
+**解决办法**
 
-这种异常一般是因为包导出进程对源数据库验证失败，验证失败的原因是发现数据库引用了不存在数据库对象，例如失效的链接数据库的对象，或不存在的表。
+关闭架构验证。这种异常一般是因为包导出进程对源数据库验证失败，验证失败的原因是发现数据库引用了不存在数据库对象，例如失效的链接数据库的对象，或不存在的表。
 
-如果需要跳过数据库验证生成dacpac包，需要使用其他工具完成达到目的，不能使用SSMS。这些工具有：
+SSMS不提供关闭架构验证开关，需要使用其他工具，这些工具有：
 
 - Visual Studio
 - Azure Data Studio [下载](https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16&tabs=redhat-install%2Credhat-uninstall#download-azure-data-studio)
 - Sqlpackage Utility [下载](https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage-download?view=sql-server-ver16)
 
 
-**主要介绍使用SQLPackage**
+> 使用SQLPackage替代SSMS关闭架构验证，导出时使用`/p:VerifyExtraction=false`，部署时使用`/p:VerifyDeployment`
 
 - 生成dacpac包。进入安装位置  `C:\Program Files\Microsoft SQL Server\160\DAC\bin` , 执行：
 
@@ -162,11 +163,21 @@ C:\Program Files\Microsoft SQL Server\160\DAC\bin>SqlPackage.exe /action:Extract
 - 发布部署dacpac包到目标数据库。执行：
 
 ``` bash
-C:\Program Files\Microsoft SQL Server\160\DAC\bin>SqlPackage.exe /Action:Publish /p:VerifyDeployment=false /SourceFile:"c:\mydb.dacpac" /TargetDatabaseName: <DatabaseName> /TargetServerName:"<Server Name>" 
+C:\Program Files\Microsoft SQL Server\160\DAC\bin>SqlPackage.exe /Action:Publish /p:VerifyDeployment=false /SourceFile:"c:\mydb.dacpac" /TargetDatabaseName: <DatabaseName> /TargetServerName:"<Server Name>"  /TargetTrustServerCertificate:True
 ``` 
 
+
+**问题2： 无法解析的引用**
+
+ 类似“Error SQL72009: [System.Web] has an unresolved dependency to [System.Design]. A deployment script with correct ordering cannot be created.
+
+ **解决办法**
+
+
+<无>
+
 :::tip 
-该方法对数据库要求较高，稍有不对，要么在源库导出时出问题，要么在目标库导入时出问题，很多时候和数据库架构验证有关，`extract`抽取时可以添加`/p:VerifyExtraction=false`关闭架构验证，`publish`部署时使用`/p:VerifyDeployment`, 详细参考[这里](https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage?view=sql-server-ver16&redirectedfrom=MSDN)
+该方法对数据库要求较高，稍有不对，要么在源库导出时出问题，要么在目标库导入时出问题，很多时候和数据库架构验证有关，`extract`抽取时可以添加`/p:VerifyExtraction=false`关闭架构验证，`publish`部署时使用。开关选项详细参考[这里](https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage?view=sql-server-ver16&redirectedfrom=MSDN)
 :::
 
 
