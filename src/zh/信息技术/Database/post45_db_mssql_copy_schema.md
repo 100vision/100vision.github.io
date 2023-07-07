@@ -154,13 +154,19 @@ DBCC 执行完毕。如果 DBCC 输出了错误信息，请与系统管理员联
 
 **主要介绍使用SQLPackage**
 
-- 进入安装位置  `C:\Program Files\Microsoft SQL Server\160\DAC\bin` 
-- 执行
-```
+- 生成dacpac包。进入安装位置  `C:\Program Files\Microsoft SQL Server\160\DAC\bin` , 执行：
+
+```bash
 C:\Program Files\Microsoft SQL Server\160\DAC\bin>SqlPackage.exe /action:Extract /TargetFile:"c:\mydb.dacpac" /SourceConnectionString:"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=ecology;Data Source=mydb.example.com;TrustServerCertificate=true"
 ```
+- 发布部署dacpac包到目标数据库。执行：
+
+``` bash
+C:\Program Files\Microsoft SQL Server\160\DAC\bin>SqlPackage.exe /Action:Publish /p:VerifyDeployment=false /SourceFile:"c:\mydb.dacpac" /TargetDatabaseName: <DatabaseName> /TargetServerName:"<Server Name>" 
+``` 
+
 :::tip 
-该方法对数据库要求较高，稍有不对，要么在源库导出时出问题，要么在目标库导入时出问题，需要使用，很多时候和数据库架构验证有关，可以添加`/p:VerifyExtraction=false`关闭架构验证
+该方法对数据库要求较高，稍有不对，要么在源库导出时出问题，要么在目标库导入时出问题，很多时候和数据库架构验证有关，`extract`抽取时可以添加`/p:VerifyExtraction=false`关闭架构验证，`publish`部署时使用`/p:VerifyDeployment`, 详细参考[这里](https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage?view=sql-server-ver16&redirectedfrom=MSDN)
 :::
 
 
