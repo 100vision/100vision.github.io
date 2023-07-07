@@ -105,6 +105,7 @@ DBCC 执行完毕。如果 DBCC 输出了错误信息，请与系统管理员联
 
 - 指定脚本文件保存位置。
 - 脚本生成执行过程，如下图：
+
 ![scrits being saved](../../PostImages/post45_db_mssql_copy_schema_create_scripts_progress.jpg)
 
 - 在目标数据库服务器上，执行该脚本即可。脚本将在目标服务器上创建一个同名数据库和同样数据库文件结构。可以修改匹配目标服务器环境。
@@ -136,7 +137,8 @@ DBCC 执行完毕。如果 DBCC 输出了错误信息，请与系统管理员联
 
 ### 关于异常和其他工具
 
-在生成DAC包过程中，有很大可能生成不成功。碰到以下类似错误（图）：
+在SSMS生成DAC包过程中，有很大可能生成不成功。碰到以下类似错误（图）：
+
 ![DAC Package creation failed](../../PostImages/post45_db_mssql_copy_schema_dacpac_exception.jpg)
 
 
