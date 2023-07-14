@@ -41,9 +41,10 @@ copyright: 无版权
 
 `solex-inc.com` 的DNS解析托管在 Cloudflare.com。域名主要主机列表有：
 - help.solex-inc.com  Cloudflare Worker 代理主机。代理OpenAI API，这样可以实现直连。
-- cockpit.solex-inc.com CentOS Cockpit Web控制台，j4125小主机docker托管。
+- manager.solex-inc.com CentOS Cockpit Web控制台，j4125小主机docker托管。
 - blog.solex-inc.com 本博客使用的域名，使用Github托管内容.
 - vault.solex-com.com Bitwarden密码管理服务。j4125小主机docker托管。
+
 
 
 ### Cloudflare Email Routing
