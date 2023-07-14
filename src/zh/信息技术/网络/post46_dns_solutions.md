@@ -35,7 +35,7 @@ copyright: 无版权
 ## 前言
 
 国内环境下，除了不能直连海外服务器问题外，还有DNS污染问题让人恼火，因此需要了解一下怎么解决。
-可以吐槽一下，在本朝很多东西都是zz的延申。
+另外吐槽一下，在本朝很多东西都是zz的延申。
 
 
 ## 什么是DNS污染
@@ -63,7 +63,7 @@ copyright: 无版权
 
 ## 方案选项1：使用DOH部署本地DNS缓存服务器
 
-### 选择DOH服务器作为上游DNS服务器
+### 步骤1：选择DOH服务器作为上游DNS服务器
 
 当前使用比较多的是DOH，比较著名的支持DOH的公网DNS服务器有：
 
@@ -72,7 +72,7 @@ copyright: 无版权
 
 > 更多可以查询这里 https://github.com/dnscrypt/dnscrypt-resolvers 
 
-### 部署本地DNS缓存服务器
+### 步骤2：部署本地DNS缓存服务器
 
 > 本地DNS缓存服务器，它扮演DOH客户端，负责转发本地的DNS查询给外部的DOH服务器，需要本地部署。
 
@@ -81,7 +81,7 @@ copyright: 无版权
 - `dnsmasq`
 - `dnscrypt-proxy`
 
-### 使用DNSMASQ 和 Cloudflare 1.1.1.1
+**开始部署**
 
 搭建步骤可以参考：
 
@@ -89,7 +89,7 @@ copyright: 无版权
 - [Connect to 1.1.1.1 using DoH client](shttps://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/dns-over-https-client/)
 
 
-### 使用本地缓存服务器dnsmasq
+### 步骤3：使用本地缓存服务器dnsmasq
 
 - 如果是dnsmasq和本机一台主机使用，可以修改`/etc/resolv.conf`。删除所有`nameserver`，添加一行`nameserver 127.0.0.1` 即可。
 - 如果是供内网所有主机使用，修改内网主机的DNS服务器指向到dnsmasq。
