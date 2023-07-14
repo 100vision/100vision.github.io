@@ -85,7 +85,7 @@ copyright: 无版权
 
 搭建步骤可以参考：
 
--  [dnsmasq + Cloudflare DoH 自建 DNS ] (https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/ )
+-  [dnsmasq + Cloudflare DoH 自建 DNS](https://page.codespaper.com/2019/dnsmasq-cloudflare-doh/)
 - [Connect to 1.1.1.1 using DoH client](shttps://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/dns-over-https-client/)
 
 
