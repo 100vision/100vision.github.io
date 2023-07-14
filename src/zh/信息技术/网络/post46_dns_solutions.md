@@ -19,6 +19,7 @@ tag:
   - dnsmasq
   - doh
   - solution
+  - dns污染
 
 # 此页面会在文章列表置顶
 sticky: false
@@ -33,12 +34,13 @@ copyright: 无版权
 
 ## 前言
 
-国内环境下，除了不能直连海外服务器问题外，还有DNS污染问题，因此需要了解一下怎么解决。
+国内环境下，除了不能直连海外服务器问题外，还有DNS污染问题让人恼火，因此需要了解一下怎么解决。
+可以吐槽一下，在本朝很多东西都是zz的延申。
 
 
 ## 什么是DNS污染
 
-> 又称DNS“投毒”和DNS劫持,执行DNS劫持攻击导致DNS服务器缓存了错误记录的现象。详见[wiki](https://zh.wikipedia.org/zh-cn/%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%93%E5%AD%98%E6%B1%A1%E6%9F%93)
+> 又称DNS“投毒”,执行DNS劫持攻击导致下游DNS服务器缓存了错误记录的现象。详见[wiki](https://zh.wikipedia.org/zh-cn/%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%93%E5%AD%98%E6%B1%A1%E6%9F%93)
 
 
 
