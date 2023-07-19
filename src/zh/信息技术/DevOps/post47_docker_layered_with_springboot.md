@@ -4,7 +4,7 @@ title: Docker：SpringBoot项目分层打包，实现更快构建Docker镜像
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
-order: 16
+order: 47
 # 设置作者
 # 设置写作时间
 date: 2023-07-14
