@@ -71,7 +71,7 @@ DFS数据库不正常关闭可能导致DFS停止复制。一般事件日志可�
 
 > Google了很久，终于找到了类似问题的解决办法，不用废掉问题DC。
 
-> 具体原理是，通过修改注册表，把所有DC上的DFS恢复到DC提升前的状态，使得它会从PDC Emulator角色的DC那里重新复制SYSVOL，最终完成修复SYSVOL复制组。具体解决办法见参考链接。
+> 具体原理是，通过修改注册表，把所有DC上的DFS SYSVOL复制组状态恢复到DC提升前的状态，使得所有DC会从PDC Emulator角色的DC那里重新复制SYSVOL，最终完成重建SYSVOL复制组。
 
 
 
