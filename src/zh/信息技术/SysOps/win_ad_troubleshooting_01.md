@@ -94,9 +94,12 @@ repadmin /syncall /AdeP
 
 - 修改PDC上的注册表。注册表内容如下：
 
-:::warn 注册表修改注意事项
-需要根据实际情况替换SYSVOL文件夹位置。在这个例子中，因为我有把SYSVOL复制协议从Frs-r升级到DFS-R，对应的SYSVOL文件夹名是`SYSVOL_DFSR`,不再是`SYSVOL`
+:::note 注意1
+需要根据实际情况替换SYSVOL文件夹位置。在这个例子中，因为我有把SYSVOL复制协议从Frs-r升级到DFS-R，所以对应的SYSVOL文件夹名是`SYSVOL_DFSR`,不再是`SYSVOL`
 :::
+
+:::note 注意2
+注册表里出现的文件夹，如果没有, 例如staging area 需要事先手动创建。
 
 ```
 Windows Registry Editor Version 5.00
@@ -118,11 +121,11 @@ Windows Registry Editor Version 5.00
 ```
 
 - 启动PDC上DFS服务，并等待3分钟左右。
-- 如果一切顺利，以上注册表内容在PDC上会发生变化（消失）。确认代之，将看到的是：
+- 如果一切顺利，以上注册表内容在PDC上会发生变化（消失）。取而代之的是：
 `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\DFSR\Parameters\SysVols\Seeding Sysvols`
 - 回到ADSI, 将能看到 `CN=System > CN=DFSR-GlobalSettings > CN=Domain System Volume > CN=Topology > CN=<your primary dc>`
 - 再在所有DC上执行一遍手动复制.
-- 在剩下所有DC上依次执行
+- 在剩下所有DC上依次执行以下：
 
 - a. 添加以下注册表内容：
 
@@ -150,7 +153,8 @@ Windows Registry Editor Version 5.00
 - c. 执行repadmin复制
 - d . 检查ADSI
 
-- 最后，检查DFS命名空间是否出现了SYSVOL复制组。至此问题解决！
+- 最后，检查DFS命名空间是否出现了SYSVOL复制组。
+- 至此问题解决！
 
 
 
