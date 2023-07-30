@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: Nginx：Proxy模块：使用Proxy_Redirect重定向Location
+title: Api网关：Nginx：Proxy模块：使用Proxy_Redirect重定向Location
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -14,6 +14,7 @@ category:
   - 工具
   - Web
   - 解决问题
+  - api网关
 # 一个页面可以有多个标签
 tag:
   - DevOps
