@@ -4,10 +4,10 @@ title: Nginx：Proxy模块：使用Proxy_Redirect重定向Location
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
-order: 14
+order: 49
 # 设置作者
 # 设置写作时间
-date: 2023-03-23
+date: 2023-07-30
 # 一个页面可以有多个分类
 category:
   - DevOps
