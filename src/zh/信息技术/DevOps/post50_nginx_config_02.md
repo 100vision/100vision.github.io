@@ -4,7 +4,7 @@ title: Api网关：Nginx：性能调优（全文转载）
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
-order: 49
+order: 50
 # 设置作者
 # 设置写作时间
 date: 2023-08-01
@@ -49,7 +49,9 @@ copyright: 无版权
 
 A basic understanding of the NGINX architecture and configuration concepts is assumed. This post does not attempt to duplicate the NGINX documentation, but provides an overview of the various options and links to the relevant documentation.
 
+:::tip
 A good rule to follow when tuning is to change one setting at a time, and set it back to the default value if the change does not improve performance.
+:::
 
 We start with a discussion of Linux tuning, because the value of some operating system settings determines how you tune your NGINX configuration.
 
@@ -61,7 +63,9 @@ The settings in modern Linux kernels (2.6+) are suitable for most purposes, but 
 
 The following settings relate to connections and how they are queued. If you have a high rate of incoming connections and you are getting uneven levels of performance (for example some connections appear to be stalling), then changing these settings can help.
 
-    `net.core.somaxconn` – The maximum number of connections that can be queued for acceptance by NGINX. The default is often very low and that’s usually acceptable because NGINX accepts connections very quickly, but it can be worth increasing it if your website experiences heavy traffic. If error messages in the kernel log indicate that the value is too small, increase it until the errors stop.
+`net.core.somaxconn` 
+
+– The maximum number of connections that can be queued for acceptance by NGINX. The default is often very low and that’s usually acceptable because NGINX accepts connections very quickly, but it can be worth increasing it if your website experiences heavy traffic. If error messages in the kernel log indicate that the value is too small, increase it until the errors stop.
 
     Note: If you set this to a value greater than 512, change the backlog parameter to the NGINX listen directive to match.
     net.core.netdev_max_backlog – The rate at which packets are buffered by the network card before being handed off to the CPU. Increasing the value can improve performance on machines with a high amount of bandwidth. Check the kernel log for errors related to this setting, and consult the network card documentation for advice on changing it.
@@ -70,14 +74,17 @@ The following settings relate to connections and how they are queued. If you hav
 
 File descriptors are operating system resources used to represent connections and open files, among other things. NGINX can use up to two file descriptors per connection. For example, if NGINX is proxying, it generally uses one file descriptor for the client connection and another for the connection to the proxied server, though this ratio is much lower if HTTP keepalives are used. For a system serving a large number of connections, the following settings might need to be adjusted:
 
-    sys.fs.file-max – The system‑wide limit for file descriptors
-    nofile – The user file descriptor limit, set in the /etc/security/limits.conf file
+`sys.fs.file-max`  – The system‑wide limit for file descriptors
+`nofile` – The user file descriptor limit, set in the /etc/security/limits.conf file
 
 - Ephemeral Ports
 
 When NGINX is acting as a proxy, each connection to an upstream server uses a temporary, or ephemeral, port. You might want to change this setting:
 
-    net.ipv4.ip_local_port_range – The start and end of the range of port values. If you see that you are running out of ports, increase the range. A common setting is ports 1024 to 65000.
+`net.ipv4.ip_local_port_range` 
+    
+    – The start and end of the range of port values. If you see that you are running out of ports, increase the range. 
+    A common setting is ports 1024 to 65000.
 
 ### Tuning Your NGINX Configuration
 
@@ -102,8 +109,10 @@ The following directive relates to upstream keepalives:
 
 To enable keepalive connections to upstream servers you must also include the following directives in the configuration:
 
+```
 proxy_http_version 1.1;
 proxy_set_header Connection "";
+```
 
 - Access Logging
 
@@ -128,10 +137,12 @@ You can set various limits that help prevent clients from consuming too many res
 - Caching and Compression Can Improve Performance
 
 Some additional features of NGINX that can be used to increase the performance of a web application don’t really fall under the heading of tuning, but are worth mentioning because their impact can be considerable. They include caching and compression.
-Caching
+
+- Caching
 
 By enabling caching on an NGINX instance that is load balancing a set of web or application servers, you can dramatically improve the response time to clients while at the same time dramatically reducing the load on the backend servers. Caching is a topic in its own right and we won’t try to cover it here. See the NGINX Plus Admin Guide.
-Compression
+
+- Compression
 
 Compressing responses sent to clients can greatly reduce their size, so they use less network bandwidth. Because compressing data consumes CPU resources, however, it is most useful when it’s really worthwhile to reduce bandwidth usage. It is important to note that you should not enable compression for objects that are already compressed, such as JPEG files. For more information, see the NGINX Plus Admin Guide.
 
