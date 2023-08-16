@@ -50,7 +50,7 @@ wrk可以简单测试网站和接口压力测试，了解压力测试下的性�
 
 >wrk is a modern HTTP benchmarking tool capable of generating significant load when run on a single multi-core CPU. It combines a multithreaded design with scalable event notification systems such as epoll and kqueue.
 
-:::note
+::: note
 wrk支持大多数类UNIX系统，不支持windows。
 :::
 
@@ -86,7 +86,9 @@ make
 
 ### 范例
 
+```shell
 wrk -t8 -c200 -d30s --latency  "http://www.bing.com"
+```
 
 输出：
 Running 30s test @ http://www.bing.com
