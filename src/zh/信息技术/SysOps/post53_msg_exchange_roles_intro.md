@@ -15,8 +15,7 @@ category:
   - Messaging
 # 一个页面可以有多个标签
 tag:
-  - Linux
-  - 反垃圾邮件
+
   - 邮件系统
   - ExchangeServer
   - 权限控制
@@ -35,7 +34,7 @@ star: true
 
 基于角色`Role Based Access Control` 介绍Exchange Server的管理权限，满足ISO 270001 `A9.2.3 特殊权限管理`或是其他安全体系的类似要求，做到不同岗位不同权限。
 
-## Exchange Server权限管理介绍
+## 一、Exchange Server权限介绍
 
 ### 管理权限组成
 
@@ -48,7 +47,11 @@ star: true
 
 ### 管理角色组 (Role Group)
 
-管理角色组,是由一组角色组成，即一对多关系，一个角色组可以拥有多个角色。Exchange常用有这么2个：
+管理角色组,是由一组角色组成，即一对多关系，一个角色组可以拥有多个角色。
+
+- 默认角色组
+
+Exchange常用有这么2个：
 
 - Organization Mangement （Exchange组织管理员，权限很高)
 - Recipient Management (Exchange用户邮箱管理员)
@@ -69,11 +72,16 @@ Recipient Policies
 Message Tracking
 ```
 
+- 定义角色组
+
+可以自定义角色组。步骤文章后面【授权】章节介绍。
 
 
 ### 角色 （Role)
 
-Role默认有很多：
+- 默认Role
+
+默认有很多，分得比较细，不同role执行不同管理任务：
 
 ```
 PS C:\> get-managementrole | select name| sort -Property name
@@ -96,10 +104,16 @@ View-Only Configuration
 View-Only Recipients
 WorkloadManagement
 ```
+其中，比较用的多的角色是：
+- `Mail Recipients` 邮箱管理
+- `Distribution Group` 邮件通讯组管理
+- `User Options` 高级邮箱选项管理
 
-Role是一组Role Entry的合集。
+- 定义role
 
-- 查看指定Role都有哪些Role Entry (即有权执行的Exchange cmdlets)。例如查看角色`Mail Recipients`对应的entry:
+其实Role是一组Role Entry的合集，我们可以自定义role,步骤文章后面【授权】章节介绍。
+
+- 查看指定Role都有哪些Role Entry (即有权做什么)。例如查看角色`Mail Recipients`对应的entry:
 ```
 PS C:\> Get-ManagementRole  "mail recipients" | select -expand RoleEntries |select-string "new-mailbox"
 
@@ -112,23 +126,14 @@ PS C:\> Get-ManagementRole  "mail recipients" | select -expand RoleEntries |sele
 
 ### Role Entry
 
-`Role Entry`  是role的子集，由`Exchange cmdlet`和`Exchange cmdParameter`组成，, 例如`Exchange cmdlet`常用的`New-mailbox`、`Set-mailbox`，如以下：
+`Role Entry`  是role的子集，由`Exchange cmdlet`和`Exchange cmdParameter`组成, 例如`Exchange cmdlet`常用的,新建邮箱`New-mailbox`、设置邮箱`Set-mailbox`
 
-```
-PS C:\> Get-ManagementRole  "mail recipients" | select -expand RoleEntries |select-string "new-mailbox"
-
-(Microsoft.Exchange.Management.PowerShell.E2010) New-Mailbox -EnableRoomMailboxAccount
-(Microsoft.Exchange.Management.PowerShell.E2010) New-MailboxRepairRequest -Archive -Confirm -CorruptionType -Database -Debug -DetectOnly -DomainController -ErrorAction -ErrorVariable -Force
- -Mailbox -OutBuffer -OutVariable -StoreMailbox -Verbose -WarningAction -WarningVariable -WhatIf
-
-```
-
-可以看到Exchange就是通过控制使用cmdlet来管理权限，哪些角色可以执行哪些cmdlet。
+:::note
+由上可以看出Exchange RBAC就是通过控制使用cmdlet来管理权限，哪些角色可以执行哪些cmdlet。
+:::
 
 :::tip
 另外，可以通过cmdlet来倒查哪些角色拥有的权限。例如，想查询哪些角色有新建邮箱的权限。
-:::
-
 ```
 PS C:\> Get-ManagementRole  -cmdlet "new-mailbox"
 
@@ -140,9 +145,11 @@ Public Folders              PublicFolders
 Retention Management        RetentionManagement
 Mail Recipients             MailRecipients
 ```
+:::
 
 
-## 管理权限
+
+## 二、授权
 
 - 方法1：使用默认角色组和自定义角色组授权。
 - 方法2：使用自定义角色授权；
@@ -157,11 +164,18 @@ Mail Recipients             MailRecipients
 - `Organization Management` 成员是Exchange管理员，管理组织所有设置/策略；
 - `Recipient Management`的成员是桌面运维支持人员，可以创建邮箱和设置邮箱选项等；
 
-如果不能满足，则自定义角色组。例如，如果新建一个自定义管理角色组只允许创建邮箱，不允许管理通讯组。则可以新建一个角色组，可以考虑只给予`Mail Recipient Creation`角色，不给予`Distribution Groups`角色。
+如果不能满足，则自定义角色组。
 
+**需求场景**
+
+例如，如果新建一个自定义管理角色组只允许创建邮箱，不允许管理通讯组。则可以新建一个角色组，可以考虑只给予`Mail Recipient Creation`角色，不给予`Distribution Groups`角色。
+
+
+**开始**
 
 1、登录EAC,点击【新建】或是通过【复制】，然后编辑复制出然后编辑角色；
-2、 选择已有的角色添加给新建的角色；
+2、 添加给新建的角色Mail Recipient Creation；不添加其他角色；
+3、 如果是复制的角色组，则移除Mail Recipient Creation外的所有其他权限；
 3、 添加成员；
 
 
