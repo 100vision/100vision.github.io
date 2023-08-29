@@ -188,6 +188,8 @@ Mail Recipients             MailRecipients
 
 ### 使用自定义角色
 
+> 通过前面介绍，我们知道可以通过给Role指定分配不同的entry来自定义role, 最终决定哪些角色可以执行哪些cmdlet。
+
 :::note
 必须通过Exchange Management Shell，Exchange Admin Console不支持。
 :::
@@ -222,7 +224,7 @@ PS C:\> New-ManagementRole -Parent "Mail Recipients" -Name "My Mailbox Admins"
 # 例1：删掉set-mailbox 这个cmdlet的部分cmdParameters来降低权限，在本例中移除几个相关cmdParameters来删除邮件转发设置权限。
 PS C:\> Set-ManagementRoleEntry "My Mailbox Admins\Set-mailbox"  -RemoveParameter -Parameters GrantSendOnBehalfTo,ForwardingAddress,ForwardingSmtpAddress,DeliverToMailboxAndForwardPS 
 
-#例2：删除改角色授权邮箱权限给其他用户。通过删除整个Add-mailboxPermission cmdlet.
+#例2：禁止改角色授权邮箱权限给其他用户，通过删除整个Add-mailboxPermission cmdlet.
 PS C:\> Remove-ManagementRoleEntry "Solex Mailbox Admins\Add-MailboxPermission" 
 ```
 
