@@ -54,7 +54,7 @@ star: true
 - Recipient Management (Exchange用户邮箱管理员)
 
 更多的可以在Active Directory的ADUC的`Microsoft Exchange Security Groups`看到.
-
+![Role Groups](../../PostImages/post53_ex_role_rbac.jpg)
 
 - 可以通过看到角色组对应了哪些角色
 ```
@@ -177,9 +177,9 @@ Mail Recipients             MailRecipients
 
 需要一个邮箱管理员角色，改角色可以新建邮箱但不可以设置用户邮箱的【邮件转发】、【邮箱委托】。如下图：
 
-![邮件转发](/PostImages/post53_ex_custom_role_deny_email_fwd.jpg)
+![邮件转发](../../PostImages/post53_ex_custom_role_deny_email_fwd.jpg)
 
-![邮件转发](/PostImages/post53_ex_custom_role_deny_delegation.jpg)
+![邮件转发](../../PostImages/post53_ex_custom_role_deny_delegation.jpg)
 
 **需求分析**
 
@@ -204,6 +204,11 @@ PS C:\> Set-ManagementRoleEntry "My Mailbox Admins\Set-mailbox"  -RemoveParamete
 #例2：删除改角色授权邮箱权限给其他用户。通过删除整个Add-mailboxPermission cmdlet.
 PS C:\> Remove-ManagementRoleEntry "Solex Mailbox Admins\Add-MailboxPermission" 
 ```
+
+**效果**
+
+- 改角色的成员登录EAC后，邮件流 - 邮件转发复选框是灰色的，不可以勾选。
+- 邮箱委托添加成员后不可保存设置。
 
 **总结**
 
