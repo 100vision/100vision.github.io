@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: Exchange Server系列：介绍Exchange Server管理角色
+title: Exchange Server系列：RBAC 介绍Exchange Server管理角色
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -53,7 +53,8 @@ star: true
 - Organization Mangement （Exchange组织管理员，权限很高)
 - Recipient Management (Exchange用户邮箱管理员)
 
-更多的可以在Active Directory中一览：
+更多的可以在Active Directory的ADUC的`Microsoft Exchange Security Groups`看到，如下图
+
 ![Exchange Role Groups](/PostImages/post53_ex_role_rbac.jpg)
 
 
@@ -127,7 +128,9 @@ PS C:\> Get-ManagementRole  "mail recipients" | select -expand RoleEntries |sele
 可以看到Exchange就是通过控制使用cmdlet来管理权限，哪些角色可以执行哪些cmdlet。
 
 :::tip
-另外，可以通过cmdlet来倒查哪些角色拥有的权限。例如，想查询哪些角色有新建邮箱的权限。则可以：
+另外，可以通过cmdlet来倒查哪些角色拥有的权限。例如，想查询哪些角色有新建邮箱的权限。
+:::
+
 ```
 PS C:\> Get-ManagementRole  -cmdlet "new-mailbox"
 
@@ -139,7 +142,7 @@ Public Folders              PublicFolders
 Retention Management        RetentionManagement
 Mail Recipients             MailRecipients
 ```
-:::
+
 
 ## 管理权限
 
