@@ -172,6 +172,25 @@ Mail Recipients             MailRecipients
 
 举例说明：
 
+**需求**
+
+需要一个邮箱管理员角色，改角色可以新建邮箱但不可以设置用户邮箱的【邮件转发】、【邮箱委托】。如下图：
+
+![邮件转发](/PostImages/post53_ex_custom_role_deny_email_fwd.jpg)
+
+![邮件转发](/PostImages/post53_ex_custom_role_deny_delegation.jpg)
+
+**需求分析**
+
+需要了解到`邮件转发`、`邮箱委托`对应的cmdlet和cmdParameter. 了解到：
+- 邮件转发对应的cmdlet是`Set-Mailbox` ,对应的parameters有 cmdParameters `ForwardingAddress`,`ForwardingSmtpAddress`,`DeliverToMailboxAndForwardPS` 
+
+- 邮箱委托对应的cmdlet是`Add-mailboxPermission`
+
+
+**开始**
+
+
 ```
 ## 先新建一个自定义角色 My Mailbox Admins。这角色必须以已有角色为模板，本例中使用Mail Recipients为模板。
 PS C:\> New-ManagementRole -Parent "Mail Recipients" -Name "My Mailbox Admins" 
@@ -185,5 +204,7 @@ PS C:\> Set-ManagementRoleEntry "My Mailbox Admins\Set-mailbox"  -RemoveParamete
 PS C:\> Remove-ManagementRoleEntry "Solex Mailbox Admins\Add-MailboxPermission" 
 ```
 
+**总结**
 
+通过以上，可以比较精细控制Exchange管理权限。过程比较花时间的就是找出需要控制的cmdlet和parameters，只能多查询得到。
 
