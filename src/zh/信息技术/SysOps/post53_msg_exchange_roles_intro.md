@@ -174,9 +174,12 @@ Mail Recipients             MailRecipients
 **开始**
 
 1、登录EAC,点击【新建】或是通过【复制】，然后编辑复制出然后编辑角色；
+
 2、 添加给新建的角色Mail Recipient Creation；不添加其他角色；
+
 3、 如果是复制的角色组，则移除Mail Recipient Creation外的所有其他权限；
-3、 添加成员；
+
+4、 添加成员；
 
 
 ### 使用自定义角色
