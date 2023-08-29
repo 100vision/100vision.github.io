@@ -79,7 +79,9 @@ Message Tracking
 
 ### 角色 （Role)
 
-- 默认Role
+> Role是Role Group的子集。
+
+**默认Role**
 
 默认有很多，分得比较细，不同role执行不同管理任务：
 
@@ -109,9 +111,11 @@ WorkloadManagement
 - `Distribution Group` 邮件通讯组管理
 - `User Options` 高级邮箱选项管理
 
-- 定义role
+**自定义Role**
 
-其实Role是一组Role Entry的合集，我们可以自定义role,步骤文章后面【授权】章节介绍。
+除了默认Role, 我们还可以自定义role, 后面【授权】章节介绍。
+
+**查看Role都能干些什么**
 
 - 查看指定Role都有哪些Role Entry (即有权做什么)。例如查看角色`Mail Recipients`对应的entry:
 ```
@@ -126,10 +130,10 @@ PS C:\> Get-ManagementRole  "mail recipients" | select -expand RoleEntries |sele
 
 ### Role Entry
 
-`Role Entry`  是role的子集，由`Exchange cmdlet`和`Exchange cmdParameter`组成, 例如`Exchange cmdlet`常用的,新建邮箱`New-mailbox`、设置邮箱`Set-mailbox`
+> `Role Entry`  是role的子集，由`Exchange cmdlet`和`Exchange cmdParameter`组成, 例如`Exchange cmdlet`常用的,新建邮箱`New-mailbox`、设置邮箱`Set-mailbox`
 
 :::note
-由上可以看出Exchange RBAC就是通过控制使用cmdlet来管理权限，哪些角色可以执行哪些cmdlet。
+由上可以看出Exchange RBAC就是通过控制使用cmdlet和Parameter来管理权限，我们可以通过给Role指定分配不同的entry来自定义role, 最终决定哪些角色可以执行哪些cmdlet。
 :::
 
 :::tip
