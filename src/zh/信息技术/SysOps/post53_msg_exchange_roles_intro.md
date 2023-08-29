@@ -53,9 +53,7 @@ star: true
 - Organization Mangement （Exchange组织管理员，权限很高)
 - Recipient Management (Exchange用户邮箱管理员)
 
-更多的可以在Active Directory的ADUC的`Microsoft Exchange Security Groups`看到，如下图
-
-![Exchange Role Groups](/PostImages/post53_ex_role_rbac.jpg)
+更多的可以在Active Directory的ADUC的`Microsoft Exchange Security Groups`看到.
 
 
 - 可以通过看到角色组对应了哪些角色
