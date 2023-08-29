@@ -54,7 +54,7 @@ star: true
 - Recipient Management (Exchange用户邮箱管理员)
 
 更多的可以在Active Directory中一览：
-![Exchange Role Groups](/PostImages/post53_ex_role_groups.jpg)
+![Exchange Role Groups](/PostImages/post53_ex_role_rbac.jpg)
 
 
 - 可以通过看到角色组对应了哪些角色
