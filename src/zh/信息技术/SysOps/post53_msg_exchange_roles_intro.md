@@ -239,7 +239,13 @@ PS C:\> Remove-ManagementRoleEntry "My Mailbox Admins\Add-MailboxPermission"
 - 改角色的成员登录EAC后，邮件流 - 邮件转发复选框是灰色的，不可以勾选。
 - 邮箱委托添加成员后不可保存设置。
 
-**总结**
+**小结**
 
 通过以上，可以比较精细控制Exchange管理权限。过程比较花时间的就是找出需要控制的cmdlet和parameters，只能多查询得到。
+
+### 授权流程
+
+>通过以下图示一览授权流程。
+
+![授权总览](../../PostImages/post53_ex_role_rbac_workflow.jpg)
 
