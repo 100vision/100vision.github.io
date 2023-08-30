@@ -249,7 +249,7 @@ PS C:\> Remove-ManagementRoleEntry "My Mailbox Admins\Add-MailboxPermission"
 
 ![授权总览](../../PostImages/post53_ex_role_rbac_workflow.jpg)
 
-## 总结
+## 三、总结
 
 1. 授权颗粒从大到小分别是：
 
