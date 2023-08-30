@@ -249,3 +249,16 @@ PS C:\> Remove-ManagementRoleEntry "My Mailbox Admins\Add-MailboxPermission"
 
 ![授权总览](../../PostImages/post53_ex_role_rbac_workflow.jpg)
 
+## 总结
+
+1. 授权颗粒从大到小分别是：
+
+默认角色组> 自定义角色组 > 自定义角色
+
+2. 授权原则
+
+- 一般授权使用默认角色组；
+- 更细一点选择使用自定义角色组 + 默认角色
+- 最细一点选择使用自定角色组 + 自定义角色
+
+根据控制需求选择适合的授权模式。
