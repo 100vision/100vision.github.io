@@ -51,7 +51,7 @@ star: true
 
 - 默认角色组
 
-Exchange常用有这么2个：
+Exchange常用有：
 
 - Organization Mangement （Exchange组织管理员，权限很高)
 - Recipient Management (Exchange用户邮箱管理员)
@@ -106,7 +106,7 @@ View-Only Configuration
 View-Only Recipients
 WorkloadManagement
 ```
-其中，比较用的多的角色是：
+其中，常用的角色是：
 - `Mail Recipients` 邮箱管理
 - `Distribution Group` 邮件通讯组管理
 - `User Options` 高级邮箱选项管理
@@ -168,9 +168,9 @@ Mail Recipients             MailRecipients
 - `Organization Management` 成员是Exchange管理员，管理组织所有设置/策略；
 - `Recipient Management`的成员是桌面运维支持人员，可以创建邮箱和设置邮箱选项等；
 
-如果不能满足，则自定义角色组。
+如果不能满足，则自定义角色组。下面举例说明：
 
-**需求场景**
+**需求**
 
 例如，如果新建一个自定义管理角色组只允许创建邮箱，不允许管理通讯组。则可以新建一个角色组，可以考虑只给予`Mail Recipient Creation`角色，不给予`Distribution Groups`角色。
 
@@ -185,16 +185,20 @@ Mail Recipients             MailRecipients
 
 4、 添加成员；
 
+**小结**
+
+通过自定义角色组，可以满足一般的授权需求。如果需要更加精细的控制颗粒，例如不允许角色设置某个邮箱属性，则需要通过自定义角色，可以参照以下【使用自定义角色】。
+
 
 ### 使用自定义角色
 
-> 通过前面介绍，我们知道可以通过给Role指定分配不同的entry来自定义role, 最终决定哪些角色可以执行哪些cmdlet。
+> 通过前面介绍，我们知道可以通过给Role指定分配不同的entry来自定义role, 最终决定哪些角色可以执行哪些cmdlet，这样就可以定义更细致的授权颗粒，下面通过举例说明。
 
 :::note
-必须通过Exchange Management Shell，Exchange Admin Console不支持。
+自定义角色必须通过Exchange Management Shell，Exchange Admin Console不支持。
 :::
 
-举例说明：
+
 
 **需求**
 
@@ -202,14 +206,16 @@ Mail Recipients             MailRecipients
 
 ![邮件转发](../../PostImages/post53_ex_custom_role_deny_email_fwd.jpg)
 
-![邮件转发](../../PostImages/post53_ex_custom_role_deny_delegation.jpg)
+![邮箱委托](../../PostImages/post53_ex_custom_role_deny_delegation.jpg)
 
 **需求分析**
 
-需要了解到`邮件转发`、`邮箱委托`对应的cmdlet和cmdParameter. 了解到：
-- 邮件转发对应的cmdlet是`Set-Mailbox` ,对应的parameters有 cmdParameters `ForwardingAddress`,`ForwardingSmtpAddress`,`DeliverToMailboxAndForwardPS` 
+了解到`邮件转发`、`邮箱委托`对应的cmdlet和cmdParameter. 了解到：
+- 邮件转发对应的cmdlet是`Set-Mailbox` ,对应的parameters有 cmdParameters `ForwardingAddress`,`ForwardingSmtpAddress`,`DeliverToMailboxAndForward` 
 
 - 邮箱委托对应的cmdlet是`Add-mailboxPermission`
+- 新建一个角色，不给这个角色这几个cmdlet和parameter的执行权限就可以实现。
+
 
 
 **开始**
@@ -224,8 +230,8 @@ PS C:\> New-ManagementRole -Parent "Mail Recipients" -Name "My Mailbox Admins"
 # 例1：删掉set-mailbox 这个cmdlet的部分cmdParameters来降低权限，在本例中移除几个相关cmdParameters来删除邮件转发设置权限。
 PS C:\> Set-ManagementRoleEntry "My Mailbox Admins\Set-mailbox"  -RemoveParameter -Parameters GrantSendOnBehalfTo,ForwardingAddress,ForwardingSmtpAddress,DeliverToMailboxAndForwardPS 
 
-#例2：禁止改角色授权邮箱权限给其他用户，通过删除整个Add-mailboxPermission cmdlet.
-PS C:\> Remove-ManagementRoleEntry "Solex Mailbox Admins\Add-MailboxPermission" 
+#例2：禁止该角色授权邮箱权限给其他用户，通过删除整个Add-mailboxPermission cmdlet.
+PS C:\> Remove-ManagementRoleEntry "My Mailbox Admins\Add-MailboxPermission" 
 ```
 
 **效果**
