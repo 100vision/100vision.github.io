@@ -58,30 +58,76 @@ star: true
 
 - 文件和文件夹的变更。例如添加/删除/移动/修改等；
 
-支持：
+主要支持CIFS文件服务器：
 - Windows文件服务器
-- NetApp Ontap (Cluster)
-- 联想凌拓Lenovo Release (需要特殊配置)
+- NetApp Ontap (Cluster)/SVM CIFS
+- EMC Isilon
+
+注意到，都是CIFS文件服务器，并不支持NFS系统。
 
 ## 安装和配置
 
 简单不介绍，安装后，几乎是开箱即用。
 
-## 文件系统审计和联想凌拓NAS集成
+## 文件系统审计和联想凌拓NAS集成问题
 
-之所以单独讲联想凌拓NAS，是因为如果不做特殊配置，ADAudit Plus无法做文件审计联想凌拓NAS文件活动。
+>之所以单独讲联想凌拓NAS，是因为如果不做特殊配置，ADAudit Plus无法做文件审计联想凌拓NAS文件活动。凌拓NAS虽然运行的系统其实也是ONTAP，但并不在ADAudit Plus官方支持列表。
 
+**一般集成步骤**
 
+ADAudit Plus和文件共享系统（CIFS)集成步骤一般是：
 
-**具体问题**
+- 发现CIFS服务器
+- 添加要共享的文件夹
+- 开启审计选项（Windows SACL)
 
-凌拓NAS虽然运行的系统也是ONTAP，但还是有些不同。例如：VServer(SVM)加入活动目录后，会在目录中创建一个AD计算机对象。但ADAudit Plus无法在AD活动目录中发现搜索这个SVM，你通过ADAudit配置NetApp服务器向导会看到：
+**问题描述**
+
+凌拓NAS（型号DH5000M) 上创建SVM，然后把VServer(SVM)加入活动目录后，我们在AD目录能看到一个SVM的AD计算机对象。但ADAudit Plus无法在AD活动目录中发现搜索这个SVM CIFS，通过ADAudit配置NetApp服务器向导会看到：
 
 > " No Active Directory Objects available."
 
-意思是NAS SVM没有发现，这样向导就没法继续配置发现NAS上的共享了和开启审核。 
+意思是SVM没有在AD中发现，这样向导也就没法继续剩下的步骤配置发现SVM上的共享继而配置SACL。 
 
-- 查看NAS端的审计配置
+翻遍ManageEngine ADAudit Plus的官方支持手册和Google也没有解决方案。
+
+:::tip 题外：什么是ONTAP VServer/SVM
+
+Storage Virtual Machine（SVM，以前称为 Vserver） ONTAP SVM 对于客户端而言都是一个专用CIFS/NFS服务器，简单理解SVM就是运行在ONTAP里面的一台虚拟机，对外提供CIFS/NFS协议。
+:::
+
+**分析**
+
+SVM CIFS计算机对象明明已经在AD里面存在了，为什么ADAudit会发现不到？
+
+如果我是开发人员，我会通过计算机账户的某个特定AD属性来发现AD目录中的NetAPP ONTAP。按照这个思路，翻看这个SVM AD计算机属性，看到`operatingSystem` (操作系统)这个AD属性，如下图：
+
+![Before](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_before_change.jpg)
+
+
+以上图，凌拓默认使用的是`Lenovo Release 9.11.1P4`, 尝试修改成`Ontap`,如下图：
+
+![After](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_after_change.jpg)
+
+等待几分钟，然后通过ADAudit配置NetApp服务器向导，可以发现到了! :-)
+
+- 能够发现后，按照向导完成剩下的配置步骤。
+
+
+
+## 扩展：如何配置NetApp ONTAP文件审计
+
+- 创建1个文件审计策略
+```
+cluster1::> vserver audit create -vserver vs1 -destination /audit_log -events file-ops,cifs-logon-logoff,file-share,audit-policy-change,user-account,security-group,authorization-policy-change,cap-staging -rotate-schedule-month all -rotate-schedule-dayofweek all -rotate-schedule-hour 12 -rotate-schedule-minute 30 -rotate-limit 5
+```
+
+- 启动审计
+```
+vserver audit enable -vserver vserver_name
+```
+
+- 查看审计策略
 
 ```
 MyFileCluster::> vserver audit show -vserver svm_cifs
@@ -102,35 +148,6 @@ Log Rotation Schedule: Day of Week: -
             Log Retention Duration: 0s
       Strict Guarantee of Auditing: true
 ```
-- 再看看NAS端的SVM CIFS配置，似乎也没有问题。
-```
-MyFileCluster::> vserver  show -vserver svm_cifs
-```
 
 
-翻遍ManageEngine ADAudit Plus的官方支持手册和Google也没有解决方案。
-
-:::tip 题外：什么是ONTAP VServer/SVM
-
-Storage Virtual Machine（SVM，以前称为 Vserver） ONTAP SVM 对于客户端而言都是一个专用CIFS/NFS服务器，简单理解SVM就是运行在ONTAP里面的一台虚拟机，对外提供CIFS/NFS协议。
-:::
-
-** 解决方案和特殊配置**
-
-SVM计算机对象明明已经在AD里面存在了，为什么会搜索不到？
-
-分析，ADAudit应该是通过一些特定AD属性来发现和判断计算机对象是否是NetAPP ONTAP。翻看这个SVM AD计算机属性，分析比较有可能就是AD计算机属性的`operatingSystem`，如下图：
-
-![Before](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_before_change.jpg)
-
-
-以上图，凌拓默认使用的是`Lenovo Release 9.11.1P4`, 尝试修改成`Ontap`,如下图：
-
-![After](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_after_change.jpg)
-
-等待几分钟，然后通过ADAudit配置NetApp服务器向导，可以发现到了! :-)
-
-发现后，根据文档配置NAS集群和启动文件审计选项即可。
-
-**一些SVM配置审计参考**
-
+具体参考：https://docs.netapp.com/us-en/ontap/nas-audit/create-auditing-config-task.html
