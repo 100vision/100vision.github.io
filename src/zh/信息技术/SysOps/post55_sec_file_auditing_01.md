@@ -19,6 +19,11 @@ tag:
   - 文件审计
   - 权限控制
   - 活动目录
+  - 问题解决
+  - AD审计
+  - Netapp
+  - Ontap
+  - 联想
 
 
 # 此页面会在文章列表置顶
@@ -98,18 +103,23 @@ Storage Virtual Machine（SVM，以前称为 Vserver） ONTAP SVM 对于客户�
 
 **分析**
 
-SVM CIFS计算机对象明明已经在AD里面存在了，为什么ADAudit会发现不到？
+- SVM CIFS计算机对象明明已经在AD里面存在了，为什么ADAudit会发现不到？
 
-如果我是开发人员，我会通过计算机账户的某个特定AD属性来发现AD目录中的NetAPP ONTAP。按照这个思路，翻看这个SVM AD计算机属性，看到`operatingSystem` (操作系统)这个AD属性，如下图：
+- 如果我是开发人员，我会通过计算机账户的某个特定AD属性来发现AD目录中的NetAPP ONTAP。那会是使用哪个属性？
+
+- 按照这个思路，翻看这个SVM AD计算机属性，看到`operatingSystem` (操作系统)这个AD属性，如下图：
 
 ![Before](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_before_change.jpg)
 
+- 我猜，ADAudit可能会查询该字段属性是否包含"ontap"字符串来计算机对象是否是netapp设备。
 
-以上图，凌拓默认使用的是`Lenovo Release 9.11.1P4`, 尝试修改成`Ontap`,如下图：
+**解决方案**
+
+- 如上图，凌拓设备对应的属性值是`Lenovo Release 9.11.1P4`, 尝试修改成`Ontap`,如下图：
 
 ![After](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_after_change.jpg)
 
-等待几分钟，然后通过ADAudit配置NetApp服务器向导，可以发现到了! :-)
+- 等待几分钟，然后通过ADAudit配置NetApp服务器向导，可以发现到了! :-)
 
 - 能够发现后，按照向导完成剩下的配置步骤。
 
