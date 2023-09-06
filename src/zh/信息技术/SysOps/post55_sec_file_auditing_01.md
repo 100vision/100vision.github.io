@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: 工具介绍系列：安全审计 ManageEngine ADAuditPlus
+title: 工具介绍系列：安全审计 ManageEngine ADAudit Plus
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -37,7 +37,7 @@ star: true
 
 ## 前言
 
-介绍一款安全审计工具`ManageEngine ADAudit Plus`，
+介绍一款Windows安全审计工具`ManageEngine ADAudit Plus`，
 
 >Tracking file and folder modifications with ADAudit Plus
 
@@ -70,17 +70,17 @@ star: true
 
 注意到，都是CIFS文件服务器，并不支持NFS系统。
 
-## 安装和配置
+## 三、ADAudit Plus安装和配置
 
 简单不介绍，安装后，几乎是开箱即用。
 
-## 文件系统审计和联想凌拓NAS集成问题
+## 四、文件系统审计和联想凌拓NAS集成问题
 
->之所以单独讲联想凌拓NAS，是因为如果不做特殊配置，ADAudit Plus无法做文件审计联想凌拓NAS文件活动。凌拓NAS虽然运行的系统其实也是ONTAP，但并不在ADAudit Plus官方支持列表。
+>之所以单独讲联想凌拓NAS，是因为凌拓NAS运行的系统其实也是ONTAP，国产版的NetApp, 理论上能被ADAudit支持，也不在ADAudit Plus官方支持列表。但事实证明，如果不做特殊配置，ADAudit Plus确实无法审计联想凌拓NAS。
 
 **一般集成步骤**
 
-ADAudit Plus和文件共享系统（CIFS)集成步骤一般是：
+ADAudit Plus和文件共享系统（CIFS)集成步骤一般是在ADAudit Plus上执行：
 
 - 发现CIFS服务器
 - 添加要共享的文件夹
@@ -88,11 +88,11 @@ ADAudit Plus和文件共享系统（CIFS)集成步骤一般是：
 
 **问题描述**
 
-凌拓NAS（型号DH5000M) 上创建SVM，然后把VServer(SVM)加入活动目录后，我们在AD目录能看到一个SVM的AD计算机对象。但ADAudit Plus无法在AD活动目录中发现搜索这个SVM CIFS，通过ADAudit配置NetApp服务器向导会看到：
+我们在凌拓NAS（型号DH5000M) 上创建SVM，然后把VServer(SVM)加入活动目录后，也能在AD目录看到一个SVM的AD计算机对象。但通过ADAudit配置NetApp服务器向导添加这个CIFS服务器时，发现不了，会看到错误消息：
 
 > " No Active Directory Objects available."
 
-意思是SVM没有在AD中发现，这样向导也就没法继续剩下的步骤配置发现SVM上的共享继而配置SACL。 
+意思是SVM没有在AD中发现，这样向导也就没法继续剩下的集成步骤。
 
 翻遍ManageEngine ADAudit Plus的官方支持手册和Google也没有解决方案。
 
@@ -111,11 +111,11 @@ Storage Virtual Machine（SVM，以前称为 Vserver） ONTAP SVM 对于客户�
 
 ![Before](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_before_change.jpg)
 
-- 我猜，ADAudit可能会查询该字段属性是否包含"ontap"字符串来计算机对象是否是netapp设备。
+- 我猜，ADAudit会查询AD中所有计算机对象，如果遍历对象该字段属性值是否包含"ontap"字符串则是netapp CIFS服务器，否则不是。
 
 **解决方案**
 
-- 如上图，凌拓设备对应的属性值是`Lenovo Release 9.11.1P4`, 尝试修改成`Ontap`,如下图：
+- 如上图以及思路，可以看到凌拓设备对应的属性值是`Lenovo Release 9.11.1P4`, 尝试修改成`Ontap`,如下图：
 
 ![After](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_after_change.jpg)
 
