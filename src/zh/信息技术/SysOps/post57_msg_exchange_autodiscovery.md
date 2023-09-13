@@ -104,7 +104,7 @@ Outlook uses an SRV record lookup in DNS to try to locate the AutoDiscover servi
 
 https://learn.microsoft.com/en-us/outlook/troubleshoot/profiles-and-accounts/how-to-control-autodiscover-via-group-policy
 
-## 查看Outlook自动发现的当前方法
+### 查看Outlook当前使用的自动发现方式
 
 - Ctrl + 右键outlook, —>>>测试配置，勾去”使用Guessmart和保护Guessstart身份验证“。
 - 点击”测试“
@@ -112,3 +112,26 @@ https://learn.microsoft.com/en-us/outlook/troubleshoot/profiles-and-accounts/how
 
 以下示例，显示Outlook是**通过SCP方式**实现自动发现。
 ![Outlook Autodiscovery](../../PostImages/post57_ex_autodiscovery.jpg)
+
+
+## 测试和检查Exchange服务器的WebService
+
+
+```shell
+PS C:\> Test-OutlookWebServices -Identity test_user -MailboxCredential (Get-Credential) -TrustAnySSLCertificate  -ClientAccessServer cas01.example.com
+
+位于命令管道位置 1 的 cmdlet Get-Credential
+请为以下参数提供值:
+Credential
+
+Source                              ServiceEndpoint                     Scenario                       Result  Latency
+                                                                                                                  (MS)
+------                              ---------------                     --------                       ------  -------
+cas01.example.com        cas01.example.com       自动发现: Outlook 提供程序     Success      35
+cas01.example.com        cas01.example.com       Exchange Web Services          Success      14
+cas01.example.com        cas01.example.com       可用性服务                     Success      71
+cas01.example.com        cas01.example.com       脱机通讯簿                     Success      17
+
+
+
+```
