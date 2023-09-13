@@ -115,11 +115,11 @@ Storage Virtual Machine（SVM，以前称为 Vserver） ONTAP SVM 对于客户�
 
 **解决方案**
 
-- 如上图以及思路，可以看到凌拓设备对应的属性值是`Lenovo Release 9.11.1P4`, 于是尝试修改成`Ontap`,如下图：
+- 如上图以及思路，于是尝试修改这个属性值看看是否能解决。可以看到凌拓设备对应的属性值是`Lenovo Release 9.11.1P4`, 通过属性编辑器直接修改为`Ontap`,如下图：
 
 ![After](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_after_change.jpg)
 
-- 等待几分钟，然后通过ADAudit配置NetApp服务器向导，可以发现到了! :-)
+- 等待几分钟，然后重新回到ADAudit配置NetApp服务器向导，bingo! 可以发现到了! :-)
 
 - 能够发现后，按照向导完成剩下的配置步骤。
 
