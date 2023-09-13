@@ -58,10 +58,6 @@ star: true
 - 客户端应用流量走SSH通道到达SSH服务器
 - SSH服务器把流量转发给远程服务；
 
-**实现方法**
-
-- 如果客户端直接支持，直接设置连接。一些SQL客户端建立连接可以设置，例如`navicat` ；
-- 如果客户端应用不支持，可以使用一些SSH工具chuan，例如 `Bitvise SSH Client` https://www.bitvise.com/ 
 
 
 **场景2：使用SSH通道代理上网**
@@ -80,31 +76,49 @@ star: true
 
 ## 具体实现
 
+:::准备
+一个远程SSH服务器的SSH凭据（账户密码）
+:::
+
 ### Windows
 
 > Windows下可以使用Bitvise SSH Client实现以上2种场景需求。
 
-- 步骤1：建立SSH连接
+
+
+- 首先：不管哪种需求，先建立一个SSH连接(有些应用自带ssh功能例外，例如navicat)
 
 
 ![Establish a ssh conn](../../PostImages/post58_ssh_tun_ssh_login.png)
 
- - 步骤2：设置Bitvise SSH代理其他服务（例如：Microsoft RDP）（场景1）
+**实现举例：代理远程桌面服务**
+
+ - 设置Bitvise SSH代理RDP服务（例如：Microsoft RDP）。添加一个Client-to-server项目。
+
+ 
 
 ![client-to-server](../../PostImages/post58_proxies_ssh_tun_bitvise_client2server.jpg)
 
-使用举例（Microsoft RDP发起连接）
+其中`Port`是本地代理端口，`Destination host`是我的目标远程RDP主机；`Destination Port` 是目标RDP端口
+
+
+- 发起一个Microsoft RDP发起连接。目标端口是本地代理端口。
+
 ![Remote Desktop connection](../../PostImages/post58_proxies_ssh_tun_bitvise_client2server_rdp.jpg)
 
 
- - 步骤3：设置Bitvise SSH作为本地的Sock5/HTTP代理 (场景2)
+
+
+**实现举例：Http/Socks5代理**
+
+ - 设置Bitvise SSH作为本地的Sock5/HTTP代理 
 
  ![socks5 settings](../../PostImages/post58_proxies_ssh_tun_bitvise_socks5.jpg)
 
-使用举例（浏览器）：
+- 设置应用使用代理（具体设置步骤代理参考应用帮助）。
 
 :::tip
-注意：浏览器如果要使用Socks5代理需要按照OmegaSwitchy扩展。
+注意：如果浏览器如果要使用Socks5代理需要按照OmegaSwitchy扩展。
 :::
 
 
