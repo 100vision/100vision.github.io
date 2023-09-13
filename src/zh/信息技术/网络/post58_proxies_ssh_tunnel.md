@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: Networking：代理上网：使用SSH Tunnel隧道代理上网
+title: Networking：代理上网：使用SSH Tunnel隧道代理来访问远程服务
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
