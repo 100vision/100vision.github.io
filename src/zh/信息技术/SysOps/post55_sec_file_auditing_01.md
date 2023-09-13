@@ -76,7 +76,7 @@ star: true
 
 ## 四、文件系统审计和联想凌拓NAS集成问题
 
->之所以单独讲联想凌拓NAS，是因为凌拓NAS运行的系统其实也是ONTAP，国产版的NetApp, 理论上能被ADAudit支持，也不在ADAudit Plus官方支持列表。但事实证明，如果不做特殊配置，ADAudit Plus确实无法审计联想凌拓NAS。
+>本文重点。之所以单独讲联想凌拓NAS，是因为凌拓NAS运行的系统其实也是ONTAP，国产版的NetApp, 理论上能被ADAudit支持，也不在ADAudit Plus官方支持列表。但事实证明，如果不做特殊配置，ADAudit Plus确实无法审计联想凌拓NAS。
 
 **一般集成步骤**
 
@@ -86,7 +86,7 @@ ADAudit Plus和文件共享系统（CIFS)集成步骤一般是在ADAudit Plus上
 - 添加要共享的文件夹
 - 开启审计选项（Windows SACL)
 
-**问题描述**
+**联想凌拓问题描述**
 
 我们在凌拓NAS（型号DH5000M) 上创建SVM，然后把VServer(SVM)加入活动目录后，也能在AD目录看到一个SVM的AD计算机对象。但通过ADAudit配置NetApp服务器向导添加这个CIFS服务器时，发现不了，会看到错误消息：
 
@@ -111,11 +111,11 @@ Storage Virtual Machine（SVM，以前称为 Vserver） ONTAP SVM 对于客户�
 
 ![Before](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_before_change.jpg)
 
-- 我猜，ADAudit会查询AD中所有计算机对象，如果遍历对象该字段属性值是否包含"ontap"字符串则是netapp CIFS服务器，否则不是。
+- 我猜，ADAudit应该时使用这个属性值，根据该属性值是否包含"ontap"字符串则是判断是否是netapp CIFS服务器。
 
 **解决方案**
 
-- 如上图以及思路，可以看到凌拓设备对应的属性值是`Lenovo Release 9.11.1P4`, 尝试修改成`Ontap`,如下图：
+- 如上图以及思路，可以看到凌拓设备对应的属性值是`Lenovo Release 9.11.1P4`, 于是尝试修改成`Ontap`,如下图：
 
 ![After](../../PostImages/Post55_sec__adauditPlus_SVM_AD_Obj_Attri_Operatingsystem_after_change.jpg)
 
