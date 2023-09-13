@@ -33,11 +33,11 @@ star: true
 
 ## 前言
 
-Outlook的Autodiscovery功能可以实现Exchange邮箱自动配置。启动Outlook时根据邮箱地址自动发现企业组织的Exchange服务器和邮箱配置，很方便。
+Outlook的Autodiscovery功能可以实现Exchange邮箱自动配置。启动Outlook时根据邮箱地址自动发现企业组织的Exchange服务器和邮箱配置，用户无需输入、也不需要知道服务器地址等，很方便。
 
 ## 自动发现介绍
 
-> Exchange Server/Outlook自动发现服务。发现的方式有这么几种，Outlook会尝试以下方式。尝试顺序根据Outlook版本不同而不同：
+> Exchange Server/Outlook自动发现服务。Outlook怎么定位Exchange服务器服务端点Url，主要会尝试以下方式。关于尝试顺序，会根据Outlook版本不同而不同：
 > 
 
 ### 1. SCP object lookup
@@ -77,7 +77,7 @@ Outlook uses an SRV record lookup in DNS to try to locate the AutoDiscover servi
 ## 一般情况
 
 - 未加入域的电脑，一般Outlook会先尝试 will try to connect to the predefined URLs (such as `https://autodiscover.contoso.com/autodiscover/autodiscover.xml`) by using DNS
-- 加入域的电脑，一般Outlook会先尝试 `SCP` 这个方式。先搜索AD目录中的SCP对象，这个对象返回值是所有组织内部的Exchange CAS服务器URL，然后向第一个发起配置查询。
+- 加入域的电脑，一般Outlook会先尝试 `SCP` 这个方式。先搜索AD目录中的SCP对象，这个对象返回值是组织内部的所有Exchange CAS服务器的自动发现服务端点URL，然后向第一个发起配置查询。
     - searches for the Autodiscover SCP objects. After the client obtains and enumerates the instances of the Autodiscover service, the client connects to the first Client Access server in the enumerated list and obtains the profile information in the form of XML data that's needed to connect to the user's mailbox and available Exchange features.
 
 ## 特殊情况
@@ -110,11 +110,12 @@ https://learn.microsoft.com/en-us/outlook/troubleshoot/profiles-and-accounts/how
 - 点击”测试“
 - 查看日志
 
-以下示例，显示Outlook是**通过SCP方式**实现自动发现。
+以下示例，显示Outlook是**通过SCP方式** 定位到自动发现端点Url。
+
 ![Outlook Autodiscovery](../../PostImages/post57_ex_autodiscovery.jpg)
 
 
-## 测试和检查Exchange服务器的WebService
+## 扩展：测试和检查Exchange服务器的WebService
 
 
 ```shell
