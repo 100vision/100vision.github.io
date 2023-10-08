@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: 工具介绍系列：Rest Api调试工具
+title: 工具介绍系列：图形界面Api调试工具
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -18,6 +18,7 @@ tag:
   - DevOps
   - 工具
   - RestApi
+  - Tool
 
 # 此页面会在文章列表置顶
 sticky: false
@@ -33,7 +34,7 @@ copyright: 无版权
 
 ## 前言
 
-继之前介绍的cURL，详见本博 [熟悉使用curl调试api](https://blog.solex-inc.com/zh/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/DevOps/how_to_use_curl.html)，再简单记录几个支持图形界面的Rest Api调试工具，方便需要时，知道上哪下载、使用。
+继之前介绍的cURL，详见本博 [熟悉使用curl调试api](https://blog.solex-inc.com/zh/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/DevOps/how_to_use_curl.html)，再简单记录几个支持图形界面的Rest Api调试工具，方便需要时上哪下载、使用 comes in handy。
 
 
 
@@ -58,7 +59,7 @@ copyright: 无版权
 
 > 特色：可以生成cURL命令参数，方便在Shell使用
 
-### Insomnia
+### Kong Insomnia
 
 Api网关商业公司`Kong` 旗下的一款调试工具。
 
@@ -69,6 +70,8 @@ https://github.com/Kong/insomnia
 
 `Postman`功能更强大，但它的桌面版更臃肿，界面使用起来有时很卡。并强制登录才能使用。
 
-`Insomnia` 功能特色少一些，但更轻量。不需要登录也可以使用。
+`Insomnia` 功能特色少一些，但更轻量。不需要登录也可以使用。  
+
+
 
 
