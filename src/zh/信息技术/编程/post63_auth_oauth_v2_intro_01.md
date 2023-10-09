@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title:开发学习:身份认证:OAuth 2.0粗解
+title: 开发学习:身份认证:OAuth 2.0粗解
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -10,12 +10,9 @@ order: 62
 date: 2023-10-09
 # 一个页面可以有多个分类
 category:
-  - DevOps
-  - 工具
   - Web
 # 一个页面可以有多个标签
 tag:
-  - DevOps
   - OAuth
   - 身份认证
   - 令牌
