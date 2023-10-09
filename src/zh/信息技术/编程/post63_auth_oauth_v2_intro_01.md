@@ -102,7 +102,7 @@ https://cloud.tencent.com/developer/article/1447723
 - Google OAuth 
 https://console.cloud.google.com/apis/credentials
 
-![OAuth客户端样例](../../PostImages/Post63_auth_Google_OAuth_Client_Example.png)
+![OAuth客户端样例](../../PostImages/Post63_OAuth_Google_OAuth_Client_Example.png)
 
 
 
