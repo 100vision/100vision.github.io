@@ -72,14 +72,24 @@ copyright: 无版权
 
 ### 使用场景和案例
 
+**场景1**
+
 现在很多网站支持使用Google账户/微信第三方账户等登录他们的服务，就是oAuth的实现。
 
-这种情景案例下，各角色：
-- 网站是第三方服务。
+
+**场景2**
+
+你有一个Web应用程序，例如处理用户相片，支持用户把他的Google相册导入，处理完后存储回去到Google相册。这时，你的应用程序则要访问用户的Google相册，比如要读取或写入到Google相册。这种场景就需要使用Google OAuth。
+
+**场景工作原理分析**
+
+从以上场景下，各角色时这样的：
+
+- 你的网站是第三方服务。
 - 微信账户提供商是认证服务商。
 - 用户的微信账户等是用户的资源；
-- 网站要用户授权，才能访问用户的微信账户资源，例如微信，头像。
-- 网站拿到google账户
+- 网站要用户授权，才能访问用户的微信账户资源，例如微信，头像或其他微信用户API资源。
+- 网站拿到用户的微信账户资源或用户其他资源（例如相册等）
 
 可以看到，
 
@@ -91,6 +101,8 @@ copyright: 无版权
 
 >如果你的网站服务需要支持用户使用Google或微信账户登录，则需要去这些身份提供商备案申请，其实就是申请创建一个身份提供商的OAuth Client客户端，表明身份。
 
+> 申请时，需要指定你的网站应用程序名和需要的访问权限（例如只读或写入）、资源范围，这些信息将会被身份提供商（API资源）都展示给用户，让用户确认是否授权同意。
+
 - 微信
 
 https://cloud.tencent.com/developer/article/1447723
@@ -98,6 +110,10 @@ https://cloud.tencent.com/developer/article/1447723
 - Google OAuth
   
 https://console.cloud.google.com/apis/credentials
+
+开发文档：
+
+https://developers.google.com/identity/protocols/oauth2/web-server
 
 ![OAuth客户端样例](../../PostImages/Post63_OAuth_Google_OAuth_Client_Example.png)
 
