@@ -70,7 +70,7 @@ copyright: 无版权
 
 9. 资源服务器返回用户资源给第三方服务。
 
-###使用场景和案例
+### 使用场景和案例
 
 现在很多网站支持使用Google账户/微信第三方账户等登录他们的服务，就是oAuth的实现。
 
@@ -89,14 +89,14 @@ copyright: 无版权
 
 ### OAuth 客户端注册和创建
 
->如果你的网站服务需要支持用户使用Google或微信账户登录，则需要去这些身份提供商备案申请，其实就是申请创建一个身份提供商的OAuth Client客户端，表明身份。申请过程可能需要指定：
-
+>如果你的网站服务需要支持用户使用Google或微信账户登录，则需要去这些身份提供商备案申请，其实就是申请创建一个身份提供商的OAuth Client客户端，表明身份。
 
 - 微信
 
 https://cloud.tencent.com/developer/article/1447723
 
-- Google OAuth 
+- Google OAuth
+  
 https://console.cloud.google.com/apis/credentials
 
 ![OAuth客户端样例](../../PostImages/Post63_OAuth_Google_OAuth_Client_Example.png)
