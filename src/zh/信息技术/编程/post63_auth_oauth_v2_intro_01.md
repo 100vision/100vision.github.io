@@ -74,7 +74,9 @@ copyright: 无版权
 
 **场景1**
 
-现在很多网站支持使用Google账户/微信第三方账户等登录他们的服务，就是oAuth的实现。
+现在很多网站支持使用Google账户/微信第三方账户等登录他们的服务，就是oAuth的实现。如下图：
+
+![OAuth Example](../../PostImages/post63_oatuth_supported_webapps_example1.png)
 
 
 **场景2**
