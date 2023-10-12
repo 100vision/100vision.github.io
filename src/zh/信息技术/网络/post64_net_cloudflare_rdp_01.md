@@ -49,7 +49,7 @@ copyright: 无版权
 
 
 
-### 穿透Micrsoft Remote Desktop
+### 穿透Microsoft Remote Desktop
 
 - 参照 [官方教程：Set up a tunnel through the dashboard](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-remote-tunnel/)部署好一个Tunnel到内网一台机器上；
 - 添加一个`public hostname`,例如 rdp.example.com。我们将使用这个主机名rdp远程到家里Windows.
