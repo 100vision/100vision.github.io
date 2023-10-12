@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: 内网穿透
+title: Networking: 组网：内网穿透
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -15,6 +15,7 @@ category:
 tag:
   - networking
   - vpn
+  - Cloudflare
 # 此页面会在文章列表置顶
 sticky: false
 # 此页面会出现在文章收藏中
@@ -48,12 +49,20 @@ copyright: 无版权
 需要把DNS域名托管在CloudFalre
 :::
 
+:::tip Updates
+
+(2023/10/12) Cloudflare Tunnel默认使用QUIC协议，在墙内经常连不上。可以尝试改成http或是ipv6。具体参考：
+https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-guide/local/local-management/arguments/
+
+以下是ipv6举例
+docker run -d --network host --name=cloudflared --restart unless-stopped cloudflare/cloudflared:latest tunnel --edge-ip-version=6 --protocol=auto --region=us --no-autoupdate run --token ********************
+:::
 
 **大致步骤**
 
 - 申请免费的CloudFlare账户
 - 内网服务器要安装cloudflared软件
-- 创建CloudFlare Tunnel
+- 创建CloudFlare Tunnel。可以创建2种管理，remotely-managed tunnel和local-managed tunnel.使用Cloudflare dashboard自动生成的配置命令则是remoted-managed
 
 
 
