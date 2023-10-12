@@ -55,10 +55,24 @@ copyright: 无版权
 https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-guide/local/local-management/arguments/
 
 - 以下是使用http2
-/usr/bin/cloudflared --protocol http2 --no-autoupdate tunnel run --token ***
+
+```
+/usr/bin/cloudflared --protocol http2 \
+--no-autoupdate tunnel run \ 
+--token ***
+```
+
 
 - 以下是使用ipv6
-docker run -d --network host --name=cloudflared --restart unless-stopped cloudflare/cloudflared:latest tunnel --edge-ip-version=6 --protocol=auto --region=us --no-autoupdate run --token ********************
+
+```
+docker run -d --network host --name=cloudflared \ 
+--restart unless-stopped cloudflare/cloudflared:latest \
+tunnel --edge-ip-version=6 --protocol=auto \ 
+--region=us --no-autoupdate run \
+--token ********************
+
+```
 :::
 
 **大致步骤**
