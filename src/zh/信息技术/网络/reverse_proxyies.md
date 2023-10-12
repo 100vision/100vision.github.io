@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: Networking: 组网：内网穿透
+title: Networking:内网穿透
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -62,7 +62,7 @@ docker run -d --network host --name=cloudflared --restart unless-stopped cloudfl
 
 - 申请免费的CloudFlare账户
 - 内网服务器要安装cloudflared软件
-- 创建CloudFlare Tunnel。可以创建2种管理，remotely-managed tunnel和local-managed tunnel.使用Cloudflare dashboard自动生成的配置命令则是remoted-managed
+- 创建CloudFlare Tunnel。可以创建2种管理2，remotely-managed tunnel和local-managed tunnel.使用Cloudflare dashboard自动生成的配置命令则是remoted-managed
 
 
 
