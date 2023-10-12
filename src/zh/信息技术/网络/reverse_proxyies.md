@@ -62,7 +62,12 @@ docker run -d --network host --name=cloudflared --restart unless-stopped cloudfl
 
 - 申请免费的CloudFlare账户
 - 内网服务器要安装cloudflared软件
-- 创建CloudFlare Tunnel。可以创建2种管理2，remotely-managed tunnel和local-managed tunnel.使用Cloudflare dashboard自动生成的配置命令则是remoted-managed
+- 创建CloudFlare Tunnel。
+
+创建Tunnel有2种方式：
+
+- remotely-managed tunnel。可以Cloudflare Tunnel新建向导生成的配置命令则是remoted-managed
+- local-managed tunnel. 需要在本地安装cloudflare tunnel代理，登录然后新建tunnel.
 
 
 
