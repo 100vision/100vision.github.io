@@ -51,7 +51,7 @@ copyright: 无版权
 
 :::tip Updates
 
-(2023/10/12) Cloudflare Tunnel默认使用QUIC协议，在墙内经常连不上。可以尝试改成http或是ipv6。具体参考：
+(2023/10/12) Cloudflare Tunnel默认使用QUIC协议，在墙内经常连不上Cloudflare边缘服务器哇零零。可以尝试改成http或是ipv6。具体参考：
 https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-guide/local/local-management/arguments/
 
 以下是ipv6举例
