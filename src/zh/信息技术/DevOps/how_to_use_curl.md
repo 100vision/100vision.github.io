@@ -30,13 +30,11 @@ copyright: 无版权
 
 
 
-## curl介绍
+## 前言
 
-curl，一个很强大的http api调试工具，可以在Shell上直接使用。
+`cURL`，一个很强大的http api调试命令行工具，可以在Shell上直接使用 有必要掌握基础使用方法。
 
-::: tip 
-作为一个运维，我应该要熟练使用该工具
-:::
+
 
 
 
@@ -50,39 +48,47 @@ https://curl.haxx.se/download.html
 
 - 发起GET 请求
 ```shell
-curl -i https://www.163.com
+curl -i http://localhost:8080/api
 ```
 - 携带cookies发起请求
 ```shell
-curl -b 'a=1;b=2' https://www.163.com
+curl -b 'a=1;b=2' http://localhost:8080/api
 ```
 
 - 保存cookies到文件并使用
 
 ```shell
-curl -c /tmp/mycookies https://www.163.com
-curl -b @/tmp/mycookies https://www.163.com
+curl -c /tmp/mycookies http://localhost:8080/api
+curl -b @/tmp/mycookies http://localhost:8080/api
 ```
 
 - 携带header发起请求，可以多个-H参数
 ```shell
 curl -H 'Content-Type:application/json' 
--H 'CustomHeader=hello' https://163.com
+-H 'CustomHeader=hello' http://localhost:8080/api
 ```
 
 - 发起POST(携带json)
 ```shell
-curl -XPOST -H 'Content-Type:application/json' -d '{"id:1","name:lin"}
+curl -XPOST -H 'Content-Type:application/json' -d '{"id:1","name:lin"} http://localhost:8080/api
+```
+
+- 发起POST(携带json文件)
+```shell
+- 发起POST(携带json)
+```shell
+curl -X POST -H "Content-Type: application/json" -d @/tmp/cats.json http://localhost:8080/api
+```
 ```
 
 - 发起POST (携带KV, application/x-www-form-urlencoded)
 ```shell
-curl -d 'k1=value1&k2=value2' https://www.163.com
+curl -d 'k1=value1&k2=value2' http://localhost:8080/api
 ```
 
 - 携带User-Agent
 ```shell
-curl -A 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0' https://163.com
+curl -A 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0' http://localhost:8080/api
 ```
 
 
