@@ -65,6 +65,7 @@ copyright: 无版权
 cloudflared access rdp --hostname rdp.example.com --url rdp://localhost:33890
 ```
 rdp.example.com #是目标rdp服务器主机（可能是你家的windows）
+
 localhost  #cloudflared运行所在的机器
 
 :::note
