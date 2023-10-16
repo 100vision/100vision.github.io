@@ -87,6 +87,7 @@ star: true
 - 直接基于基础磁盘(Base VMDK)的快速上的数据，直接向Base VMDK合并，写入base vmdk文件；
 - 基于有父快照的快照会向父快照的delta磁盘文件何婷，数据吸入到父快照delta vmdk文件；
 - 如果时删除所有快照，所有快照会直接向base vmdk合并，不在一层一层合并；
+
 :::warning
 
 删除快照意味着快照之后的改变会被合并到快照之前的数据，因此虚拟机无法回退到创建快照时的状态！
@@ -174,7 +175,7 @@ Windows平台上，VMware Tools需要使用到`Microsoft VSS Provider`,VSS是一
 
 - VMware tools 以 `VSS Requester` 的身份通知 VSS，VSS 再通知已经注册的文件系统以及各应用的 `VSS writer` 执行各自的数据下刷和冻结操作（应用的暂时冻结不能超过60秒）
 
-- 一旦完成，`VMware tools 将就结果告诉 hostd
+- 一旦完成，VMware tools 将就结果告诉 hostd
 
 - `Hostd` 再执行快照操作
 
@@ -233,7 +234,7 @@ else
 fi
 ```
 
-脚本更多 [Enabling Quiescing for Linux VMs](https://docs.vmware.com/en/VMware-Cloud-Disaster-Recovery/services/vmware-cloud-disaster-recovery/GUID-DBF1DFD5-F956-4ED9-AF06-95664D3AA89D.html)
+
 
 ### 文件系统一致性快照
 
