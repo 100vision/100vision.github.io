@@ -15,7 +15,6 @@ category:
 
 # 一个页面可以有多个标签
 tag:
-
   - VMware
   - 快照
   - 虚拟化
