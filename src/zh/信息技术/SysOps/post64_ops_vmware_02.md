@@ -82,7 +82,7 @@ star: true
 - 然后，删除快照磁盘文件。
 
 
-**数据合并（Consolidation)**
+**数据合并 Consolidation**
 
 - 直接基于基础磁盘(Base VMDK)的快速上的数据，直接向Base VMDK合并，写入base vmdk文件；
 - 基于有父快照的快照会向父快照的delta磁盘文件何婷，数据吸入到父快照delta vmdk文件；
