@@ -169,7 +169,7 @@ star: true
 Windows平台上，VMware Tools需要使用到`Microsoft VSS Provider`,VSS是一个接口，实际还需要`VSS Writers`来实现冻结静默操作，详细如下：
 
 
-- 备份程序发出 quiesced snapshot 创建请求给 `vCenter`，vCenter 给虚机所在的 ESXi 的 `hostd`` 服务发出指令
+- 备份程序发出 quiesced snapshot 创建请求给 `vCenter`，vCenter 给虚机所在的 ESXi 的 `hostd` 服务发出指令
 
 - ESXi 上的 `Hostd` 将请求传给客户机内的 `VMware Tools`
 
@@ -182,7 +182,7 @@ Windows平台上，VMware Tools需要使用到`Microsoft VSS Provider`,VSS是一
 - 操作结束，按照前面的顺序再对文件系统和应用进行解冻。
 
 :::note
-从以上看出，该类型快照，需要在虚拟机内部安装VMWare Tools以及需要应用程序厂商对应的VSS Writer。微软应用一般都有，比例比较常见的Exchange和MSSQL。通过`vssadmin provider list` 和`vssadmin writer list` 可以查看。
+从以上看出，该类型快照，需要在虚拟机内部安装VMWare Tools以及需要应用程序厂商对应的VSS Writer。微软应用一般都有，比例比较常见的Exchange和MSSQL。通过`vssadmin list providers` 和`vssadmin list writers` 可以查看。
 :::
 
 **其他系统**
