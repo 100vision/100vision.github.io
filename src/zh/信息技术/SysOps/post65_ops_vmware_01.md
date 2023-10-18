@@ -42,5 +42,33 @@ star: true
 - *-flat.vmdk
 - *.ctk
 
-### VMDK文件
+![磁盘文件结构 - ESX Shell](../../PostImages/post64_vmware_disk_files.png)
 
+![磁盘文件结构 - Datastore Browser](../../PostImages/post64_vmware_disk_files_hidden_in_DS_Browser.png)
+
+### <vmname>.VMDK文件
+
+VMDK文件是虚拟机磁盘描述符配置文件，不是实际数据存储磁盘文件。它记录的是磁盘大小、磁盘类型等元数据，是一个文本文件。
+
+:::note
+该文件通过Vsphere Web控制台下的DataStore Browser可以看到，而且看起来文件大小等同于虚拟机磁盘分配大小，但它不是实际的存储数据存储的虚拟机磁盘文件，而是下面的flat.vmdk文件。
+:::
+
+### <>-flat.vmdk files
+
+<vmname>flat.vmdk file - This is the actual raw disk file that is created for each virtual hard drive. Almost all of a .vmdk file's content is the virtual machine's data, with a small portion allotted to virtual machine overhead. This file will be roughly the same size as your virtual hard drive.
+
+:::note
+该文件通过Vsphere Web控制台下的DataStore Browser是看不到的，需要到ESX shell下才能看到。
+:::
+
+
+### 其他
+
+待补充
+
+## 参考
+
+[IBM Source](https://www.ibm.com/support/pages/detailed-description-all-files-make-virtual-machine)
+
+[VMDK file types](http://vmfsrecover.com/articles/vmfs-disk-types)
