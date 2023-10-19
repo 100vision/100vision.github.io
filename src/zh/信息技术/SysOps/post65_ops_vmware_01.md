@@ -47,6 +47,7 @@ star: true
 
 
 **vSphere DataStore Browser下磁盘文件一览**
+
 ![磁盘文件结构 - DataStore Browser](../../PostImages/post64_vmware_disk_files_hidden_in_DS_Browser.png)
 
 
