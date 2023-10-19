@@ -56,7 +56,7 @@ VMDK文件是虚拟机磁盘描述符配置文件，不是实际数据存储磁�
 
 ### [vmname]-flat.vmdk files
 
-<vmname>flat.vmdk file - This is the actual raw disk file that is created for each virtual hard drive. Almost all of a .vmdk file's content is the virtual machine's data, with a small portion allotted to virtual machine overhead. This file will be roughly the same size as your virtual hard drive.
+>[vmname]-flat.vmdk file - This is the actual raw disk file that is created for each virtual hard drive. Almost all of a .vmdk file's content is the virtual machine's data, with a small portion allotted to virtual machine overhead. This file will be roughly the same size as your virtual hard drive.
 
 :::note
 该文件通过Vsphere Web控制台下的DataStore Browser是看不到的，需要到ESX shell下才能看到。
