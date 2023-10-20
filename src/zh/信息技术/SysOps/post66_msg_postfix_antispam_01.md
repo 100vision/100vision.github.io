@@ -113,14 +113,15 @@ SpamAssassin Bayes需要投喂200封垃圾邮件和200封正常邮件后才能�
 
 
 ### 开始
+---
 
 - 创建邮箱且开启IMAP
 
 步骤略
 
->在我的环境和邮件路由是`Exchange -> Postfix网关`,因此我创建Exchange邮箱，例如`quarantine@example.com`。同时，这个邮箱是我部署SpamAssassin指定的目标隔离邮箱，凡是被被SpamAssassin判定垃圾邮件嫌疑的都会转发到这个邮箱，因此这个邮箱会有很多垃圾邮件样本。
+>在我的环境和邮件路由是`Exchange -> Postfix网关`,因此我创建Exchange邮箱，例如`quarantine@example.com`。同时，这个邮箱是我部署SpamAssassin指定的目标隔离邮箱，凡是被SpamAssassin判定垃圾邮件嫌疑的都会转发到这个邮箱，因此这个邮箱会有很多垃圾邮件样本。
 
-（步骤略）
+
 
 - 创建邮件文件夹。
 
