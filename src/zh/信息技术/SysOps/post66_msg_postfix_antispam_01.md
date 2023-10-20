@@ -112,8 +112,13 @@ SpamAssassin Bayes需要投喂200封垃圾邮件和200封正常邮件后才能�
 以上配置看似步骤很多，但是是一次性初始配置实现自动投喂，一劳永逸。
 
 
+### 开始
 
-- 创建Exchange邮箱且开启IMAP
+- 创建邮箱且开启IMAP
+
+步骤略
+
+>在我的环境和邮件路由是`Exchange -> Postfix网关`,因此我创建Exchange邮箱，例如`quarantine@example.com`。同时，这个邮箱是我部署SpamAssassin指定的目标隔离邮箱，凡是被被SpamAssassin判定垃圾邮件嫌疑的都会转发到这个邮箱，因此这个邮箱会有很多垃圾邮件样本。
 
 （步骤略）
 
@@ -187,7 +192,6 @@ set no bouncemail
 set postmaster "postmaster@example.com"
 set no spambounce
 set logfile fetch_ham.log
-set limit 1024000
 set properties ""
 defaults proto imap
 poll my-email-server.example.com with proto imap
@@ -225,9 +229,21 @@ fetchall
 * */3 * * *  /usr/bin/sa-learn --ham --mbox /var/spool/mail/sa_ham > /var/log/sa-learn-ham.log
 ```
 
-## 扩展：How fetchmail works
+## 扩展：Fetchmail学习
 
-- 下载邮件(IMAP/POP3)
-- 使用管理员指定的MDA（POSTFIX)转发邮件到本地用户邮箱
+从以上配置看出，整个过程关键部分就是fetchmail的配置最为关键。
+因此有必要多了解一下fetchmail的使用。
+
+### How fetchmail works
+
+`Fetchmail`可以在Linux Terminal实现邮件接收和发送，实现：
+
+- 从外部邮箱服务器，例如Gmail/Office365等支持IMAP/POP3下载邮件；
+- 把下载后的邮件绑定到Linux本地用户，实现方法是先使用IMAP/POP3接收协议下载，然后通过本地smtp（Mail Delivery Agent),例如`Postfix`、`Sendmail`发给本地用户；
+
+### 配置Fetchmailrc
+
+fetchmail默认使用一个配置文件`.fetchmailrc`，具体使用可以参考：
+https://calomel.org/fetchmailrc.html
 
 

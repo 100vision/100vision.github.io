@@ -56,7 +56,7 @@ copyright: 无版权
 
 - 安装和配置好Git  [下载Git](https://git-scm.com/downloads);
 - 安装VS Code等支持Markdown的文本编辑器；[下载Visual Studio Code](https://code.visualstudio.com/download)
-- 熟悉以下Markdown基本语法。可以参考[Markdown基本使用](https://theme-hope.vuejs.press/zh/cookbook/markdown：
+- 熟悉一下Markdown基本语法。可以参考[Markdown基本使用](https://theme-hope.vuejs.press/zh/cookbook/markdown)
 
 
 ### 撰写新文章
