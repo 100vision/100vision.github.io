@@ -142,7 +142,7 @@ useradd sa_spam
 useradd sa_ham
 ```
 创建后，可以看到`/var/spool/mail/sa_spam` 和 `/var/spool/mail/sa_ham`
-这两个文件是mbox,fetchmail下载的邮件将分别存放在这两个文件中。
+这两个文件是mbox文件，也就是用户邮箱,fetchmail下载的邮件将分别存放在这两个邮箱文件中（邮箱可以使用`mailx`查看）
 
 - 在SpamAssassin主机上配置fetchmail来下载样本
 
@@ -247,4 +247,15 @@ fetchall
 fetchmail默认使用一个配置文件`.fetchmailrc`，具体使用可以参考：
 https://calomel.org/fetchmailrc.html
 
+### Fetchmail排错
 
+- 在fetchmailrc配置中使用`logfile`指定日志文件，查看日志根据具体错误进行排查；
+- 一般可能是参数使用或配置错误，例如IMAP邮箱用户名或密码弄错；
+
+### 其他
+
+注意邮箱清理，大量且长期下载邮件可能会造成磁盘空间爆满。可使用cron任务定期清理：
+
+```
+@monthly > /var/spool/mail/solex_sa_learn_spam
+```
