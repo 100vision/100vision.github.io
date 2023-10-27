@@ -106,12 +106,22 @@ EXPOSE 8080
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
 ```
 
+
+
+
 - 修改业务代码，然后构建Docker
 
 ```
 docker build . --cache-from my-registry.docker.com:5000/my-image:2.0.0
 
 ```
+
+
+### 实现原理
+
+>把docker进行更细的分层，项目依赖和业务代码分开分层。实现则需要通过编写dockerfile文件也改成相应的格式后，确实能达到我们预期的效果。我们每次重新上传的只是我们自己写的代码，第三方依赖、SpringBoot内部配置、快照依赖 ，这些SpringBoot都为我们打包到不同的文件夹下，再依靠docker的分层特征，分次加入文件即可达到分层打包的效果。
+
+>这样，修改了业务代码，只有对业务层重新封装打包，项目依赖等其他层不会变化。最终改善了打包速度。
 
 
 ## 参考
