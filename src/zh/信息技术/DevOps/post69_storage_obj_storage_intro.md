@@ -81,8 +81,9 @@ copyright: 无版权
 
 根据以上特点，可以了解到：
 
-  - 一般用于海量数据的存储。特别适合那些`WORM`应用程序 （**W**rite **O**ne **R**ead **M**any)，
+  - 一般用于海量数据的存储。特别适合那些`WORM`应用程序 （**W**rite **O**nce **R**ead **M**any)，
   - 主要是非结构化数据，比如日志、音频、视频、数据备份等冷数据。
+  - 写入后的数据一般不更新。
 
   ### 对象存储的关键概念
 
@@ -90,6 +91,7 @@ copyright: 无版权
   - 对象
 
 桶是对象的逻辑物理存储单元，对象放在桶里，如下：
+
   ![图源：https://zhuanlan.zhihu.com/p/426079235](../../PostImages/post69_s3_obj_storage_terminology.png)
 
 
@@ -139,6 +141,29 @@ copyright: 无版权
 
 - [Veeam: How-to Deploy, and Configure MinIO with Erasure Coding Enabled, Immutability, and Let’s Encrypt](https://jorgedelacruz.uk/2020/07/22/veeam-how-to-deploy-and-configure-minio-with-erasure-coding-enabled-immutability-and-lets-encrypt/)
 
+### 讨论：如何选择非结构数据存储？是对象存储还是NAS
+
+对象存储拥有有更好的扩展性，但性能较差，IO开销较高，对频繁改动不是很友好（需要整个对象下载一份，再修改上传），因此比较适合：
+
+- **存储不经常修改的冷数据**，例如数据归档备份，图片、音频、视频、ISO镜像等静态资源，适合做二级存储；
+- 对IO性能延迟不敏感的应用，例如企业网盘上传和下载；
+
+NAS等传统文件、块存储扩展性一般且成本高，性能较好，对经常需要改动的场景比较合适，因此NAS适合：
+
+- **存储经常改动的热数据**，例如员工Office文档等；
+- 不支持RESTful的应用；
+- 对IO延迟敏感的应用；
 
 
 
+### 扩展：挂载对象存储
+
+> 一些项目实现把S3对象存储挂载到文件系统，前端可以想操作文件系统一样。这种项目有`s3fs`、`juiceFS`。
+
+
+- `s3fs`, 可以实现把S3存储挂载到文件系统。项目地址：[s3fs](https://github.com/s3fs-fuse/s3fs-fuse)。
+
+- `juicefs`，项目地址：[juiceFS](https://github.com/juicedata/juicefs)
+
+原理是在对象存储前增加了一层，实现了POSIX接口。
+不确定稳定性，也没有在网上看到用于生产环境的案例。Reddit上的意见是一个字评价`don't`,2个字`do not`,`don't do it`, `don't do it ever`。如果是普通使用或是非关键应用，可以试试看。
