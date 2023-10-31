@@ -127,17 +127,15 @@ copyright: 无版权
 
 **使用**
 
-范例1：使用mini client for Java操作minio
 
--  [API使用范例](https://zhuanlan.zhihu.com/p/654273720)
 
-范例2：ElasticSearch，OpenSearch使用minio S3作索引快照备份
+-  [使用mini client for Java操作minio](https://zhuanlan.zhihu.com/p/654273720)
 
-- [如何把S3存储注册到OpenSearch作为快照存储](https://opensearch.org/docs/1.0/opensearch/snapshot-restore/#register-repository)
 
-范例3：数据备份Veeam使用minio S3作为备份存储
+- [如何实现ElasticSearch，OpenSearch使用minio S3作索引快照存储](https://opensearch.org/docs/1.0/opensearch/snapshot-restore/#register-repository)
 
-- [Veeam Replication with minio S3](https://min.io/docs/minio/linux/integrations/using-minio-with-veeam.html)
+
+- [数据备份Veeam使用minio S3作为备份存储Veeam Replication with minio S3](https://min.io/docs/minio/linux/integrations/using-minio-with-veeam.html)
 
 - [Veeam: How-to Deploy, and Configure MinIO with Erasure Coding Enabled, Immutability, and Let’s Encrypt](https://jorgedelacruz.uk/2020/07/22/veeam-how-to-deploy-and-configure-minio-with-erasure-coding-enabled-immutability-and-lets-encrypt/)
 
