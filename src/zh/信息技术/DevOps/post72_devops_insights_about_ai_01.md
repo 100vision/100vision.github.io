@@ -1,5 +1,5 @@
 ---
-title: AI：ChatGPT: ChatGPT和ChatGPT提示语技巧
+title: AI：ChatGPT和ChatGPT提示语技巧
 icon: page
 order: 72
 date: 2023-11-06
