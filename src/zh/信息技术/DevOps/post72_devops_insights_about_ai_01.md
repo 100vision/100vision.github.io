@@ -14,7 +14,7 @@ tags:
   - 提示语
   - prompt
 
-sticky: false
+sticky: true
 star: true
 footer: 
 copyright: 无版权
