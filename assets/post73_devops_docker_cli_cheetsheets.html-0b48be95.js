@@ -16,7 +16,7 @@ import{_ as e,W as i,X as d,Y as n}from"./framework-b5535326.js";const c={},l=n(
 Environment=&quot;HTTPS_PROXY=http://192.168.2.153:1080&quot;
 Environment=&quot;HTTP_PROXY=http://192.168.2.153:1080&quot;
 ~                                                                                                                                                                                             ~                                                         
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>创建（构建）镜像。<code>docker build -t &lt;image_name&gt; .</code>,需要编写dockerfile。dockerfile示例：</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># Use an official Node.js runtime as the base image
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>创建（构建）镜像。<code>docker build -t &lt;image_name&gt; .</code>,需要编写Dockerfile。Dockerfile示例：</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># Use an official Node.js runtime as the base image
 FROM node:14
 
 # Set the working directory in the container to /app
