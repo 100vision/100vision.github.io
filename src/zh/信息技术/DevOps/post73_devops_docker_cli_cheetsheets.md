@@ -64,7 +64,7 @@ Environment="HTTP_PROXY=http://192.168.2.153:1080"
 ~                                                                                                                                                                                             ~                                                         
 ```
 
-- 创建（构建）镜像。`docker build -t <image_name> .`,需要编写dockerfile。dockerfile示例：
+- 创建（构建）镜像。`docker build -t <image_name> .`,需要编写Dockerfile。Dockerfile示例：
 ```
 # Use an official Node.js runtime as the base image
 FROM node:14
