@@ -12,7 +12,7 @@ tags:
   - 技巧
 
 
-sticky: true
+sticky: false
 star: true
 footer: 
 copyright: 无版权
