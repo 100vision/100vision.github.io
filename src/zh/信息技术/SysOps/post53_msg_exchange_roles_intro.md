@@ -235,7 +235,7 @@ PS C:\> Remove-ManagementRoleEntry "My Mailbox Admins\Add-MailboxPermission"
 ```
 
 :::tip 
-(2023/11/10更新）不能添加父角色没有的cmdlet和cmdParameters给角色，否则会收到以下类似异常。例如，当我尝试`Set-ManagementRoleEntry "My Mailbox Admins\new-mailbox" -AddParameter -Parameters Room,RoomMailboxPassword`。由于"(Microsoft.Exchange.Management.PowerShell.E2010) New-Mailbox -EnableRoomMailboxAccount -Room -RoomMailboxPassword"管理角色条目的父角色不包含相同角色条目的以下参数，无法将条目添加到"Solex Mailbox Admins"管理角色:"Room,RoomMailboxPassword"。
+(2023/11/10更新）不能添加父角色没有的cmdlet和cmdParameters给角色，否则会收到以下类似异常。例如，当我尝试`Set-ManagementRoleEntry "My Mailbox Admins\new-mailbox" -AddParameter -Parameters Room,RoomMailboxPassword`。由于"(Microsoft.Exchange.Management.PowerShell.E2010) New-Mailbox -EnableRoomMailboxAccount -Room -RoomMailboxPassword"管理角色条目的父角色不包含相同角色条目的以下参数，无法将条目添加到"my Mailbox Admins"管理角色:"Room,RoomMailboxPassword"。
 :::
 
 
