@@ -58,7 +58,7 @@ copyright: 无版权
 
 - 配置镜像源的代理. `vi /etc/systemd/system/docker.service.d/http-proxy.conf`
 ```
-#[Service]
+[Service]
 Environment="HTTPS_PROXY=http://192.168.2.153:1080"
 Environment="HTTP_PROXY=http://192.168.2.153:1080"
 ~                                                                                                                                                                                             ~                                                         
