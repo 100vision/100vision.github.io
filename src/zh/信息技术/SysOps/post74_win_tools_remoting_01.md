@@ -34,7 +34,7 @@ star: true
 
 ### DroidVNC-NG
 
-DroidVNC-NG 是VNC Server方式。
+> DroidVNC-NG 是一款VNC Server。
 
 特点：
 
@@ -46,7 +46,7 @@ DroidVNC-NG 是VNC Server方式。
 
 ### RustDesk
 
-工作方式类似向日葵，支持从任何位置远程。
+> 可以平替向日葵的开源解决方案，支持从任何位置远程。
 
 特点:
 
@@ -70,4 +70,4 @@ Android需要7.0以上,DroidVNC-NG推荐安装最新版本2.15
     
 ## 其他
 
-有机会再试试自建RustDesk到云主机，开源免费平替向日葵。
+有机会再试试自建RustDesk到云主机，平替向日葵。
