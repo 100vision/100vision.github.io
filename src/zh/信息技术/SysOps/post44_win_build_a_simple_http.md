@@ -64,32 +64,11 @@ const app = express();
 // Define the folder path where your file is located
 const folderPath = path.join(__dirname, 'download');
 
-
 // on the request to root (localhost:3000/)
-app.get('/download/1', function(req, res) {
+app.get('/download/:file', function(req, res) {
   // Use the path module to join the folder path and the file name
-  res.download(path.join(folderPath, 'WinSCPnet.dll'), function(err) {
-    if (err) {
-      console.log(err);
-    }
-  });
-});
-
-
-// on the request to root (localhost:3000/)
-app.get('/download/2', function(req, res) {
-  // Use the path module to join the folder path and the file name
-  res.download(path.join(folderPath, 'WinSCP.exe'), function(err) {
-    if (err) {
-      console.log(err);
-    }
-  });
-});
-
-// on the request to root (localhost:3000/)
-app.get('/download/3', function(req, res) {
-  // Use the path module to join the folder path and the file name
-  res.download(path.join(folderPath, 'orcl.ppk'), function(err) {
+  const file = req.params.file;
+  res.download(path.join(folderPath, file), function(err) {
     if (err) {
       console.log(err);
     }
@@ -99,6 +78,7 @@ app.get('/download/3', function(req, res) {
 app.listen(3000, () => {
   console.log('Server started on port 3000.');
 });
+
 
 ```
 
@@ -110,9 +90,7 @@ Server started on port 3000.
 
 - 最后，可以尝试使用浏览器访问和文件下载. 文件下载Url分别是
 
-http://<IP地址>:3000/download/1
+http://<IP地址>:3000/download/fileName
 
-http://<IP地址>:3000/download/2
 
-http://<IP地址>:3000/download/3
 
