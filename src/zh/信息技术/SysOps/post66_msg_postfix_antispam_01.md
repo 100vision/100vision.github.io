@@ -225,9 +225,15 @@ fetchall
 
 ```shell
 [root@mailhost ~]crontab -l
-#Schedule a SpamAssassin SA-Learning 
-*/1 * * * *  /usr/bin/sa-learn --spam --mbox /var/spool/mail/sa_spam > /var/log/sa-learn-spam.log
-* */3 * * *  /usr/bin/sa-learn --ham --mbox /var/spool/mail/sa_ham > /var/log/sa-learn-ham.log
+#Schedule a SpamAssassin SA-Learning from local mailboxes where fetchmail from Exchange Quarntine Mailbox for details
+*/1 * * * *  /usr/bin/sa-learn --username=amavis --spam --mbox /var/spool/mail/sa_learn_spam >> /var/log/sa-learn-spam.log
+* */3 * * *  /usr/bin/sa-learn --username=amavis --ham --mbox /var/spool/mail/sa_learn_ham >> /var/log/sa-learn-ham.log
+*/30 * * * *  /usr/bin/sa-learn --username=amavis --sync
+
+#Schedule mailbox purge on the local mailboxes used for sa-learning to free local storage space.
+@weekly > /var/spool/mail/root
+@monthly > /var/spool/mail/sa_learn_spam
+@monthly > /var/spool/mail/sa_learn_ham
 ```
 
 ## 扩展：Fetchmail学习
@@ -257,5 +263,5 @@ https://calomel.org/fetchmailrc.html
 注意邮箱清理，大量且长期下载邮件可能会造成磁盘空间爆满。可使用cron任务定期清理：
 
 ```
-@monthly > /var/spool/mail/solex_sa_learn_spam
+@monthly > /var/spool/mail/sa_learn_spam
 ```
