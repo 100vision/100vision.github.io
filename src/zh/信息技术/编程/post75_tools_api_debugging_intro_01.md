@@ -40,6 +40,8 @@ copyright: 无版权
 
 说到api调试，第一选择就是`Postman` ，但不知道什么开始，开始需要登录网络后才可以使用。功能也强大了，但也更臃肿了。
 
+之前也介绍过`Insommia` [文章见这里](../DevOps/post59_devops_tools_03_rest_api.md)，但好像不太好用了。
+
 现在一些api工具，不仅可以做到更小巧，也能做到边调试边生成Api文档，还支持本地部署。
 
 本文介绍的一款是`Showdoc`。
@@ -94,3 +96,9 @@ docker run -d --name showdoc --user=root --privileged=true -p 4999:80 \
 ### Showdoc客户端runApi
 
 >https://www.showdoc.com.cn/runapi/30291
+
+
+## 其他Api调试工具
+
+- 类似showdoc的`RunnerGO`
+- IDE里面的插件http Restclient
