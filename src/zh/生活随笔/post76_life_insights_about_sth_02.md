@@ -1,5 +1,5 @@
 ---
-title: 学习和了解：抗生素
+title: 学习和了解：抗生素和支原体
 icon: page
 order: 76
 date: 2023-12-14
