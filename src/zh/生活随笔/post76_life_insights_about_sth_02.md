@@ -12,6 +12,7 @@ tags:
   - 观点
   - 抗生素
   - 生活常识
+  - 支原体
 
 sticky: false
 star: true
