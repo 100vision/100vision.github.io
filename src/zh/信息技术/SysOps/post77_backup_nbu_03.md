@@ -42,7 +42,7 @@ Netbackup有很多进程，服务器上有很多，客户端也有很多。
 
 > netbackup客户端进程描述，来自netbackup客户端logs文件夹下的`readme`
 
-```
+
 
  Here are descriptions of NetBackup processes:
 
@@ -209,4 +209,3 @@ Netbackup有很多进程，服务器上有很多，客户端也有很多。
 		-command-line program used during execution of VxUpdate deployment policies.
 
 
-```
