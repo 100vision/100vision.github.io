@@ -44,6 +44,8 @@ Netbackup有很多进程，服务器上有很多，客户端也有很多。
 
 
 
+```
+
  Here are descriptions of NetBackup processes:
 
 	bprd       
@@ -56,13 +58,7 @@ Netbackup有很多进程，服务器上有很多，客户端也有很多。
 			-"list files backed-up or archived"
 			-manual/immediate backups
 			-reread configuration database
-	bpdm       
-		-disk manager
-		-used on storage units of type Disk
-		-started by bpbrm on backups and restores
-		-during backups and restores, one of these is started (on
-		 the server with the storage unit) for each client backup
-		 or restore
+
 	bptm
 		-removable media (tape) manager
 		-used on storage units of type Logical Tape
@@ -145,9 +141,7 @@ Netbackup有很多进程，服务器上有很多，客户端也有很多。
 	bparchive
 		-command-line program on clients to initiate archives
 		-communicates with bprd on server
-	bpbackup   
-		-command-line program on clients to initiate backups
-		-communicates with bprd on server
+
 	bpbkar32
 		-program used on Windows clients to generate backup images
 		-not used directly by client users
@@ -201,11 +195,11 @@ Netbackup有很多进程，服务器上有很多，客户端也有很多。
 		 and provide other miscellaneous services
 	nbstop
 		-command-line program used to shut down the NetBackup services on the client where it was run.
-	mssql_backup_failures
-		-log for MSSQL backup operation failures
-	nbrepo
-		-command-line program used to manage the NetBackup deployment package repository.
-	nbinstallagent
-		-command-line program used during execution of VxUpdate deployment policies.
+.
 
 
+```
+
+## 参考
+
+来自netbackup客户端安装目录下的logs文件夹下的`readme`
