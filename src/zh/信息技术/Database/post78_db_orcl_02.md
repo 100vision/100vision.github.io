@@ -47,45 +47,55 @@ star: true
 
 ### 实现步骤
 
-- 普通用户创建Package。
+- System用户创建Package。
 
 ```sql
 
 -- 创建包
-CREATE OR REPLACE PACKAGE kill_sessions AS
-PROCEDURE kill(p_sid IN NUMBER); -- 参数为会话的SID
+CREATE OR REPLACE PACKAGE kill_session AS
+PROCEDURE kill(pn_sid IN NUMBER,pn_serial IN NUMBER); -- 参数为会话的SID,和会话序列号
 END;
 /
 
 -- 编译包体
-ALTER PACKAGE kill_sessions COMPILE BODY;
+ALTER PACKAGE kill_session COMPILE BODY;
 /
 
 -- 创建存储过程
-CREATE OR REPLACE PACKAGE BODY kill_sessions IS
-PROCEDURE kill(p_sid IN NUMBER) IS
-v_serial# NUMBER := -1;
+CREATE OR REPLACE PROCEDURE kill(
+    pn_sid NUMBER,
+    pn_serial NUMBER
+) AS
+    lv_user VARCHAR2(30);
 BEGIN
-SELECT serial# INTO v_serial# FROM sys.v$session WHERE sid = p_sid;
-
-    IF v_serial# > 0 THEN
-        EXECUTE IMMEDIATE 'ALTER SYSTEM KILL SESSION ''' || p_sid || ', ' || v_serial# || '''';
-        DBMS_OUTPUT.put_line('Session killed successfully!');
+    SELECT username INTO lv_user FROM SYS.V_$SESSION
+    WHERE sid = pn_sid AND serial# = pn_serial;
+-- 安全起见，限制普通用户只能杀掉指定用户的会话，不能杀掉其他用户（例如dba的会话
+    IF lv_user IS NOT NULL AND lv_user IN ('svc_dbuser01', 'svc_dbuser02') THEN
+        EXECUTE IMMEDIATE 'ALTER SYSTEM KILL SESSION ''' || pn_sid || ',' || pn_serial || '''';
     ELSE
-        DBMS_OUTPUT.put_line('Invalid session ID or the session is not active.');
+        RAISE_APPLICATION_ERROR(-20000, 'Attempt to kill protected system session has been blocked.');
     END IF;
 END;
-END;
+
+
+-- 创建一个同义词给普通用户
+Create synonym <username>.kill_session for system.kill_session;
 
 ```
 
-- 授权普通用户以下权限
-```
-SQL> grant select on v$session to <the_user>;
-SQL> grant execute on kill_sessions to <the_user>;
-SQL> grant alter system to <the_user>;
-```
+- 授权package的owner,即system用户以下权限
 
+```
+SQL> grant select on v$session to system;
+SQL> grant alter system to system;
+```
+- 授权普通用户可以执行package
+
+```
+SQL> grant execute on kill_session to <the_user>;
+
+```
 ### 使用
 
 - 查询死锁会话
@@ -97,7 +107,7 @@ where sid in (select session_id from v$locked_object);
 ```
 
 ```
-SELECT l.SESSION_ID, l.OS_USER_NAME, s.USERNAME, l.OBJECT_ID, l.ORACLE_USERNAME
+SELECT l.SESSION_ID, l.OS_USER_NAME, s.USERNAME, s.serial#,l.OBJECT_ID, l.ORACLE_USERNAME
 FROM v$locked_object l,
      v$session s
 WHERE l.SESSION_ID = s.SID;
@@ -106,11 +116,16 @@ WHERE l.SESSION_ID = s.SID;
 - 杀会话
 
 ```
--- 杀掉会话227
+-- 普通用户在PL/SQL里杀掉会话227，序号311
 BEGIN
-  KILL_SESSIONS.KILL(227);
+  KILL_SESSION.KILL(222,311);
 END;
+```
 
+```
+普通用户在sqlplus杀掉会话
+SQL> exec kill_session.kill(222,311)
+```
 
 ## 参考
 
