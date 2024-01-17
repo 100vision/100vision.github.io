@@ -37,13 +37,12 @@ star: true
 
 ### 实现方式
 
-- 授权这个普通用户可以查询v$session
-- 指定1个普通用户创建一个Package,改package的body中包含`alter system kill session`
-- 授权这个普通用户可以执行该package
-- 授权这个普通用户可以执行`alter system`
+- 授权一个高级用户，例如system可以查询v$session
+- 授权这个高级用户可以执行`alter system`特权；
+- 这个高级用户身份下创建一个Package或procedure,核心语句是授权package的body中包含`alter system kill session`
+- 授权1个普通用户可以执行该package或procedure。
 
-- Oracle Single instance (Source) to Single instance(target)
-- Netbackup Data Backup Environment
+以上看出，普通用户在没有`alter system`权限情况下，可以通过一个高权限的专用package/procedure杀掉会话。
 
 ### 实现步骤
 
@@ -130,4 +129,5 @@ SQL> exec kill_session.kill(222,311)
 ## 参考
 
 Granting ALTER SYSTEM KILL SESSION to users
+
 http://dba-oracle.com/t_granting_alter_system_kill_session.htm
