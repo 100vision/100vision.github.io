@@ -187,52 +187,25 @@ Windows平台上，VMware Tools需要使用到`Microsoft VSS Provider`,VSS是一
 
 和Windows系统不同，Linux没有所谓的VSS Writer。这样，静默Linux虚拟机需要管理员自己编写静默脚本配合VMWare Tools来完成。主要是要写一个脚本实现VMware Tools的3个操作。
 
-脚本要放在位置` /etc/vmware-tools/backupScripts.d`,脚本可以有多个。每个脚本要实现：
+- 安装VMware Tools(必须)
+- 脚本要放在位置` /etc/vmware-tools/backupScripts.d`,脚本可以有多个。每个脚本要实现：
 
 - `freeze`。怎么开始冻结操作；
 - `thaw`, 怎么释放冻结；
 - `freezFail`,冻结失败怎么处理；
 
-范例：support quiescing for a Linux VM running a PostgreSQL database. 
+**范例1：support quiescing for PostgreSQL database** 
 
-```bash
-#!/bin/sh
-if [[ $1 == "freeze" ]]
-then
-        # set log directory
-        log="/var/log/vpostgres_backup.log"
-        # set and log start date
-        today=`date +%Y\/%m\/%d\ %H:%M:%S`
-        echo "${today}: Start of creation consistent state" >> ${log}
-        # execute freeze command.
-        # This command can be modified as per the database command
-        cmd="echo \"SELECT pg_start_backup('${today}', true);\" | sudo -i -u postgres psql >> ${log} 2>&1"
-        eval ${cmd}
-        # set and log end date
-        today=`date +%Y\/%m\/%d\ %H:%M:%S`
-        echo "${today}: Finished freeze script" >> ${log}
-elif [[ $1 == "thaw" ]]
-then
-        echo "This section is executed when the Snapshot is removed"
-        log="/var/log/vpostgres_backup.log"
-        # set and log start date
-        today=`date +%Y\/%m\/%d\ %H:%M:%S`
-        echo "${today}: Release of backup" >> ${log}
-        # execute release command
-        cmd="echo \"SELECT pg_stop_backup();\" | sudo -i -u postgres psql >> ${log} 2>&1"
-        eval ${cmd}
-        # set and log end date
-        today=`date +%Y\/%m\/%d\ %H:%M:%S`
-        echo "${today}: Finished thaw script" >> ${log}
-elif [[ $1 == "freezeFail" ]]
-then
-        echo "This section is executed when the Quiescing Fails."
-else
-        echo "No argument was provided"
-fi
-```
+[Scripts](../../PostAttachements/Post64/postgresql/quiesce_postgre.sh)
+
+**范例2：support quiescing for MySQL database**
 
 
+- [pre-freeze-script.sh](../../PostAttachements/Post64/mysql/pre-freeze-script.sh)
+
+- [post-thaw-script.sh](../../PostAttachements/Post64/mysql/post-thaw-script.sh)
+
+- [config.sh](../../PostAttachements/Post64/mysql/config.sh)
 
 ### 文件系统一致性快照
 
