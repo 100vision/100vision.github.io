@@ -88,6 +88,9 @@ EXPOSE 8080
 CMD [ "npm", "start" ]
 
 ```
+:::tip 编写高效的Dockerfile
+可以参考另一篇文章[ “如何编写高效的Dockerfile”](../../信息技术/DevOps/post81_devops_docker_tip_01.md)
+:::
 
 ### Docker Daemon管理
 - 查看dockerd配置信息。`docker info`
