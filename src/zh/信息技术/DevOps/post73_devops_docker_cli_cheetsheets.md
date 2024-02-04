@@ -97,7 +97,8 @@ CMD [ "npm", "start" ]
 
 ### 容器管理类型
 
-- 跑一个docker。 `docker run ...`
+- 创建一个docker容器但不启动，`docker create ...`
+- 创建一个docker而且启动docker。 `docker run ...`， 等于`docker create + docker start...`
 - 停止docker。`docker stop ...`
 - 启动一个docker。`docker start ...`
 - 检查一个运行中的docker配置元数据。`docker inspect <docker name>`
