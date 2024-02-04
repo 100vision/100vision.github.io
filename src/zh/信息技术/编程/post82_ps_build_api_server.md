@@ -40,7 +40,7 @@ Powershell作为一个脚本语言，也是可以像服务端编程语言，例�
 
 ## 正文
 
-- 示例代码1: HTTP REST Api
+- 示例代码1: HTTP REST Api,返回json数据。
 
 :::note 注意
 需要管理员启动该脚本
@@ -108,7 +108,7 @@ $listener.Dispose()
 
 
 ```
-- 示例2：提供文件下载
+- 示例2：提供文件下载。 `https://localhost:8010/downloads/filename`
 
 ```powershell
 # 创建一个http监听器listner，和其他语言大同小异
