@@ -181,8 +181,11 @@ star: true
 
 务必使用正确的恢复代理证书。通过对证书的指纹thumbprint来验证证书是否同一个， 步骤：
 - 检查解密出问题的加密文件的属性，文件的加密属性里【详细信息】，可以看到加密时指定的EFS恢复代理证书和指纹。如下图：
+
 ![图：检查加密时的使用EFS恢复代理证书指纹](../../PostImages/post83_efs_dra_thumbprint_when_encrypted.png)
+
 - 检查导入的EFS恢复代理的证书指纹。如下图：
+
 ![图：检查导入的EFS恢复代理证书指纹](../../PostImages/post83_efs_dra_thumbprint_when_recovered.png)
 
 
