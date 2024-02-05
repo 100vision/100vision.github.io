@@ -39,7 +39,7 @@ star: true
 
 ## 正文
 
-> EFS, `Encrypted File System`，使用的是公钥对文件进行加密。
+> EFS, `Encrypted File System`，使用的是公钥对文件进行加密,是比较可靠的加密选项。
 
 ### 简单介绍
 
