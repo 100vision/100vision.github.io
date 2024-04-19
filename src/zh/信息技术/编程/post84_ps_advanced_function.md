@@ -1,13 +1,13 @@
 ---
 # 这是文章的标题
-title: 脚本编程：Powershell：创建一个简单的HTTP REST Api服务
+title: 脚本编程：Powershell：Powershell Advanced Function 踩坑记
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
-order: 82
+order: 84
 # 设置作者
 # 设置写作时间
-date: 2024-02-04
+date: 2024-04-10
 # 一个页面可以有多个分类
 category:
   - Scripting Language
@@ -17,8 +17,8 @@ category:
 # 一个页面可以有多个标签
 tag:
   - Powershell
-  - Web编程
-  - api
+  - 踩坑记
+
 
 
   
@@ -34,151 +34,31 @@ star: true
 
 ## 前言
 
-Powershell作为一个脚本语言，也是可以像服务端编程语言，例如Java/C#一样启动一个Web服务器，提供简单的REST Api服务。
-
-这样，结合丰富Powershell Cmdlets就可以对外提供丰富的数据。
+最近使用Powershell踩了一个坑，后来回想起来，这个坑上回不也踩过吗？也是来回摸索很长时间。记性不如烂笔头，记录一下。
 
 ## 正文
 
-- 示例代码1: HTTP REST Api,返回json数据。
+> 我的一个函数使用一个参数从管道接收一个对象集合或是数组（又多个对象），结果每次只处理一个输入对象，真奇怪啊.调试了半天，百思不得其解。
 
-:::note 注意
-需要管理员启动该脚本
-:::
-
-```powershell
-# Source code https://hkeylocalmachine.com/?p=518
-# Create a listener on port 8000
-$listener = New-Object System.Net.HttpListener
-$listener.Prefixes.Add('http://+:8010/') 
-$listener.Start()
-'Listening ...'
-
-# Run until you send a GET request to /end
-while ($true) {
-    $context = $listener.GetContext() 
-
-    # Capture the details about the request
-    $request = $context.Request
-
-    # Setup a place to deliver a response
-    $response = $context.Response
-   
-    # Break from loop if GET request sent to /end
-    if ($request.Url -match '/end$') { 
-        break 
-    } else {
-
-        # Split request URL to get command and options
-        $requestvars = ([String]$request.Url).split("/");        
-
-        # If a request is sent to http:// :8000/wmi
-        if ($requestvars[3] -eq "wmi") {
-           
-            # Get the class name and server name from the URL and run get-WMIObject
-            $result = get-WMIObject $requestvars[4] -computer $requestvars[5];
-
-            # Convert the returned data to JSON and set the HTTP content type to JSON
-            $message = $result | ConvertTo-Json; 
-            $response.ContentType = 'application/json';
-
-       } else {
-
-            # If no matching subdirectory/route is found generate a 404 message
-            $message = "This is not the page you're looking for.";
-            $response.ContentType = 'text/html' ;
-       }
-
-       # Convert the data to UTF8 bytes
-       [byte[]]$buffer = [System.Text.Encoding]::UTF8.GetBytes($message)
-       
-       # Set length of response
-       $response.ContentLength64 = $buffer.length
-       
-       # Write response out and close
-       $output = $response.OutputStream
-       $output.Write($buffer, 0, $buffer.length)
-       $output.Close()
-   }    
-}
- 
-#Terminate the listener
-$listener.Stop()
-$listener.Dispose()
-
+`直接上答案`
 
 ```
-- 示例2：提供文件下载。 `https://localhost:8010/downloads/filename`
-
-```powershell
-# 创建一个http监听器listner，和其他语言大同小异
-$listener = New-Object System.Net.HttpListener
-$listener.Prefixes.Add('http://+:8010/') 
-
-# 启动一个监听器
-$listener.Start()
-'Listening ...'
-
-# 该HTTP服务一直运行，除非向它发送一个"http://xxx/end"请求。Run until you send a GET request to /end
-while ($true) {
-    $context = $listener.GetContext() 
-
-    # Capture the details about the request 获取一个会话的HTTP Request对象
-    $request = $context.Request
-
-    # Setup a place to deliver a response 获取一个会话的HTTP Response对象
-    $response = $context.Response
-   
-    # Break from loop if GET request sent to /end
-    if ($request.Url -match '/end$') { 
-        break 
-    } else {
-
-        # Split request URL to get command and options
-        $requestvars = ([String]$request.Url).split("/");        
-
-        # If a request is sent to http:// :8010/downloads 
-        if ($requestvars[3] -eq "downloads") {
-           
-            #文件转换成字节（读一个文件到内存）
-            $inputBytes = [IO.File]::ReadAllBytes("C:\AdminPack\a\DB_Backup_Download.ps1")
-            # 指定文件下载的内容类型
-            $response.ContentType = 'application/octet-stream';
-
-
-
-       } else {
-
-            # If no matching subdirectory/route is found generate a 404 message
-            $message = "This is not the page you're looking for.";
-
-            #字符串转换成字节
-            $inputBytes = [System.Text.Encoding]::UTF8.GetBytes($message)
-            $response.ContentType = 'text/html' ;
-       }
-
-       
-       # Set length of response
-       $response.ContentLength64 = $inputBytes.length
-
-       # 获取HTTP Response输出流
-       $output = $response.OutputStream
-
-       #通过Response输出流对象输出，返回给浏览器
-       $output.Write($inputBytes, 0, $inputBytes.length)
-       $output.Close()
-   }    
-}
- 
-#停止关闭和销毁监听器对象
-$listener.Stop()
-$listener.Dispose()
-
-
+如果函数参数设置为接受管道输入且未定义process块，则记录逐条处理将失败。
 ```
-## 参考
+ 这篇文章深入探讨了PowerShell中的Begin、Process和End块，这些块是PowerShell高级函数内置的控制流，有助于开发者维护代码工作流程。文章通过比喻和示例，解释了每个块的具体目的和常见用例。
 
-https://hkeylocalmachine.com/?p=518
+1. **Begin块**：用于设置函数，包括指定变量和数组，这些变量和数组将在函数中使用。Begin块是可选的，如果只使用Process或End块，则不需要它。Begin块中的所有内容只会在函数调用时运行一次，类似于日常工作中的准备阶段。
+
+2. **Process块**：这是PowerShell高级函数中完成工作的地方。它处理参数和通过管道输入到函数中的数据。Process块可以单独使用，不需要Begin或End块。如果函数接受单个参数值，则Process块将只处理该单个值。如果函数接受管道输入，则Process块将处理每个传入的值。文章通过示例展示了如何处理单个值和通过管道传递的数组。
+
+3. **End块**：用于执行必要的清理工作。如果在Begin或Process块中创建了对象、变量、文件等，则应在End块中清理这些资源。End块也是可选的，如果只使用Process或Begin块，则不需要它。与Process块不同，无论通过管道传递了多少个数组元素，End块中的代码都只会执行一次。
+
+文章通过比喻和例子强调了每个块的作用，如将一天的开始比作Begin块的初始化，将处理日常任务比作Process块的工作，将结束一天的工作并回家比作End块的清理。文章还提到了PowerShell函数应该做好一件事，并强调了将函数分解为Begin、Process和End块的重要性，以实现清晰的逻辑分离和更好的维护性。
 
 
 
+## Reference
+
+- https://4sysops.com/archives/understanding-powershell-begin-process-and-end-blocks/
+  
+- https://jeffbrown.tech/powershell-begin-process-end/
