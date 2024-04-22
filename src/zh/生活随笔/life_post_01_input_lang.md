@@ -66,6 +66,25 @@ copyright: 无版权
 - 更多使用方法。👉[用户手册](https://dvel.me/posts/rime-ice/)
 
 
+### 自定义配置
+
+> 自定义配置后，都需要【重新部署】是配置生效。
+
+- 增加候选词。
+
+默认是5个，有点少。可以修改`%appdata\rime\default.custom.yaml`文件。使用`notepad ++`等工具增加一行（注意：缩进不能用tab, 用2个空格）：
+
+```yaml
+patch:
+  menu/page_size: 9
+```
+- 左右shift键都可以中英文切换(默认只有左shift)
+```yaml
+patch:
+  menu/page_size: 9
+  "ascii_composer/switch_key/Shift_L": commit_code
+  "ascii_composer/switch_key/Shift_R": commit_code 
+```
 
 
 
