@@ -63,7 +63,7 @@ copyright: 无版权
 
 - 按左shift键，中英文切换；
 - 按 `+` 向下翻更多候选词，按`-` 向上翻候选词；
-- 更多使用方法。👉[用户手册]([https://dvel.me/posts/rime-ice/)
+- 更多使用方法。👉[用户手册](https://dvel.me/posts/rime-ice/)
 
 
 
