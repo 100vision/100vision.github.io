@@ -29,7 +29,7 @@ Windows系统重装后,会考虑安装的必备开源工具列表。
 ## 正文
 
 
-- 下载工具 `Gopeed`
+- 下载工具 `Gopeed`,支持（HTTP、BitTorrent、Magnet）协议下载
 - 代理 `Bitvise SSH Client`
 - 科学 `clash`
 - 截图 `PixPin`,推荐理由：支持滚动截图，git制作；
