@@ -65,6 +65,12 @@ copyright: 无版权
 - 按 `+` 向下翻更多候选词，按`-` 向上翻候选词；
 - 更多使用方法。👉[用户手册](https://dvel.me/posts/rime-ice/)
 
+### 更新词库
+
+ - 定期下载[下载地址](https://github.com/iDvel/rime-ice)
+ - 覆盖`%appdata\rime\cn_dicts` 和 `%appdata\rime\en_dicts`
+ - 重新部署。
+
 
 ### 自定义配置
 
@@ -85,6 +91,38 @@ patch:
   "ascii_composer/switch_key/Shift_L": commit_code
   "ascii_composer/switch_key/Shift_R": commit_code 
 ```
+- 修改雾凇输入法初始状态。
+
+默认是中文。定位到雾凇拼音的`%appdata%\rime\rime_ice.schema.yaml`，
+修改reset的值为`1`
+
+```yaml
+switches:
+  - name: ascii_mode
+    states: [ 中, Ａ ]
+    reset: 1
+```    
+
+
+
+### Ubuntu平台上使用rime/雾凇拼音
+
+> Ubuntu上使用rime输入法引擎，有两种选择：
+
+- `IBus输入法框架 + rime + 雾凇拼音`
+- `fcitx5 + rime + 雾凇拼音`
+
+`IBus`和 `fcitx5`只能选一个，我选择`IBUS`因为`fcitx5`试了很多次都不成功。
+
+### 安装和配置IBus + rime + 雾凇拼音
+
+- 安装Plum 
+- 安装Rime
+- 修改系统键盘配置
+
+具体步骤参考 [网友KLangHu](https://www.cnblogs.com/KLangHu/p/17699295.html) 
+
+
 
 
 
