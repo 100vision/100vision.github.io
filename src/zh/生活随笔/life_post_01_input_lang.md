@@ -1,5 +1,5 @@
 ---
-title: 推荐：中文输入法：rime输入框架和雾凇输入法
+title: 推荐：中文输入法：rime输入框架和雾凇拼音
 icon: page
 order: 76
 date: 2024-04-22
