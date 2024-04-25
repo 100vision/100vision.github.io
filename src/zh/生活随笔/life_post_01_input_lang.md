@@ -105,6 +105,8 @@ switches:
 
 
 
+## 补充
+
 ### Ubuntu平台上使用rime/雾凇拼音
 
 > Ubuntu上使用rime输入法引擎，有两种选择：
