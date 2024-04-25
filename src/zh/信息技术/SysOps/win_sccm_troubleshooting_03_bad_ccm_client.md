@@ -40,7 +40,7 @@ unhealthy client could be:
 
 - Run a few checks for client health status on client side.
 
-> Check: SMS Agent Host service (CCMExec) is up and running
+> Check: make sure that `SMS Agent Host service` (CCMExec) is up and running
 
 > Check: `CcmEval.log` for client health self-check results ( the check scheduled to run by Windows Scheduled Task).
 
@@ -50,7 +50,14 @@ unhealthy client could be:
 
 - Verifty the connectivity between MP and client
 
-> Check: client is able to access the url  `http(s)://<ServerName>/sms_mp/.sms_aut?mplist`
+> Check: makes sure that client is able to access the url  `http(s)://<ServerName>/sms_mp/.sms_aut?mplist`
 
 
 > Check: and this one `http(s)://<ServerName>/sms_mp/.sms_aut?mpcert` 
+
+
+### Remediation Actions to involve
+
+- Reinstall the ccm client (in most case always does the trick)
+- Repair WMI databases;
+- Disable Windows Firewall;
