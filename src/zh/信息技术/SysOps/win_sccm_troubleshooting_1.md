@@ -27,6 +27,9 @@ star: true
 
 ---
 
+## What's SCCM policy?
+
+the policy could be a job of application deployment or compliance baseline deployment.
 
 ## Purpose
 
