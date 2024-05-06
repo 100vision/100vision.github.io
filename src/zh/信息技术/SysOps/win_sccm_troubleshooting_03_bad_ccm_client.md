@@ -50,10 +50,16 @@ unhealthy client could be:
 
 - Verifty the connectivity between MP and client
 
+> Check: `CcmMessaging.log` for any communiction issue with MP server. for example: ssl error and certificate-related issue if https enabled.
+
 > Check: makes sure that client is able to access the url  `http(s)://<ServerName>/sms_mp/.sms_aut?mplist`
 
 
 > Check: and this one `http(s)://<ServerName>/sms_mp/.sms_aut?mpcert` 
+
+- Checks for Management Point Server (MP) health states
+
+> CCM Console -> `Monitoring` -> `System Status` - > `Component State` -> `SMS_MP_CONTROL_MANAGER`
 
 
 ### Remediation Actions to involve
