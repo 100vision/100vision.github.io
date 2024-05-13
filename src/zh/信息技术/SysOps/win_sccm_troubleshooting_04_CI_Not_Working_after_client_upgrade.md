@@ -1,6 +1,6 @@
 ---
 # 这是文章的标题
-title: SCCM：问题排查3：客户端升级后基准Baseline工作不正常
+title: SCCM：问题排查3：CI Stopped working after client upgrade
 # 这是页面的图标
 icon: page
 # 这是侧边栏的顺序
@@ -28,7 +28,7 @@ star: true
 ---
 
 
-### 问题症状
+### Symptom and behavior 
 
 Client upgraded to `5.000.9058.1018` from `5.00.8790.1007`
 SCCM Server upgarded to `CB 2107` from `CB 2002`
@@ -49,7 +49,7 @@ SCCM Server upgarded to `CB 2107` from `CB 2002`
 
 ### Cause
 
-No idea what caused this behavior.  Seemed that nothing else was broken other than CI was affected. 
+No idea what caused this behavior.  Seemed that nothing was broken other than CI was affected. 
 
 ### Solution
 
