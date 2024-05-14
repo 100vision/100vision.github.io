@@ -59,6 +59,6 @@ No idea what caused this behavior.  Seemed that nothing was broken other than CI
 
 - Then wait for the policies to kick in on the clients or manually trigger a client notification to client for an immediate policy check-in.
 
--That's it. 
+That's it. 
 
 
