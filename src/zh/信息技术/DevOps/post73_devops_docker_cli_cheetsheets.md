@@ -104,6 +104,11 @@ CMD [ "npm", "start" ]
 可以参考另一篇文章[ “如何编写高效的Dockerfile”](../../信息技术/DevOps/post81_devops_docker_tip_01.md)
 :::
 
+### 镜像备份
+
+- 可使用`docker save -o myImage.tar myImage:lastest` 导出（备份）镜像到本地磁盘；
+- 可以使用`docker load -i myImage.tar` 导入镜像包到本地镜像库；
+
 ### 镜像分析
 
 - 查看镜像配置 `docker inspect <image ID>` ,也可以查看容器配置,把image ID 换成container ID；
