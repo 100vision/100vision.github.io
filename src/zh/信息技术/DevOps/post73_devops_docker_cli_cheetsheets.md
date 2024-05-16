@@ -1,5 +1,5 @@
 ---
-title: 容器管理：Docker：常用命令（1）
+title: 容器管理：Docker：常用命令（1）:镜像篇
 icon: page
 order: 73
 date: 2023-11-10
@@ -23,7 +23,7 @@ copyright: 无版权
 
 ## 前言 
 
-收集一些Docker常用基础命令。
+收集一些Docker常用基础命令。主要记录镜像(Image)管理。`镜像像是编程概念中的类，容器则是对象实例`，这样可以帮助理解镜像和容器的关系。
 
 ## 正文
 
@@ -32,10 +32,7 @@ copyright: 无版权
 
 ### 镜像管理
 
-- 查看镜像。`docker image ls`
-- 拉镜像。`docker pull`
-
-- 推送（上传）镜像。`docker push`
+- 查看本地所有镜像。`docker image ls`
 
 - 使用镜像源的国内镜像。`vi /etc/docker/daemon.json `
 
@@ -61,8 +58,23 @@ copyright: 无版权
 [Service]
 Environment="HTTPS_PROXY=http://192.168.2.153:1080"
 Environment="HTTP_PROXY=http://192.168.2.153:1080"
-~                                                                                                                                                                                             ~                                                         
+                                                       
 ```
+
+
+- 拉(下载）远程镜像。`docker pull <镜像名>`
+
+- 推送（上传）本地镜像到远程registry。`docker push`，一般是：
+
+```bash
+#先给本地镜像打上包含远程镜像服务器名的tag
+[root@dockerhost01 ~]# docker tag localhost:3000/myImage:latest remote.domain.com/myImage:latest
+
+# 开始推送。如果需要远程库需要认证，先登录docker login
+[root@dockerhost01 ~]# docker push remote.domain.com/myImage:latest
+
+```
+
 
 - 创建（构建）镜像。`docker build -t <image_name> .`,需要编写Dockerfile。Dockerfile示例：
 ```
@@ -92,35 +104,19 @@ CMD [ "npm", "start" ]
 可以参考另一篇文章[ “如何编写高效的Dockerfile”](../../信息技术/DevOps/post81_devops_docker_tip_01.md)
 :::
 
-### Docker Daemon管理
-- 查看dockerd配置信息。`docker info`
+### 镜像分析
 
-
-
-
-### 容器管理类型
-
-- 创建一个docker容器但不启动，`docker create ...`
-- 创建一个docker而且启动docker。 `docker run ...`， 等于`docker create + docker start...`
-- 停止docker。`docker stop ...`
-- 启动一个docker。`docker start ...`
-- 检查一个运行中的docker配置元数据。`docker inspect <docker name>`
-- 查看docker的输出日志. `docker logs -f <docker name>`
-- 在docker内部里运行命令。`docker exec -it <docker name> <shell命令>`
-
-
-
-
-### 清理类
-
-
-- 查看docker对象使用的磁盘空间。`docker system df`
-- 删除docker。 `docker rm ...`。技巧:删除所有停止状态的docker:
+- 查看镜像配置 `docker inspect <image ID>` ,也可以查看容器配置,把image ID 换成container ID；
+- 查看镜像的创建历史信息 `docker history <image ID 或image name>`。可以看到镜像各层的sha256。
+使用`--no-trunc`可以看到完整的sha256
+```bash
+root@runoob:~# docker history runoob/ubuntu:v3
+IMAGE             CREATED           CREATED BY                                      SIZE      COMMENT
+4e3b13c8a266      3 months ago      /bin/sh -c #(nop) CMD ["/bin/bash"]             0 B                 
+<missing>         3 months ago      /bin/sh -c sed -i 's/^#\s*\(deb.*universe\)$/   1.863 kB            
+<missing>         3 months ago      /bin/sh -c set -xe   && echo '#!/bin/sh' > /u   701 B               
+<missing>         3 months ago      /bin/sh -c #(nop) ADD file:43cb048516c6b80f22   136.3 MB
 ```
-docker rm $(docker ps -a -q)
-```
-- 删除镜像。清理无用（没有引用的镜像）`docker image prune -a`
-- 删除docker build缓存。`docker buildx prune -f`
-
-- 删除所有未使用/未运行的docker对象（危险！！），docker,image等,但不包括volume。`docker system prune -f`，删除未使用的卷还需要 `docker system prune --volumes -a -f`
-
+- 也可以使用其他开源工具分析镜像。例如`dive`，项目地址 [wagoodman /
+dive
+](https://github.com/wagoodman/dive)
