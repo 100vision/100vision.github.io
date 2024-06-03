@@ -100,7 +100,7 @@ wacs.exe --source manual
 mkdir -p /var/www/html/proxy.example.cn/
 ```
 
-- 开启http 80以支持acme.sh的`http validation`
+- 修改现有nginx配置，主要是开启http 80以支持acme.sh的`http validation`
 
   
 ```
@@ -123,8 +123,11 @@ server {
 
 - 网络防火墙上开启80端口。
 
-  acme.sh要求的，Let's Encrypt要发送http challenge进来。
-步骤略
+acme.sh要求的，Let's Encrypt要发送http challenge进来，否则无法申请到证书。步骤略
+
+> [!important]
+> 申请成功后，可以关闭，不再需要保持开启。
+
 
 
 
@@ -163,8 +166,10 @@ acme.sh --install-cert -d proxy.example.cn \
 [Mon Jun  3 17:13:52 CST 2024] Run reload cmd: nginx -s reload
 [Mon Jun  3 17:13:52 CST 2024] Reload success
 ```
-
-- 检查cron。auto renewal is scheduled to run by a cron job from the install process
+- 修改nginx配置，把证书指向到以上证书路径。然后`nginx -s reload`
+- 验证证书是否有效。
+- 检查cron。
+  这个crob job主要是实现自动续订。auto renewal is scheduled to run by a cron job from the install process
 check and confirm that the cron job is already there.
 
 ```shell
