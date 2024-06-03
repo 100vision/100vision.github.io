@@ -77,10 +77,82 @@ wacs.exe --source manual
 
 - Windows平台的还有Powershell客户端实现，详见 [ACMESharp](https://github.com/ebekker/ACMESharp)。不仅是Powershell实现，也是C#实现库。
 
-- Linux平台下，有官方的`certbot`, 详见:[Certbot Instructions](https://certbot.eff.org/)。
+- Linux平台下，有官方的`acme.sh` [^2] 和`certbot`, 详见:[Certbot Instructions](https://certbot.eff.org/)。
 
 - 更多客户端可以参考：[more client options](https://letsencrypt.org/docs/client-options/)
 
 
 
 [^1]: 详细使用案例可以参考 [Install FREE Let’s Encrypt certificate in Exchange Server](https://www.alitajran.com/install-free-lets-encrypt-certificate-in-exchange-server/)
+
+
+
+[^2]: 大致步骤：
+   
+-
+```
+mkdir -p /var/www/html/proxy.example.cn/
+```
+
+- nginx config : MUST enable port 80  to support http validation required by Let's Encrypt ACME.sh
+```
+server {
+
+        listen       80;
+        server_name proxy.example.cn;
+        location ^~ /.well-known/acme-challenge/ {
+	        default_type "text/plain";
+	        allow all;
+	        root /var/www/html/proxy.example.cn/;
+  		 }
+		location /{
+	   		rewrite ^(.*)$  https://$host$1 permanent;
+	   	}
+}
+
+```
+
+
+- work with network admin to enable port http/80 on Internet firewall port to nginx  so that http validation can come through
+
+
+
+
+- Request the cert
+
+```shell
+acme.sh --issue -d proxy.example.cn -w /var/www/html/proxy.example.cn/
+
+[Mon Jun  3 16:50:13 CST 2024] Your cert is in: /root/.acme.sh/proxy.example.cn_ecc/proxy.example.cn.cer
+[Mon Jun  3 16:50:13 CST 2024] Your cert key is in: /root/.acme.sh/proxy.example.cn_ecc/proxy.example.cn.key
+[Mon Jun  3 16:50:13 CST 2024] The intermediate CA cert is in: /root/.acme.sh/proxy.example.cn_ecc/ca.cer
+[Mon Jun  3 16:50:13 CST 2024] And the full chain certs is there: /root/.acme.sh/proxy.example.cn_ecc/fullchain.cer
+
+```
+
+- MUST install and copy the cert 
+
+
+```sh
+acme.sh --install-cert -d proxy.example.cn \
+--cert-file      /usr/local/openresty/nginx/cert/qlik/proxy.example.cn.cer  \
+--key-file       /usr/local/openresty/nginx/cert//qlik/proxy.example.cn.key  \
+--fullchain-file /usr/local/openresty/nginx/cert/qlik/fullchain.cer \
+--reloadcmd     "nginx -s reload"
+
+```
+```
+[Mon Jun  3 17:13:52 CST 2024] The domain 'proxy.example.cn' seems to have a ECC cert already, lets use ecc cert.
+[Mon Jun  3 17:13:52 CST 2024] Installing cert to: /usr/local/openresty/nginx/cert/qlik/proxy.example.cn.cer
+[Mon Jun  3 17:13:52 CST 2024] Installing key to: /usr/local/openresty/nginx/cert//qlik/proxy.example.cn.key
+[Mon Jun  3 17:13:52 CST 2024] Installing full chain to: /usr/local/openresty/nginx/cert/qlik/fullchain.cer
+[Mon Jun  3 17:13:52 CST 2024] Run reload cmd: nginx -s reload
+[Mon Jun  3 17:13:52 CST 2024] Reload success
+```
+
+- auto renewal is scheduled to run by a cron job from the install process
+check and confirm that the cron job is already there.
+
+```shell
+crontab -l
+```
