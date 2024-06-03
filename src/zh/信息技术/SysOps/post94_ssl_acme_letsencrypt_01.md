@@ -88,13 +88,21 @@ wacs.exe --source manual
 
 
 [^2]: 大致步骤：
-   
--
-```
+
+
+### ACME.sh and Nginx Reverse Proxy 
+
+以`proxy.example.cn`举例：
+
+- 创建目录
+  
+```bash
 mkdir -p /var/www/html/proxy.example.cn/
 ```
 
-- nginx config : MUST enable port 80  to support http validation required by Let's Encrypt ACME.sh
+- 开启http 80以支持acme.sh的`http validation`
+
+  
 ```
 server {
 
@@ -113,15 +121,19 @@ server {
 ```
 
 
-- work with network admin to enable port http/80 on Internet firewall port to nginx  so that http validation can come through
+- 网络防火墙上开启80端口。
+
+  acme.sh要求的，Let's Encrypt要发送http challenge进来。
+步骤略
 
 
 
-
-- Request the cert
+- 开始申请 Request the cert
 
 ```shell
 acme.sh --issue -d proxy.example.cn -w /var/www/html/proxy.example.cn/
+```
+如果申请成功，则输出一下类似信息：
 
 [Mon Jun  3 16:50:13 CST 2024] Your cert is in: /root/.acme.sh/proxy.example.cn_ecc/proxy.example.cn.cer
 [Mon Jun  3 16:50:13 CST 2024] Your cert key is in: /root/.acme.sh/proxy.example.cn_ecc/proxy.example.cn.key
@@ -130,7 +142,7 @@ acme.sh --issue -d proxy.example.cn -w /var/www/html/proxy.example.cn/
 
 ```
 
-- MUST install and copy the cert 
+- 安装和拷贝证书。必须使用amce的命令。否则不会自动续订。
 
 
 ```sh
@@ -141,6 +153,8 @@ acme.sh --install-cert -d proxy.example.cn \
 --reloadcmd     "nginx -s reload"
 
 ```
+
+安装成功后，输出一下类似信息：
 ```
 [Mon Jun  3 17:13:52 CST 2024] The domain 'proxy.example.cn' seems to have a ECC cert already, lets use ecc cert.
 [Mon Jun  3 17:13:52 CST 2024] Installing cert to: /usr/local/openresty/nginx/cert/qlik/proxy.example.cn.cer
@@ -150,7 +164,7 @@ acme.sh --install-cert -d proxy.example.cn \
 [Mon Jun  3 17:13:52 CST 2024] Reload success
 ```
 
-- auto renewal is scheduled to run by a cron job from the install process
+- 检查cron。auto renewal is scheduled to run by a cron job from the install process
 check and confirm that the cron job is already there.
 
 ```shell
