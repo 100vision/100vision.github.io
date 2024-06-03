@@ -125,9 +125,9 @@ server {
 
 acme.sh要求的，Let's Encrypt要发送http challenge进来，否则无法申请到证书。步骤略
 
-> [!important]
-> 申请成功后，可以关闭，不再需要保持开启。
-
+```warning
+申请成功后，可以关闭，不再需要保持开启。
+```
 
 
 
