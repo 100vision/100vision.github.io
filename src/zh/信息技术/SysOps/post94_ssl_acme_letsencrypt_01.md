@@ -77,8 +77,8 @@ wacs.exe --source manual
 
 - Linux平台下，有官方的`certbot`, 详见:[Certbot Instructions](https://certbot.eff.org/)。
 
-- 更多，可以参考：[more client options](https://letsencrypt.org/docs/client-options/)
+- 更多客户端可以参考：[more client options](https://letsencrypt.org/docs/client-options/)
 
-## 脚注
 
-[^1]: ... 使用举例
+
+[^1]: 详细使用案例可以参考 [Install FREE Let’s Encrypt certificate in Exchange Server](https://www.alitajran.com/install-free-lets-encrypt-certificate-in-exchange-server/)
