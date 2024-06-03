@@ -62,7 +62,7 @@ star: true
 
 实现ACME协议的客户端，有官方版本，也有第三方。
 
-- Windows平台的有 `win-acme`, 官网 [win-acme](https://www.win-acme.com),可以支持Exchange服务器证书。详细请参考: [Example: Microsoft Exchange](https://www.win-acme.com/manual/advanced-use/examples/exchange)
+- Windows平台的有 `win-acme`, 官网 [win-acme](https://www.win-acme.com),可以支持Exchange服务器证书。详细请参考: [Example: Microsoft Exchange](https://www.win-acme.com/manual/advanced-use/examples/exchange) [^1]
 
 ```
 wacs.exe --source manual 
@@ -78,3 +78,7 @@ wacs.exe --source manual
 - Linux平台下，有官方的`certbot`, 详见:[Certbot Instructions](https://certbot.eff.org/)。
 
 - 更多，可以参考：[more client options](https://letsencrypt.org/docs/client-options/)
+
+## 脚注
+
+[^1]: ... 使用举例
