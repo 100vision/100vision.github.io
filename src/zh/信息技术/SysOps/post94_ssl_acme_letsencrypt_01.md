@@ -136,7 +136,10 @@ acme.sh要求的，Let's Encrypt要发送http challenge进来，否则无法申�
 ```shell
 acme.sh --issue -d proxy.example.cn -w /var/www/html/proxy.example.cn/
 ```
+
 如果申请成功，则输出一下类似信息：
+
+```
 
 [Mon Jun  3 16:50:13 CST 2024] Your cert is in: /root/.acme.sh/proxy.example.cn_ecc/proxy.example.cn.cer
 [Mon Jun  3 16:50:13 CST 2024] Your cert key is in: /root/.acme.sh/proxy.example.cn_ecc/proxy.example.cn.key
