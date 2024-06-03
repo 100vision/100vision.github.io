@@ -62,7 +62,9 @@ star: true
 
 实现ACME协议的客户端，有官方版本，也有第三方。
 
-- Windows平台的有 `win-acme`, 官网 [win-acme](https://www.win-acme.com),可以支持Exchange服务器证书。详细请参考: [Example: Microsoft Exchange](https://www.win-acme.com/manual/advanced-use/examples/exchange) [^1]
+- Windows平台的有 `win-acme`, 官网 [win-acme](https://www.win-acme.com),可以支持IIS, Exchange服务器证书。详细请参考: [Example #1: Microsoft Exchange](https://www.win-acme.com/manual/advanced-use/examples/exchange) [^1], [Example 2#: IIS](https://www.shiyanit.com/news-technical/136.html)
+
+
 
 ```
 wacs.exe --source manual 
