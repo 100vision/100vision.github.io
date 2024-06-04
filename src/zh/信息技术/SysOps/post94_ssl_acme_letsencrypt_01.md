@@ -94,7 +94,12 @@ wacs.exe --source manual
 
 以`proxy.example.cn`举例：
 
-- 创建目录
+:::note
+以下操作需要root权限
+:::
+
+
+- 创建主目录
   
 ```bash
 mkdir -p /var/www/html/proxy.example.cn/
@@ -102,6 +107,7 @@ mkdir -p /var/www/html/proxy.example.cn/
 
 - 修改现有nginx配置，主要是开启http 80以支持acme.sh的`http validation`
 
+主要是`root`指令指定一个站点目录，如下：
   
 ```
 server {
@@ -123,11 +129,11 @@ server {
 
 - 网络防火墙上开启80端口。
 
-acme.sh要求的，Let's Encrypt要发送http challenge进来，否则无法申请到证书。步骤略
+http validation需要验证你是域名所有者，这个验证过程是通过发送http challenge进来，否则无法申请到证书。步骤略
 
-```warning
+:::warning
 申请成功后，可以关闭，不再需要保持开启。
-```
+:::
 
 
 
@@ -178,3 +184,25 @@ check and confirm that the cron job is already there.
 ```shell
 crontab -l
 ```
+
+### 配置邮件通知
+
+> 通过邮件通知跟踪证书是否续订成功
+
+- 配置smtp参数。`vi /root/.bashrc`
+```
+
+# Email configuration for acme email notifications
+export SMTP_FROM="waf@example.com"
+export SMTP_TO="it-sysops@example.com"
+export SMTP_HOST="mailserver.example.com"
+export SMTP_SECURE="none"
+export SMTP_BIN="/usr/bin/python2"
+```
+
+- 开启邮件通知
+```sh
+acme.sh --set-notify --notify-hook smtp --notify-level 2
+```
+
+- 检查是否收到测试邮件。
