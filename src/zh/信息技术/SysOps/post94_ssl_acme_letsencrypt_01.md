@@ -127,7 +127,7 @@ server {
 ```
 
 
-- 网络防火墙上开启80端口。
+- 网络防火墙上开启80端口映射。
 
 http validation需要验证你是域名所有者，这个验证过程是通过发送http challenge进来，否则无法申请到证书。步骤略
 
@@ -189,6 +189,9 @@ check and confirm that the cron job is already there.
 ```shell
 crontab -l
 ```
+
+- 最后，在网络防火墙上关闭80端口映射。
+
 
 ### 配置邮件通知
 
