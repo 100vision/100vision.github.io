@@ -62,6 +62,11 @@ Function MyFunction {
 Invoke-Command -ComputerName "Remote_Computer_Name" -ScriptBlock ${Function:MyFunction} -ArgumentList 5,"Hello"
 
 ```
+:::note 注意语法
+ScriptBlock的参数值${Function:MyFunction}是一个代码块，花括号的内部和左右都不能有任何空格。
+:::
+
+
 
 ## 扩展
 
@@ -97,6 +102,7 @@ Function MyFunction {
 MyFunction -ComputerName "Remote_Computer_Name"
 
 ```
+
 
 ## 参考
 
