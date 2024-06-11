@@ -127,7 +127,7 @@ server {
 ```
 
 
-- 网络防火墙上开启80端口。
+- 网络防火墙上开启80端口映射。
 
 http validation需要验证你是域名所有者，这个验证过程是通过发送http challenge进来，否则无法申请到证书。步骤略
 
@@ -159,23 +159,28 @@ acme.sh --issue -d proxy.example.cn -w /var/www/html/proxy.example.cn/
 
 ```sh
 acme.sh --install-cert -d proxy.example.cn \
---cert-file      /usr/local/openresty/nginx/cert/qlik/proxy.example.cn.cer  \
---key-file       /usr/local/openresty/nginx/cert//qlik/proxy.example.cn.key  \
---fullchain-file /usr/local/openresty/nginx/cert/qlik/fullchain.cer \
---reloadcmd     "nginx -s reload"
+--cert-file      /usr/local/openresty/nginx/cert/certstore/proxy.example.cn.cer  \
+--key-file       /usr/local/openresty/nginx/cert/certstore/proxy.example.cn.key  \
+--fullchain-file /usr/local/openresty/nginx/cert/certstore/fullchain.cer \
+--reloadcmd     "/path_to_nginx/nginx -s reload"
 
 ```
 
 安装成功后，输出一下类似信息：
 ```
 [Mon Jun  3 17:13:52 CST 2024] The domain 'proxy.example.cn' seems to have a ECC cert already, lets use ecc cert.
-[Mon Jun  3 17:13:52 CST 2024] Installing cert to: /usr/local/openresty/nginx/cert/qlik/proxy.example.cn.cer
-[Mon Jun  3 17:13:52 CST 2024] Installing key to: /usr/local/openresty/nginx/cert//qlik/proxy.example.cn.key
-[Mon Jun  3 17:13:52 CST 2024] Installing full chain to: /usr/local/openresty/nginx/cert/qlik/fullchain.cer
+[Mon Jun  3 17:13:52 CST 2024] Installing cert to: /usr/local/openresty/nginx/cert/certstore/proxy.example.cn.cer
+[Mon Jun  3 17:13:52 CST 2024] Installing key to: /usr/local/openresty/nginx/cert//certstore/proxy.example.cn.key
+[Mon Jun  3 17:13:52 CST 2024] Installing full chain to: /usr/local/openresty/nginx/cert/certstore/fullchain.cer
 [Mon Jun  3 17:13:52 CST 2024] Run reload cmd: nginx -s reload
 [Mon Jun  3 17:13:52 CST 2024] Reload success
 ```
-- 修改nginx配置，把证书指向到以上证书路径。然后`nginx -s reload`
+- 修改nginx配置，把证书指向到以上证书路径。
+```
+    ssl_certificate   /usr/local/openresty/nginx/cert/certstore/proxy.example.cn.cer;
+    ssl_certificate_key  /usr/local/openresty/nginx/cert/certstore/proxy.example.cn.cer.key;
+```
+- 然后`nginx -s reload`
 - 验证证书是否有效。
 - 检查cron。
   这个crob job主要是实现自动续订。auto renewal is scheduled to run by a cron job from the install process
@@ -184,6 +189,9 @@ check and confirm that the cron job is already there.
 ```shell
 crontab -l
 ```
+
+- 最后，在网络防火墙上关闭80端口映射。
+
 
 ### 配置邮件通知
 
