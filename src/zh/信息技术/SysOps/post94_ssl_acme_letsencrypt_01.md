@@ -157,11 +157,11 @@ https://github.com/acmesh-official/acme.sh/wiki/How-to-issue-a-cert
 
 端口服务器映射按照你的防火墙配置，步骤略。
 
-为什么要开放80端口，Let’s Encrypt解释说：
 
-```text
-Let’s Encrypt gives a token to your ACME client, and your ACME client puts a file on your web server at http://<YOUR_DOMAIN>.well-known/acme-challenge/<TOKEN>. That file contains the token, plus a thumbprint of your account key. Once your ACME client tells Let’s Encrypt that the file is ready, Let’s Encrypt tries retrieving it (potentially multiple times from multiple vantage points). If our validation checks get the right responses from your web server, the validation is considered successful and you can go on to issue your certificate. If the validation checks fail, you’ll have to try again with a new certificate.
-```
+
+:::note 关于80端口
+Let’s Encrypt gives a token to your ACME client, and your ACME client puts a file on your web server at http://YOUR_DOMAIN.well-known/acme-challenge/TOKEN. That file contains the token, plus a thumbprint of your account key. Once your ACME client tells Let’s Encrypt that the file is ready, Let’s Encrypt tries retrieving it (potentially multiple times from multiple vantage points). If our validation checks get the right responses from your web server, the validation is considered successful and you can go on to issue your certificate. If the validation checks fail, you’ll have to try again with a new certificate.
+:::
 
 
 
