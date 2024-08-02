@@ -60,7 +60,7 @@ star: true
 `ACME` 是 `let's Encrypt`证书管理实现协议。实现ACME协议的客户端可以实现证书申请、续订等。
 
 ---
-### ACME客户端
+### 选择ACME客户端
 
 实现ACME协议的客户端，有官方版本，也有第三方。
 
@@ -98,7 +98,7 @@ wacs.exe --source manual
 ----
 
 
-### ACME Challenge 介绍
+### 选择ACME Challenge
 
 > 开始之前，要先了解一下`ACME Challenge`。Let's Encrypt仅给域名所有者颁发免费证书，因此申请证书前我们需要通过域名所有者身份验证。Let's Encrypt验证方法就是`Challenge`。了解更多 https://letsencrypt.org/docs/challenge-types/
 
@@ -126,7 +126,7 @@ Challenge大概有这两种：
 https://github.com/acmesh-official/acme.sh/wiki/dnsapi
 
 ---
-### ACME.sh的使用模式
+### 选择ACME.sh的使用模式
 
 >ACME.sh支持很多安装和使用模式。根据自己情况选择模式，不同模式则证书申请、安装选项都不同。
 
@@ -143,7 +143,7 @@ https://github.com/acmesh-official/acme.sh/wiki/How-to-issue-a-cert
 
 ---
 
-### Acme.sh 和 webroot模式
+### 开始Acme.sh 和 webroot模式
 
 以域名`proxy.example.cn`举例：
 
