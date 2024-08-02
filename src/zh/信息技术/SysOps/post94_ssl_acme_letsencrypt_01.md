@@ -53,11 +53,13 @@ star: true
 - 很多大厂，例如`Cloudflare`都在使用。个人网站使用Let's Encrypt免费证书还是挺安全的。
 - 小企业不想使用昂贵的商业收费的ssl证书也可以考虑。
 
+---
 ### ACME
+
 
 `ACME` 是 `let's Encrypt`证书管理实现协议。实现ACME协议的客户端可以实现证书申请、续订等。
 
-
+---
 ### ACME客户端
 
 实现ACME协议的客户端，有官方版本，也有第三方。
@@ -89,10 +91,16 @@ wacs.exe --source manual
 
 [^2]: 大致步骤：
 
+**根据自己情况选择ACME客户端**
+
+本例选择使用官方客户端`acme.sh`
+
+----
+
 
 ### ACME Challenge 介绍
 
-> 要先了解一下`ACME Challenge`。Let's Encrypt仅给域名所有者颁发免费证书，因此申请证书前我们需要通过域名所有者身份验证。Let's Encrypt验证方法就是`Challenge`。了解更多 https://letsencrypt.org/docs/challenge-types/
+> 开始之前，要先了解一下`ACME Challenge`。Let's Encrypt仅给域名所有者颁发免费证书，因此申请证书前我们需要通过域名所有者身份验证。Let's Encrypt验证方法就是`Challenge`。了解更多 https://letsencrypt.org/docs/challenge-types/
 
 Challenge大概有这两种：
 - HTTP-01 challenge
@@ -117,7 +125,7 @@ Challenge大概有这两种：
 
 https://github.com/acmesh-official/acme.sh/wiki/dnsapi
 
-
+---
 ### ACME.sh的使用模式
 
 >ACME.sh支持很多安装和使用模式。根据自己情况选择模式，不同模式则证书申请、安装选项都不同。
@@ -132,6 +140,8 @@ https://github.com/acmesh-official/acme.sh/wiki/dnsapi
 https://github.com/acmesh-official/acme.sh/wiki/How-to-issue-a-cert
 
 本例使用了`webroot`模式。
+
+---
 
 ### Acme.sh 和 webroot模式
 
@@ -239,7 +249,7 @@ crontab -l
 ```
 
 
-
+---
 
 ### 配置邮件通知
 
@@ -262,6 +272,8 @@ acme.sh --set-notify --notify-hook smtp --notify-level 2
 ```
 
 - 检查是否收到测试邮件。
+
+---
 
 ### 关于证书续订
 
