@@ -260,15 +260,18 @@ export SMTP_BIN="/usr/bin/python2"
 acme.sh --set-notify --notify-hook smtp --notify-level 2
 ```
 
-- 检查是否收到测试邮件。邮件内容类似：
+- 检查是否收到测试邮件。
+
+### 关于证书续订
+
+- 如果使用了自动续订是通过cron定时任务完成，如果续订成功，则会手动邮件内容类似：
 
 `Good, the cert is renewed.`
 
-- 关注证书续订通知邮件。
 
-默认证书每`60`天续订一次，即剩余`30`天会通过cron进行自动续订。
+- 默认证书每`60`天续订一次，即剩余`30`天会通过cron进行自动续订。
 
-查看证书信息：
+- 查看和验证当前证书（续订）信息：
 ```
 acme.sh --list
 ```
