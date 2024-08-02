@@ -100,7 +100,7 @@ Challenge大概有这两种：
 
 **HTTP challenge利弊**
 
-利：配置比较容易
+利：配置比较容易，还可以支持自动续订。
 
 弊：需要在防火墙上长期开放 `80` 端口。如果你无法控制防火墙或你的ISP因为安全原因不开放80，就无法使用这个HTTP challenge。
 
@@ -108,7 +108,7 @@ Challenge大概有这两种：
 
 利：不需要开放80端口。如果DNS服务商支持api访问，可以很方便自动续订证书；还支持通配符证书。
 
-弊：不让过DNS服务商不知道API访问，需要手动续订证书，比较麻烦。
+弊：如果DNS服务商不支持API访问，无实现自动续订证书。每次续订证书需要手动，比较麻烦。
 
 
 **根据自己情况选择**
@@ -135,12 +135,27 @@ https://github.com/acmesh-official/acme.sh/wiki/How-to-issue-a-cert
 
 ### Acme.sh 和 webroot模式
 
-以`proxy.example.cn`举例：
+以域名`proxy.example.cn`举例：
 
 :::note
 以下操作建议root权限
 :::
 
+
+
+- 网络防火墙上开启80端口映射。
+
+端口服务器映射按照你的防火墙配置，步骤略。
+
+:::tip 为什么要在防火墙上开放80端口
+Let’s Encrypt解释说：Let’s Encrypt gives a token to your ACME client, and your ACME client puts a file on your web server at http://<YOUR_DOMAIN>/.well-known/acme-challenge/<TOKEN>. That file contains the token, plus a thumbprint of your account key. Once your ACME client tells Let’s Encrypt that the file is ready, Let’s Encrypt tries retrieving it (potentially multiple times from multiple vantage points). If our validation checks get the right responses from your web server, the validation is considered successful and you can go on to issue your certificate. If the validation checks fail, you’ll have to try again with a new certificate.
+:::
+
+
+
+:::warning
+80端口要保持一直开放。从首次申请到后期每次自动续订。关于保持80端口常开，很多人认为不安全，因此Let's Encrypt写了一篇文章特别解释了为什么防火墙保持80端口不会带来安全风险。https://letsencrypt.org/docs/allow-port-80/  但要注意把http重定向80到443解决网络攻击面。
+:::
 
 - 创建主目录
   
@@ -148,9 +163,9 @@ https://github.com/acmesh-official/acme.sh/wiki/How-to-issue-a-cert
 mkdir -p /var/www/html/proxy.example.cn/
 ```
 
-- 修改现有nginx配置，主要是开启http 80以支持acme.sh的`http validation`
+- 修改现有nginx配置，在现有配置外添加一个的`HTTP challenge` 目录。
 
-主要是`root`指令指定一个站点目录，如下：
+主要是`root`指令指定一个webroot站点目录，如下：
   
 ```
 server {
@@ -168,17 +183,6 @@ server {
 }
 
 ```
-
-
-- 网络防火墙上开启80端口映射。
-
-`HTTP Challenge`需要验证你是域名所有者，这个验证过程是通过发送http challenge进来，否则无法申请/续订证书。端口映射按照你的防火墙配置，步骤略
-
-:::warning
-80端口要保持一直开放。从首次申请到后期每次自动续订。关于保持80端口常开，很多人认为不安全，因此Let's Encrypt写了一篇文章特别解释了为什么防火墙保持80端口不会带来安全风险。https://letsencrypt.org/docs/allow-port-80/  但要注意把http重定向80到443解决网络攻击面。
-:::
-
-
 
 - 开始申请 Request the cert
 
