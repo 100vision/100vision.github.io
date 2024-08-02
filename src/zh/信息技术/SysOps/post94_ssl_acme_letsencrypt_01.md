@@ -90,12 +90,55 @@ wacs.exe --source manual
 [^2]: 大致步骤：
 
 
-### ACME.sh and Nginx Reverse Proxy 
+### ACME Challenge 介绍
+
+> 要先了解一下`ACME Challenge`。Let's Encrypt仅给域名所有者颁发免费证书，因此申请证书前我们需要通过域名所有者身份验证。Let's Encrypt验证方法就是`Challenge`。了解更多 https://letsencrypt.org/docs/challenge-types/
+
+Challenge大概有这两种：
+- HTTP-01 challenge
+- DNS-01 challenge
+
+**HTTP challenge利弊**
+
+利：配置比较容易
+
+弊：需要在防火墙上长期开放 `80` 端口。如果你无法控制防火墙或你的ISP因为安全原因不开放80，就无法使用这个HTTP challenge。
+
+**DNS challenge 利弊**
+
+利：不需要开放80端口。如果DNS服务商支持api访问，可以很方便自动续订证书；还支持通配符证书。
+
+弊：不让过DNS服务商不知道API访问，需要手动续订证书，比较麻烦。
+
+
+**根据自己情况选择**
+
+本例使用 `HTTP Challene`。 如果选择DNS chalenge, 可以先查看一下自己的DNS服务商在受支持列表中：
+
+https://github.com/acmesh-official/acme.sh/wiki/dnsapi
+
+
+### ACME.sh的使用模式
+
+>ACME.sh支持很多安装和使用模式。根据自己情况选择模式，不同模式则证书申请、安装选项都不同。
+
+- webroot模式
+- standalone模式
+- nginx模式
+- 其他
+
+**根据自己情况选择模式**
+
+https://github.com/acmesh-official/acme.sh/wiki/How-to-issue-a-cert
+
+本例使用了`webroot`模式。
+
+### Acme.sh 和 webroot模式
 
 以`proxy.example.cn`举例：
 
 :::note
-以下操作需要root权限
+以下操作建议root权限
 :::
 
 
@@ -129,10 +172,10 @@ server {
 
 - 网络防火墙上开启80端口映射。
 
-http validation需要验证你是域名所有者，这个验证过程是通过发送http challenge进来，否则无法申请到证书。步骤略
+`HTTP Challenge`需要验证你是域名所有者，这个验证过程是通过发送http challenge进来，否则无法申请/续订证书。端口映射按照你的防火墙配置，步骤略
 
 :::warning
-申请成功后，可以关闭，不再需要保持开启。
+80端口要保持一直开放。从首次申请到后期每次自动续订。关于保持80端口常开，很多人认为不安全，因此Let's Encrypt写了一篇文章特别解释了为什么防火墙保持80端口不会带来安全风险。https://letsencrypt.org/docs/allow-port-80/  但要注意把http重定向80到443解决网络攻击面。
 :::
 
 
@@ -190,12 +233,12 @@ check and confirm that the cron job is already there.
 crontab -l
 ```
 
-- 最后，在网络防火墙上关闭80端口映射。
+
 
 
 ### 配置邮件通知
 
-> 通过邮件通知跟踪证书是否续订成功
+> 通过邮件跟踪证书是否续订成功
 
 - 配置smtp参数。`vi /root/.bashrc`
 ```
@@ -213,4 +256,15 @@ export SMTP_BIN="/usr/bin/python2"
 acme.sh --set-notify --notify-hook smtp --notify-level 2
 ```
 
-- 检查是否收到测试邮件。
+- 检查是否收到测试邮件。邮件内容类似：
+
+`Good, the cert is renewed.`
+
+- 关注证书续订通知邮件。
+
+默认证书每`60`天续订一次，即剩余`30`天会通过cron进行自动续订。
+
+查看证书信息：
+```
+acme.sh --list
+```
