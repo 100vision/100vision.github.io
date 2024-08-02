@@ -148,7 +148,8 @@ https://github.com/acmesh-official/acme.sh/wiki/How-to-issue-a-cert
 端口服务器映射按照你的防火墙配置，步骤略。
 
 为什么要开放80端口，Let’s Encrypt解释说：
->Let’s Encrypt gives a token to your ACME client, and your ACME client puts a file on your web server at http://<YOUR_DOMAIN>/.well-known/acme-challenge/<TOKEN>. That file contains the token, plus a thumbprint of your account key. Once your ACME client tells Let’s Encrypt that the file is ready, Let’s Encrypt tries retrieving it (potentially multiple times from multiple vantage points). If our validation checks get the right responses from your web server, the validation is considered successful and you can go on to issue your certificate. If the validation checks fail, you’ll have to try again with a new certificate.
+
+>Let’s Encrypt gives a token to your ACME client, and your ACME client puts a file on your web server at http://<YOUR_DOMAIN>.well-known/acme-challenge/<TOKEN>. That file contains the token, plus a thumbprint of your account key. Once your ACME client tells Let’s Encrypt that the file is ready, Let’s Encrypt tries retrieving it (potentially multiple times from multiple vantage points). If our validation checks get the right responses from your web server, the validation is considered successful and you can go on to issue your certificate. If the validation checks fail, you’ll have to try again with a new certificate.
 
 
 
@@ -157,7 +158,7 @@ https://github.com/acmesh-official/acme.sh/wiki/How-to-issue-a-cert
 80端口要保持一直开放。从首次申请到后期每次自动续订。关于保持80端口常开，很多人认为不安全，因此Let's Encrypt写了一篇文章特别解释了为什么防火墙保持80端口不会带来安全风险。https://letsencrypt.org/docs/allow-port-80/  但要注意把http重定向80到443解决网络攻击面。
 :::
 
-- 创建主目录
+- 创建HTTP Challenge主目录
   
 ```bash
 mkdir -p /var/www/html/proxy.example.cn/
@@ -264,14 +265,19 @@ acme.sh --set-notify --notify-hook smtp --notify-level 2
 
 ### 关于证书续订
 
-- 如果使用了自动续订是通过cron定时任务完成，如果续订成功，则会手动邮件内容类似：
+- 启用了自动续订后，会收到以下类似邮件通知内容：
 
 `Good, the cert is renewed.`
 
 
-- 默认证书每`60`天续订一次，即剩余`30`天会通过cron进行自动续订。
+- 续订周期。默认证书每`60`天续订一次，即剩余`30`天会通过cron进行自动续订。
 
 - 查看和验证当前证书（续订）信息：
 ```
 acme.sh --list
 ```
+
+- 如果自动续订不成功，可以尝试手动续订
+```sh
+ acme.sh --renew -d proxy.example.com --force
+ ```
