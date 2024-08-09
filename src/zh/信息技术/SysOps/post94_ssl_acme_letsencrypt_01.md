@@ -236,9 +236,13 @@ acme.sh --install-cert -d proxy.example.cn \
 ```
 - 修改nginx配置，把证书指向到以上证书路径。
 ```
-    ssl_certificate   /usr/local/openresty/nginx/cert/certstore/proxy.example.cn.cer;
+    ssl_certificate   /usr/local/openresty/nginx/cert/certstore/fullchain.cer;
     ssl_certificate_key  /usr/local/openresty/nginx/cert/certstore/proxy.example.cn.cer.key;
 ```
+:::note 
+务必指定的是fullchain.cer这个包含完整证书链的证书，否则使用cURL测试或是其他工具可能大概率收到 “ssl certificate problem unable to get local issuer certificate”类似错误信息
+:::
+
 - 然后`nginx -s reload`
 - 验证证书是否有效。
 - 检查cron。
