@@ -53,14 +53,16 @@ star: true
 - 很多大厂，例如`Cloudflare`都在使用。个人网站使用Let's Encrypt免费证书还是挺安全的。
 - 小企业不想使用昂贵的商业收费的ssl证书也可以考虑。
 
----
+
 ### ACME
+---
 
 
 `ACME` 是 `let's Encrypt`证书管理实现协议。实现ACME协议的客户端可以实现证书申请、续订等。
 
----
+
 ### 选择ACME客户端
+---
 
 实现ACME协议的客户端，有官方版本，也有第三方。
 
@@ -95,10 +97,11 @@ wacs.exe --source manual
 
 本例选择使用官方客户端`acme.sh`
 
-----
+
 
 
 ### 选择ACME Challenge
+---
 
 > 开始之前，要先了解一下`ACME Challenge`。Let's Encrypt仅给域名所有者颁发免费证书，因此申请证书前我们需要通过域名所有者身份验证。Let's Encrypt验证方法就是`Challenge`。了解更多 https://letsencrypt.org/docs/challenge-types/
 
@@ -125,8 +128,9 @@ Challenge大概有这两种：
 
 https://github.com/acmesh-official/acme.sh/wiki/dnsapi
 
----
+
 ### 选择ACME.sh的使用模式
+---
 
 >ACME.sh支持很多安装和使用模式。根据自己情况选择模式，不同模式则证书申请、安装选项都不同。
 
@@ -141,9 +145,10 @@ https://github.com/acmesh-official/acme.sh/wiki/How-to-issue-a-cert
 
 本例使用了`webroot`模式。
 
----
+
 
 ### 开始Acme.sh 和 webroot模式
+---
 
 以域名`proxy.example.cn`举例：
 
@@ -153,7 +158,7 @@ https://github.com/acmesh-official/acme.sh/wiki/How-to-issue-a-cert
 
 
 
-- 网络防火墙上开启80端口映射。
+- 1、网络防火墙上开启80端口映射。
 
 端口服务器映射按照你的防火墙配置，步骤略。
 
@@ -166,16 +171,16 @@ Let’s Encrypt gives a token to your ACME client, and your ACME client puts a f
 
 
 :::warning
-80端口要保持一直开放。从首次申请到后期每次自动续订。关于保持80端口常开，很多人认为不安全，因此Let's Encrypt写了一篇文章特别解释了为什么防火墙保持80端口不会带来安全风险。https://letsencrypt.org/docs/allow-port-80/  但要注意把http重定向80到443解决网络攻击面。
+80端口要保持一直开放。从首次申请到后期每次自动续订。关于保持80端口常开，很多人认为不安全，因此Let's Encrypt写了一篇文章特别解释了为什么防火墙保持80端口不会带来安全风险。https://letsencrypt.org/docs/allow-port-80/  。开放了80端口，要注意把http重定向80到443解决网络攻击面。
 :::
 
-- 创建HTTP Challenge主目录
+- 2、在web服务器上创建HTTP Challenge主目录
   
 ```bash
 mkdir -p /var/www/html/proxy.example.cn/
 ```
 
-- 修改现有nginx配置，在现有配置外添加一个的`HTTP challenge` 目录。
+- 3、修改现有nginx配置，在现有配置外添加一个的`HTTP challenge` 目录。
 
 主要是`root`指令指定一个webroot站点目录，如下：
   
@@ -196,7 +201,7 @@ server {
 
 ```
 
-- 开始申请 Request the cert
+- 4、开始申请 Request the cert
 
 ```shell
 acme.sh --issue -d proxy.example.cn -w /var/www/html/proxy.example.cn/
@@ -213,7 +218,7 @@ acme.sh --issue -d proxy.example.cn -w /var/www/html/proxy.example.cn/
 
 ```
 
-- 安装和拷贝证书。必须使用amce的命令。否则不会自动续订。
+- 5、安装和拷贝证书。必须使用amce的命令。否则不会创建自动续订的cron任务。
 
 
 ```sh
@@ -234,25 +239,30 @@ acme.sh --install-cert -d proxy.example.cn \
 [Mon Jun  3 17:13:52 CST 2024] Run reload cmd: nginx -s reload
 [Mon Jun  3 17:13:52 CST 2024] Reload success
 ```
-- 修改nginx配置，把证书指向到以上证书路径。
+- 6、修改nginx配置，把站点证书指向到以上证书路径。
 ```
-    ssl_certificate   /usr/local/openresty/nginx/cert/certstore/proxy.example.cn.cer;
+    ssl_certificate   /usr/local/openresty/nginx/cert/certstore/fullchain.cer;
     ssl_certificate_key  /usr/local/openresty/nginx/cert/certstore/proxy.example.cn.cer.key;
 ```
-- 然后`nginx -s reload`
+:::note 
+务必指定的是fullchain.cer这个包含完整证书链的证书，否则使用cURL测试或是其他工具可能大概率收到 “ssl certificate problem unable to get local issuer certificate”类似错误信息
+:::
+
+- 然后 `nginx -t` 检查nginx配置
+- 以及`nginx -s reload`
 - 验证证书是否有效。
-- 检查cron。
-  这个crob job主要是实现自动续订。auto renewal is scheduled to run by a cron job from the install process
-check and confirm that the cron job is already there.
+- 检查cron是否右一条任务。
 
 ```shell
 crontab -l
 ```
+  这个crob job主要是实现自动续订。auto renewal is scheduled to run by a cron job from the install process
+check and confirm that the cron job is already there.
 
 
----
 
 ### 配置邮件通知
+---
 
 > 通过邮件跟踪证书是否续订成功
 
@@ -274,11 +284,12 @@ acme.sh --set-notify --notify-hook smtp --notify-level 2
 
 - 检查是否收到测试邮件。
 
----
+
 
 ### 关于证书续订
+---
 
-- 启用了自动续订后，会收到以下类似邮件通知内容：
+- 在前面步骤使用cron实现自动续订后，每次续订成功后，会收到以下类似邮件通知：
 
 `Good, the cert is renewed.`
 
