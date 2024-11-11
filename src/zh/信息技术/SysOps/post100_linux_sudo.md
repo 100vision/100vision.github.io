@@ -18,7 +18,7 @@ tag:
   - 脚本编程
 
 # 此页面会在文章列表置顶
-sticky: true
+sticky: false
 # 此页面会出现在文章收藏中
 star: true
 
