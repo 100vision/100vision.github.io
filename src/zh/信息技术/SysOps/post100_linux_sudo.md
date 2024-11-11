@@ -78,22 +78,35 @@ export var1=value1
 
 **创建子Shell**
 
-- 在当前bash下执行`bash`就创建了一个子shell
-- 在当前bash下执行一个shell脚本，该脚本就会创建一个子shell运行该脚本；
-- 在当前shell下使用`()` 括号.  例：
+- 方法1: 在当前bash下执行`bash`就创建了一个子shell。例：
 ```shell
-(eport var1=valued;env)
+$ bash
 ```
-- 在当前Shell下使用`$( )`。可以把子shell的执行结果返回给父shell
+
+- 方法2: 在当前bash下执行一个shell脚本，该脚本就会创建一个子shell运行该脚本，例：
+
+```shell
+$ demo.sh
+```
+
+- 方法3: 在当前shell下使用`()` 括号.  例：
+```shell
+(export var1=valued;env)
+```
+- 方法4: 在当前Shell下使用`$( )`。可以把子shell的执行结果返回给父shell。例：
+
+```shell
+$(export var1=valued;env)
+```
 
 
 
 
-### 3. 父shell获取子shell
+### 3. 父shell获取子shell的变量传递
 
 > 来自DeepSeek：子 shell 无法直接修改父 shell 的环境变量。环境变量在子 shell 中的修改仅限于子 shell 本身，不会影响父 shell。然而，你可以通过一些间接的方法将子 shell 中的变量值传递回父 shell。以下是几种常见的方法："
 
-- 使用`source` 或 `.` 在当前shell运行脚本，而不是在子shell执行；这样脚本修改了变量会反应到当前shell
+- 使用`source` 或 `.` 在当前shell运行脚本，改变脚本的默认行为。而不是在子shell执行；这样脚本修改了变量会反应到当前shell。
 
 示例：
 
