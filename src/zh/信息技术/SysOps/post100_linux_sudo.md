@@ -67,7 +67,7 @@ env: 用于显示当前 shell 的环境变量，或者在修改后的环境中�
 export var1=value1
 ```
 
-### 2. 父Shell和子Shell之间变量使用
+### 2. 父Shell和子Shell之间环境变量使用
 
 
 **重要说明**
@@ -102,7 +102,7 @@ $(export var1=valued;env)
 
 
 
-### 3. 父shell获取子shell的变量传递
+### 3. 父shell获取子shell的环境变量传递
 
 > 来自DeepSeek：子 shell 无法直接修改父 shell 的环境变量。环境变量在子 shell 中的修改仅限于子 shell 本身，不会影响父 shell。然而，你可以通过一些间接的方法将子 shell 中的变量值传递回父 shell。以下是几种常见的方法："
 
@@ -110,7 +110,8 @@ $(export var1=valued;env)
 
 示例：
 
-创建一个demo.sh
+创建一个 `demo.sh`
+
 ```shell
 #!/bin/bash
 var1="hello"
