@@ -25,7 +25,7 @@ star: true
 
 ---
 
-### 脚本功能： 使用PSCustomObject构建自定义对象
+## 方法1: 使用PSCustomObject构建自定义对象
 
 ::: tip 前提条件
 Powershell 3.0 以上版本
@@ -67,3 +67,43 @@ $results | ?{$_.Memory -gt 4000}
 ```
 
 
+### 使用Add-Member方法明确指定自定义对象的属性类型
+
+> 有时候要显式指定属性类型。例如在 PowerShell 中，当你将一个数组赋值给自定义对象的属性时，该属性的类型会被自动推断为 System.Object[]，即一个对象数组。这是因为在 PowerShell 中，数组的类型是 System.Object[]，除非你显式指定数组的元素类型。
+
+例如：
+
+```powershell
+# 导入 Active Directory 模块
+Import-Module ActiveDirectory
+
+# 获取 Active Directory 中的计算机对象
+$computers = Get-ADComputer -Filter * -Properties Name, OperatingSystem, LastLogonDate
+
+# 创建一个自定义对象
+$customObject = [PSCustomObject]@{}
+
+# 使用 Add-Member 添加类型明确的 Computers 属性
+Add-Member -InputObject $customObject -MemberType NoteProperty -Name "Computers" -Value $computers -TypeName "Microsoft.ActiveDirectory.Management.ADComputer[]"
+
+# 输出自定义对象
+$customObject
+```
+
+## 方法2: 使用哈希表创建自定义对象
+
+```powershell
+# 创建一个哈希表并指定属性类型
+$hashTable = @{
+    Name  = [string]"John Doe"
+    Age   = [int]30
+    Email = [string]"john.doe@example.com"
+}
+
+# 将哈希表转换为自定义对象
+$customObject = [PSCustomObject]$hashTable
+
+# 输出对象
+$customObject
+
+```
